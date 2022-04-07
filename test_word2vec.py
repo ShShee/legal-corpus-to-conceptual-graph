@@ -1,5 +1,6 @@
+from pickle import TRUE
 import gensim
 
-model = gensim.models.KeyedVectors.load_word2vec_format('word2vec_vi_syllables_300dims.txt', binary=False)
+model = gensim.models.KeyedVectors.load_word2vec_format('wiki.vi.model.bin', binary=True)
 
-print(model.similarity('hưởng', 'nhận'))
+print(model.similarity('nộp', 'gửi'))

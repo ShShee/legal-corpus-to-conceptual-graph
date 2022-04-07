@@ -1,89 +1,58 @@
-from datasets import tqdm
+from operator import truediv
+from process_data import reduce_word, handle_synonyms_in_query
+from process_graph import generate_edges, generate_graph, create_same_arcs
+from process_comparison import conceptual_similarity, relational_similarity, calculate_a
+import json
+
 from underthesea import word_tokenize, chunk, pos_tag, ner, classify
 from collections import defaultdict
-query = 'Quy định về thông báo tìm kiếm việc làm trong khi đang hưởng hỗ trợ từ trợ cấp thất nghiệp là như thế nào ?'
 
-info_1 = 'Thông báo về việc tìm kiếm việc làm khi hưởng trợ cấp thất nghiệp'
-info_2 = 'Trường hợp được bỏ qua thông báo về việc tìm kiếm việc làm khi hưởng trợ cấp thất nghiệp'
-info_3 = 'Quy định tham gia bảo hiểm thất nghiệp cho người lao động'
-info_4 = 'Giải quyết hưởng trợ cấp thất nghiệp'
-info_5 = 'Thủ tục xin hỗ trợ học nghề'
+if __name__ == '__main__':
+    # while True:
+    #query = input("Query Input: ")
+    query = "Thủ tục đề nghị hỗ trợ học nghề cần những gì ?"
+    query = "Quyền của người sử dụng lao động tham gia bảo hiểm thất nghiệp được quy định như thế nào?"
+    query = "Các quy định đóng bảo hiểm thất nghiệp cho người lao động cụ thể ra sao ?"
+    query = "Mức hỗ trợ mà người sử dụng lao động được hưởng từ quỹ bảo hiểm thất nghiệp do ảnh hưởng bởi đại dịch COVID-19 ?"
 
-init_query_list = []
-init_data_list = []
-init_query_list.append(pos_tag(query))
+    data_list = []
 
-init_data_list.append(pos_tag(info_1))
-init_data_list.append(pos_tag(info_2))
-init_data_list.append(pos_tag(info_3))
-init_data_list.append(pos_tag(info_4))
-init_data_list.append(pos_tag(info_5))
+    # Read list titles of laws
+    f = open('data.json', encoding="utf8")
 
+    # returns JSON object as
+    # a dictionary
+    data = json.load(f)
 
-def reduce_word(input_list):
-    reduced = []
-    for token in input_list:
-        if(token[1] == 'N' or token[1] == 'Nc' or token[1] == 'V'):
-            reduced.append(token[0])
-    return reduced
+    # Iterating through the json
+    # list
+    for item in data:
+        data_list.append([item['id'], item['title']])
 
+    f.close()
 
-def generate_graph(input_list):
-    graph = dict.fromkeys(input_list, [])
-    for index in range(len(input_list)-1):
-        destination_nodes = []
-        destination_nodes.append(input_list[index+1])
-        graph[input_list[index]] = destination_nodes
+    query_synonym = handle_synonyms_in_query(query)
+    query_pos_tag = pos_tag(query_synonym)
 
-    return graph
-
-
-def generate_edges(graph):
-    edges = []
-
-    for node in graph:
-        # for each neighbour node of a single node
-        for neighbour in graph[node]:
-            # if edge exists then append
-            edges.append((node, neighbour))
-
-    return edges
-
-
-def create_same_arcs(g_graph):
-    arcs = []
-
-    for idx in range(len(g_graph)-1):
-        if(g_graph[idx][1]+1 == g_graph[idx+1][1]):
-            arcs.append((g_graph[idx][0], g_graph[idx+1][0]))
-
-    return arcs
-
-
-def conceptual_similarity(nGc, nG1, nG2):
-    return (2*nGc)/(nG1 + nG2)
-
-
-def relational_similarity(mGc, mGcG1, mGcG2):
-    return (2*mGc)/(mGcG1 + mGcG2)
-
-
-def calculate_a(nGc, mGcG1, mGcG2):
-    return (2*nGc)/(2*nGc+mGcG1 + mGcG2)
-
-
-for item_query in init_query_list:
-    print("======================================================")
-    print("Query:", item_query)
-    print("------------------------------------------------------")
-    print("Sc        |     Sr        |     S")
-    print("======================================================")
-    queury_graph = generate_graph(reduce_word(item_query))
+    query_reduced = reduce_word(query_pos_tag, True)
+    queury_graph = generate_graph(query_reduced)
     queury_graph_arcs = generate_edges(queury_graph)
 
-    for item_data in init_data_list:
+    print("================================================================")
+    print("Query replaced synonyms:", query_synonym)
+    print("Converted query reduced:", query_reduced)
+    print("----------------------------------------------------------------")
+    print("Sc        |     Sr        |     S         |     ID")
+    print("======================================================")
+
+    score_table = []
+
+    for item_data in data_list:
+        # if(item_data[0] != 35 and item_data[0] != 36):
+        #     continue
         g_graph = []
-        data_graph = generate_graph(reduce_word(item_data))
+        data_graph = generate_graph(
+            reduce_word(pos_tag(item_data[1]), False))
 
         # Retrieve similar nodes
         for node_index, node_query in enumerate(queury_graph):
@@ -115,17 +84,24 @@ for item_query in init_query_list:
         Sc = conceptual_similarity(
             len(g_graph), len(queury_graph), len(data_graph))
 
-        Sr = relational_similarity(len(g_graph_arcs), mGcG1, mGcG2)
+        if(Sc != 0):
+            Sr = relational_similarity(len(g_graph_arcs), mGcG1, mGcG2)
+            a = calculate_a(len(g_graph), mGcG1, mGcG2)
+            S = Sc * (a + (1-a)*Sr)
+        else:
+            Sr = 0
+            S = 0
 
-        a = calculate_a(len(g_graph), mGcG1, mGcG2)
-
-        S = Sc * (a + (1-a)*Sr)
-
-        # print("------------------------------------------------------------------------------------")
         # print("Data: ", "Arcs: ", g_graph)
-        # print("Data: ", "Arcs: ", arcs_of_query)
-        # print("Data: ", "Arcs: ", arcs_of_data)
-        print('{0:.3f}'.format(Sc), '{0:.3f}'.format(Sr), '{0:.3f}'.format(S), sep="     |     ")
-        print("------------------------------------------------------")
+        # print("Data: ", "Arcs: ", pos_tag(item_data[1]))
+        print('{0:.3f}'.format(Sc), '{0:.3f}'.format(
+            Sr), '{0:.3f}'.format(S), item_data[0], sep="     |     ")
+        score_table.append(S)
 
     print("======================================================")
+    highest_score_positions = [index for index, item in enumerate(
+        score_table) if item == max(score_table)]
+    for idx in highest_score_positions:
+        print("Matched:", data_list[idx][1])
+
+    print("================================================================")
