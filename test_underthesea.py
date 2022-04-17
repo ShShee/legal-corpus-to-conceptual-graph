@@ -11,9 +11,9 @@ if __name__ == '__main__':
     # while True:
     #query = input("Query Input: ")
     query = "Thủ tục đề nghị hỗ trợ học nghề cần những gì ?"
-    query = "Quyền của người sử dụng lao động tham gia bảo hiểm thất nghiệp được quy định như thế nào?"
-    query = "Các quy định đóng bảo hiểm thất nghiệp cho người lao động cụ thể ra sao ?"
-    query = "Mức hỗ trợ mà người sử dụng lao động được hưởng từ quỹ bảo hiểm thất nghiệp do ảnh hưởng bởi đại dịch COVID-19 ?"
+    # query = "Quyền của người sử dụng lao động tham gia bảo hiểm thất nghiệp được quy định như thế nào?"
+    # query = "Các quy định đóng bảo hiểm thất nghiệp cho người lao động cụ thể ra sao ?"
+    query = "Mức hỗ trợ mà người sử dụng lao động được hưởng từ quỹ bảo hiểm thất nghiệp do ảnh hưởng bởi ncov ?"
 
     data_list = []
 

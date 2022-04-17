@@ -1,22 +1,29 @@
 from underthesea import word_tokenize, chunk, pos_tag, ner, classify
 
 
-def reduce_word(input_list, isQuery):
+def reduce_word(input_list):
     reduced = []
     for token in input_list:
-        if(token[1] == 'N' or token[1] == 'Nc' or token[1] == 'V'):
-            reduced.append(token[0])
+        if(token[1] == 'N' or token[1] == 'Nc' or token[1] == 'V' or token[0] == 'tạm' or token[0] == 'hủy' or token[0] == 'không'):
+            reduced.append(token)
 
-    result = reduced.copy()
+    return reduced
 
-    if(isQuery):
-        for idx in range(-3, 0):
-            if(reduced[idx].lower() == "là"):
-                result.pop(idx)
-                if(idx != -1 and (reduced[idx+1].lower() == "như thế nào" or reduced[idx+1].lower() == "bao gồm")):
-                    result.pop(idx+1)
 
-    return result
+def check_unnecessaries(word, word_behind):
+    if((word == 'có' and word_behind == 'được')
+       or (word == 'diễn' and word_behind == 'ra')
+       or ((word == 'các' or word == 'những') and word_behind == 'bước') or (word == 'không' and (word_behind == '?' or word_behind == ''))):
+        return 2
+    elif(word == 'như thế nào' or word == 'về' or word == 'phải'
+         or word == 'cần' or word == 'tính' or word == 'được'
+         or word == 'theo' or word == 'có' or word == 'gồm'
+         or word == 'trường hợp' or word == 'bị' or word == 'khi'
+         or word == 'là' or word == 'như thế nào'
+         or word == 'bao nhiêu' or word == 'bao gồm'):
+        return 1
+    else:
+        return 0
 
 
 def convert_synonyms(word, word_behind):
@@ -38,14 +45,23 @@ def convert_synonyms(word, word_behind):
         return word
 
 
-def handle_synonyms_in_query(query):
-    query_tokenizes = word_tokenize(query)
-    result = []
+def handle_in_query(query):
+    query_tokenizes=word_tokenize(query)
+    result=[]
+    exclude_next=False
     for idx, val in enumerate(query_tokenizes):
-        if((idx+1) < len(query_tokenizes)):
-            word_behind = query_tokenizes[idx+1]
+        if exclude_next:
+            exclude_next=False
         else:
-            word_behind = ""
-        result.append(convert_synonyms(val.lower(), word_behind.lower()))
+            if((idx+1) < len(query_tokenizes)):
+                word_behind=query_tokenizes[idx+1]
+            else:
+                word_behind=""
+
+            checked=check_unnecessaries(val.lower(), word_behind.lower())
+            if checked != 0:
+                exclude_next=True if checked == 2 else False
+                continue
+            result.append(convert_synonyms(val.lower(), word_behind.lower()))
 
     return ' '.join(result)
