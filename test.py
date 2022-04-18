@@ -12,6 +12,7 @@ query = reduce_word(pos_tag(handle_in_query(query_data[0])))
 skip = 0
 words = []
 list_query = []
+last_checkpoint = ""
 for item in query:
     list_same_names = []
     if skip == 0:
@@ -27,11 +28,19 @@ for item in query:
 
     count_inclued = len(list_same_names)
     if(count_inclued == 0):
-        for word in words:
-            list_query.append(word)
+        if last_checkpoint:
+            list_query.append(last_checkpoint)
+            last_checkpoint = ""
+            list_query.append(item[0])
+        else:
+            for word in words:
+                list_query.append(word)
     elif (count_inclued == 1 and ' '.join(words) == list_same_names[0]):
         list_query.append(' '.join(words))
     else:
+        for name in list_same_names:
+            if(name == ' '.join(words)):
+                last_checkpoint = ' '.join(words)
         skip = skip+1
 
 print(list_query)
