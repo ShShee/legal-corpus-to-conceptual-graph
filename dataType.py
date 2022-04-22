@@ -1,5 +1,7 @@
 from msvcrt import getch
 from unicodedata import name
+from underthesea import pos_tag
+from process_query import filter_words
 
 
 class DataType:
@@ -30,17 +32,24 @@ class DataType:
 
         return ""
 
-    def getSameNames(self, title):
+    def getParentsNames(self, title):
         returnList = []
-        if title in self.name:
-            returnList.append(self.name)
+        wordsList = filter_words(pos_tag(self.name))
+
+        for word in wordsList:
+            if title == word[0]:
+                returnList.append(self.name)
+                break
         for item in self.childData:
             hasChild = True if len(item.childData) > 0 else False
-            if title in item.name:
-                returnList.append(item.name)
+            itemWordsList = filter_words(pos_tag(item.name))
+            for word in itemWordsList:
+                if title == word[0]:
+                    returnList.append(item.name)
+                    break
             if hasChild:
                 for item2 in item.childData:
-                    for item3 in item2.getSameNames(title):
-                        if(item3):
+                    for item3 in item2.getParentsNames(title):
+                        if item3:
                             returnList.append(item3)
         return returnList

@@ -1,17 +1,51 @@
 from underthesea import word_tokenize, chunk, pos_tag, ner, classify
-from generate_data import data_type
 
 
-def reduce_word(input_list):
+def filter_words(input_list):
     reduced = []
-    for index in range(0, len(input_list)):
-        if input_list[index][1] == 'N' or input_list[index][1] == 'Nc' or input_list[index][1] == 'V' or input_list[index][0] == 'cao':
-            reduced.append(input_list[index])
-        elif index+1 < len(input_list):
+    index = 0
+    flag_change_type = False
+    while index < len(input_list):
+        if index+1 < len(input_list):
             if input_list[index][0] == 'tạm' and input_list[index+1][0] == 'dừng':
                 reduced.append(('tạm dừng', 'V'))
+                index = index + 2
+                continue
             elif input_list[index][0] == 'không' and input_list[index+1][1] == 'V':
                 reduced.append(('không '+input_list[index+1][0], 'V'))
+                index = index + 2
+                continue
+            elif input_list[index][0] == 'nâng' and input_list[index+1][0] == 'cao':
+                flag_change_type = False
+                reduced.append(('nâng cao', 'V'))
+                index = index + 2
+                continue
+            elif (input_list[index][0] == 'kĩ năng' or input_list[index][0] == 'kỹ năng') and input_list[index+1][0] == 'nghề':
+                reduced.append(('kỹ năng nghề', 'N'))
+                index = index + 2
+                continue
+            elif input_list[index][0] == 'học' and input_list[index+1][0] == 'nghề':
+                flag_change_type = False
+                reduced.append(('học nghề', 'N'))
+                index = index + 2
+                continue
+            # elif input_list[index][1] == 'V' and input_list[index+1][1] == 'V':
+            #     reduced.append(input_list[index])
+            #     flag_change_type = True
+            #     index = index + 1
+            #     continue
+
+        if input_list[index][1] == 'N' or input_list[index][1] == 'Nc' or input_list[index][1] == 'V':
+            # if flag_change_type:
+            #     reduced.append((input_list[index][0], 'N'))
+            #     flag_change_type = False
+            reduced.append(input_list[index])
+        index = index + 1
+
+    if reduced and reduced[-1][1] == 'V':
+        data = reduced[-1][0]
+        reduced.pop()
+        reduced.append((data, 'N'))
     return reduced
 
 
@@ -48,47 +82,3 @@ def convert_synonyms(word, word_behind):
         return "hưởng"
     else:
         return word
-
-
-def handle_in_query(query):
-    query_tokenizes = word_tokenize(query)
-    result = []
-    exclude_next = False
-    for idx, val in enumerate(query_tokenizes):
-        if exclude_next:
-            exclude_next = False
-        else:
-            if((idx+1) < len(query_tokenizes)):
-                word_behind = query_tokenizes[idx+1]
-            else:
-                word_behind = ""
-
-            checked = check_unnecessaries(val.lower(), word_behind.lower())
-            if checked != 0:
-                exclude_next = True if checked == 2 else False
-                continue
-            result.append(convert_synonyms(val.lower(), word_behind.lower()))
-
-    return ' '.join(result)
-
-
-def define_connection(word_1, word_2):
-    type_of_connection = ""
-    if(word_2[1] == 'V'):
-        for item in data_type:
-            value = item.getConntectorType(word_1[0])
-            if value:
-                type_of_connection = value
-        if type_of_connection == 'người':
-            return 'tác nhân'
-        else:
-            return 'ngữ cảnh'
-    else:
-        for item in data_type:
-            value = item.getConntectorType(word_2[0])
-            if value:
-                type_of_connection = value
-        if not type_of_connection:
-            return 'đối tượng'
-        else:
-            return type_of_connection
