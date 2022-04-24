@@ -4,7 +4,7 @@ from underthesea import word_tokenize, chunk, pos_tag, ner, classify
 def filter_words(input_list):
     reduced = []
     index = 0
-    flag_change_type = False
+    #print(input_list)
     while index < len(input_list):
         if index+1 < len(input_list):
             if input_list[index][0] == 'tạm' and input_list[index+1][0] == 'dừng':
@@ -16,7 +16,6 @@ def filter_words(input_list):
                 index = index + 2
                 continue
             elif input_list[index][0] == 'nâng' and input_list[index+1][0] == 'cao':
-                flag_change_type = False
                 reduced.append(('nâng cao', 'V'))
                 index = index + 2
                 continue
@@ -25,21 +24,14 @@ def filter_words(input_list):
                 index = index + 2
                 continue
             elif input_list[index][0] == 'học' and input_list[index+1][0] == 'nghề':
-                flag_change_type = False
                 reduced.append(('học nghề', 'N'))
                 index = index + 2
                 continue
-            # elif input_list[index][1] == 'V' and input_list[index+1][1] == 'V':
-            #     reduced.append(input_list[index])
-            #     flag_change_type = True
-            #     index = index + 1
-            #     continue
 
         if input_list[index][1] == 'N' or input_list[index][1] == 'Nc' or input_list[index][1] == 'V':
-            # if flag_change_type:
-            #     reduced.append((input_list[index][0], 'N'))
-            #     flag_change_type = False
             reduced.append(input_list[index])
+        elif input_list[index][0] == 'bảo hiểm' or input_list[index][0] == 'nghĩa vụ' or input_list[index][0] == 'covid-19':
+            reduced.append((input_list[index][0], 'N'))
         index = index + 1
 
     if reduced and reduced[-1][1] == 'V':
