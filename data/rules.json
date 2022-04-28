@@ -1,83 +1,83 @@
 [
   {
-    "id": "term/01",
+    "id": "rule/01",
     "lookUpId": "lookUp/01",
     "keyphrase": "bảo đảm chia sẻ rủi ro",
     "content": "1. Bảo đảm chia sẻ rủi ro giữa những người tham gia bảo hiểm thất nghiệp.",
     "reference": []
   },
   {
-    "id": "term/02",
+    "id": "rule/02",
     "lookUpId": "lookUp/01",
     "keyphrase": "mức đóng bảo hiểm thất nghiệp",
     "content": "2. Mức đóng bảo hiểm thất nghiệp được tính trên cơ sở tiền lương của người lao động.",
     "reference": []
   },
   {
-    "id": "term/03",
+    "id": "rule/03",
     "lookUpId": "lookUp/01",
     "keyphrase": "mức hưởng bảo hiểm thất nghiệp",
     "content": "3. Mức hưởng bảo hiểm thất nghiệp được tính trên cơ sở mức đóng, thời gian đóng bảo hiểm thất nghiệp.",
     "reference": []
   },
   {
-    "id": "term/04",
+    "id": "rule/04",
     "lookUpId": "lookUp/01",
     "keyphrase": "thực hiển bảo hiểm thất nghiệp",
     "content": "4. Việc thực hiện bảo hiểm thất nghiệp phải đơn giản, dễ dàng, thuận tiện, bảo đảm kịp thời và đầy đủ quyền lợi của người tham gia.",
     "reference": []
   },
   {
-    "id": "term/05",
+    "id": "rule/05",
     "lookUpId": "lookUp/01",
     "keyphrase": "quỹ bảo hiểm thất nghiệp",
     "content": "5. Quỹ bảo hiểm thất nghiệp được quản lý tập trung, thống nhất, công khai, minh bạch, bảo đảm an toàn và được Nhà nước bảo hộ.",
     "reference": []
   },
   {
-    "id": "term/06",
+    "id": "rule/06",
     "lookUpId": "lookUp/02",
     "keyphrase": "trợ cấp thất nghiệp",
     "content": "1. Trợ cấp thất nghiệp.",
     "reference": []
   },
   {
-    "id": "term/07",
+    "id": "rule/07",
     "lookUpId": "lookUp/02",
     "keyphrase": "hỗ trợ tư vấn, giới thiệu việc làm",
     "content": "2. Hỗ trợ tư vấn, giới thiệu việc làm.",
     "reference": []
   },
   {
-    "id": "term/08",
+    "id": "rule/08",
     "lookUpId": "lookUp/02",
     "keyphrase": "hỗ trợ học nghề",
     "content": "3. Hỗ trợ Học nghề.",
     "reference": []
   },
   {
-    "id": "term/9",
+    "id": "rule/9",
     "lookUpId": "lookUp/02",
     "keyphrase": "hỗ trợ đào tạo, bồi dưỡng, nâng cao trình độ kỹ năng nghề",
     "content": "4. Hỗ trợ đào tạo, bồi dưỡng, nâng cao trình độ kỹ năng nghề để duy trì việc làm cho người lao động.",
     "reference": []
   },
   {
-    "id": "term/10",
+    "id": "rule/10",
     "lookUpId": "lookUp/03",
     "keyphrase": "người lao động tham gia bảo hiểm thất nghiệp",
     "content": "1. Người lao động phải tham gia bảo hiểm thất nghiệp khi làm việc theo hợp đồng lao động hoặc hợp đồng làm việc như sau:\na) Hợp đồng lao động hoặc hợp đồng làm việc không xác định thời hạn;\nb) Hợp đồng lao động hoặc hợp đồng làm việc xác định thời hạn;\nc) Hợp đồng lao động theo mùa vụ hoặc theo một công việc nhất định có thời hạn từ đủ 03 tháng đến dưới 12 tháng.\nTrong trường hợp người lao động giao kết và đang thực hiện nhiều hợp đồng lao động quy định tại khoản này thì người lao động và người sử dụng lao động của hợp đồng lao động giao kết đầu tiên có trách nhiệm tham gia bảo hiểm thất nghiệp.",
     "reference": []
   },
   {
-    "id": "term/11",
+    "id": "rule/11",
     "lookUpId": "lookUp/03",
     "keyphrase": "người lao động không phải tham gia bảo hiểm thất nghiệp",
     "content": "2. Người lao động theo quy định tại khoản 1 Điều này đang hưởng lương hưu, giúp việc gia đình thì không phải tham gia bảo hiểm thất nghiệp.",
     "reference": ["term/10"]
   },
   {
-    "id": "term/12",
+    "id": "rule/12",
     "lookUpId": "lookUp/03",
     "keyphrase": "người sử dụng lao động tham gia bảo hiểm thất nghiệp",
     "content": "3. Người sử dụng lao động tham gia bảo hiểm thất nghiệp bao gồm cơ quan nhà nước, đơn vị sự nghiệp công lập, đơn vị vũ trang nhân dân; tổ chức chính trị, tổ chức chính trị - xã hội, tổ chức chính trị xã hội - nghề nghiệp, tổ chức xã hội, tổ chức xã hội - nghề nghiệp; cơ quan, tổ chức nước ngoài, tổ chức quốc tế hoạt động trên lãnh thổ Việt Nam; doanh nghiệp, hợp tác xã, hộ gia đình, hộ kinh doanh, tổ hợp tác, tổ chức khác và cá nhân có thuê mướn, sử dụng lao động theo hợp đồng làm việc hoặc hợp đồng lao động quy định tại khoản 1 Điều này.",

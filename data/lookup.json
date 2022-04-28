@@ -1,0 +1,17 @@
+[
+  {
+    "id": "lookUp/01",
+    "article": "article/01",
+    "rules": ["rule/01", "rule/02", "rule/03", "rule/04", "rule/05"]
+  },
+  {
+    "id": "lookUp/02",
+    "article": "article/02",
+    "rules": ["rule/06", "rule/07", "rule/08", "rule/09"]
+  },
+  {
+    "id": "lookUp/03",
+    "article": "article/03",
+    "rules": ["rule/10", "rule/11", "rule/12"]
+  }
+]

@@ -1,21 +1,21 @@
 [
   {
-    "id": "rule/01",
-    "parent": ["38/2013/QH13"],
+    "id": "article/01",
+    "laws": ["38/2013/QH13"],
     "title": "Điều 41. Nguyên tắc bảo hiểm thất nghiệp",
     "keyphrase": "nguyên tắc bảo hiểm thất nghiệp",
     "lookUpId": "lookUp/01"
   },
   {
-    "id": "rule/02",
-    "parent": ["38/2013/QH13"],
+    "id": "article/02",
+    "laws": ["38/2013/QH13"],
     "title": "Điều 42. Các chế độ bảo hiểm thất nghiệp",
     "keyphrase": "chế độ bảo hiểm thất nghiệp",
     "lookUpId": "lookUp/02"
   },
   {
-    "id": "rule/03",
-    "parent": ["38/2013/QH13"],
+    "id": "article/03",
+    "laws": ["38/2013/QH13"],
     "title": "Điều 43. Đối tượng bắt buộc tham gia bảo hiểm thất nghiệp",
     "keyphrase": "đối tượng tham gia bảo hiểm thất nghiệp",
     "lookUpId": "lookUp/03"
