@@ -1,0 +1,17 @@
+[
+  {
+    "id": "lookUp/01",
+    "rule": "rule/01",
+    "terms": ["term/01", "term/02", "term/03", "term/04", "term/05"]
+  },
+  {
+    "id": "lookUp/02",
+    "rule": "rule/02",
+    "terms": ["term/06", "term/07", "term/08", "term/09"]
+  },
+  {
+    "id": "lookUp/03",
+    "rule": "rule/03",
+    "terms": ["term/10", "term/11", "term/12"]
+  }
+]
