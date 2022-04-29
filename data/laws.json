@@ -4,10 +4,6 @@
     "title": "Luật việc làm"
   },
   {
-    "code": "45/2019/QH14",
-    "title": "Luật lao động"
-  },
-  {
     "code": "28/2015/NĐ-CP",
     "title": "Nghị định quy định chi tiết thi hành một số điều của Luật Việc làm về bảo hiểm thất nghiệp"
   },
@@ -20,10 +16,6 @@
     "title": "Nghị định sửa đổi, bổ sung một số điều của Nghị định 28/2015/NĐ-CP ngày 12 tháng 3 năm 2015 của Chính phủ quy định chi tiết thi hành một số điều của Luật Việc làm về bảo hiểm thất nghiệp"
   },
   {
-    "code": "3232/LĐTBXH-BHXH",
-    "title": "Công văn thu bảo hiểm xã hội, y tế, thất nghiệp"
-  },
-  {
     "code": "77/2014/QĐ-TTg",
     "title": "Quyết định quy định mức hỗ trợ học nghề đối với người lao động tham gia bảo hiểm thất nghiệp"
   },
@@ -34,5 +26,9 @@
   {
     "code": "3535/LĐTBXH-VL",
     "title": "Công văn xác định đối tượng hổ trợ theo Quyết định 28/2021/QĐ-TTg"
+  },
+  {
+    "code": "60/2021/NĐ-CP",
+    "title": "Nghị định quy định cơ chế tự chủ tài chính của đơn vị sự nghiệp công lập"
   }
 ]
