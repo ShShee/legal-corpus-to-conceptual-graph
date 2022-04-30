@@ -11,6 +11,18 @@ class ConceptualGraph:
         self.graph.add_nodes_from(keywords)
         self.graph.add_edges_from(self._create_edges(keywords))
 
+    def _create_edges(self, keywords):
+        """
+        Input: List of keywords to init edges
+        Output: Edges that is connected between 2 adjoined keywords
+        """
+        edges = []
+
+        for idx in range(len(keywords)-1):
+            edges.append((keywords[idx], keywords[idx+1]))
+
+        return edges
+
     def getNodes(self):
         """
         Output: Nodes of this graph
@@ -24,20 +36,8 @@ class ConceptualGraph:
         return self.graph.edges
 
     def print(self):
-        print("Nodes:",self.graph.nodes)
-        print("Edges:",self.graph.edges)
-
-    def _create_edges(self, keywords):
-        """
-        Input: List of keywords to init edges
-        Output: Edges that is connected between 2 adjoined keywords
-        """
-        edges = []
-
-        for idx in range(len(keywords)-1):
-            edges.append((keywords[idx], keywords[idx+1]))
-
-        return edges
+        print("Nodes:", self.graph.nodes)
+        print("Edges:", self.graph.edges)
 
     def getSameNodes(self, graph):
         """

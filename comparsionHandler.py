@@ -20,13 +20,18 @@ class ComparisonHandler(ConceptualGraph):
         self.nG2 = len(graph_2.getNodes())
 
         # Size of same edges in comparison with this graph
-        self.mGcG1 = self.__getRelevantEdges(graph_1)
-        self.mGcG2 = self.__getRelevantEdges(graph_2)
+        if len(same_nodes) != 0:
+            self.mGcG1 = self.__getRelevantEdges(graph_1)
+            self.mGcG2 = self.__getRelevantEdges(graph_2)
 
-        init_edges = self._create_edges(same_nodes)
-        init_edges.append((same_nodes[0], same_nodes[len(same_nodes)-1]))
-        self.graph.add_edges_from(graph_2.getSameEdges(init_edges))
-        self.mGc = len(self.getEdges())
+            init_edges = self._create_edges(same_nodes)
+            init_edges.append((same_nodes[0], same_nodes[len(same_nodes)-1]))
+            self.graph.add_edges_from(graph_2.getSameEdges(init_edges))
+            self.mGc = len(self.getEdges())
+        else:
+            self.mGc = 0
+            self.mGcG1 = 0
+            self.mGcG2 = 0
 
     def __getRelevantEdges(self, graph):
         """
@@ -43,10 +48,12 @@ class ComparisonHandler(ConceptualGraph):
         return (2*self.nGc)/(self.nG1 + self.nG2)
 
     def __relational_similarity(self):
-        return (2*self.mGc)/(self.mGcG1 + self.mGcG2)
+        denominator = self.mGcG1 + self.mGcG2
+        return (2*self.mGc)/denominator if denominator != 0 else 0
 
     def __calculate_a(self):
-        return (2*self.nGc)/(2*self.nGc + self.mGcG1 + self.mGcG2)
+        denominator = 2*self.nGc + self.mGcG1 + self.mGcG2
+        return (2*self.nGc)/denominator if denominator != 0 else 0
 
     def getSimilarityScore(self):
         return round(self.__conceptual_similarity() * (self.__calculate_a() + (1 - self.__calculate_a()) * self.__relational_similarity()), 5)
