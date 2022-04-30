@@ -18,13 +18,3 @@ def generate_edges(graph):
             edges.append((node, neighbour))
 
     return edges
-
-
-def create_same_arcs(g_graph):
-    arcs = []
-
-    for idx in range(len(g_graph)-1):
-        if(g_graph[idx][1]+1 == g_graph[idx+1][1]):
-            arcs.append((g_graph[idx][0], g_graph[idx+1][0]))
-
-    return arcs

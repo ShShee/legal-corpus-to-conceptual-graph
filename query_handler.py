@@ -31,94 +31,51 @@ def handle_in_query(query):
     return ' '.join(result)
 
 
-def reduce_words(query_data):
-    for item in query_data:
-        print("------------------------------------------")
-        print("Gốc:", item)
-        query = filter_words(pos_tag(handle_in_query(item)))
-        skip = 0
-        list_query = []
-        start = 0
-        while start < len(query):
-            list_same_names = []
-            if skip != 0:
-                skip = skip - 1
+def reduce_words(query):
+    # print("------------------------------------------")
+    # print("Gốc:", query)
+    query = filter_words(pos_tag(handle_in_query(query)))
+    skip = 0
+    list_query = []
+    start = 0
+    while start < len(query):
+        list_same_names = []
+        if skip != 0:
+            skip = skip - 1
+        else:
+            namesList = data.getSameKeywordsList(query[start][0])
+            for name in namesList:
+                list_same_names.append(name)
+
+            count_inclued = len(list_same_names)
+            if(count_inclued != 0):
+                max_step = -1
+                last_length = -1
+                score = 0
+                get_data = ""
+                for item in list_same_names:
+                    step, length = getChildLength(
+                        query[start][0], item, query)
+                    #print(query[start][0], "---", item[1], "---",step, "+", max_step, last_length, length)
+                    if step >= max_step:
+                        if (max_step == -1 and step <= 0) or length == -1:
+                            get_data = query[start][0]
+                            score = 0 if length == -1 else item[1]
+                        elif (step == max_step and (last_length == -1 or length <= last_length)) or max_step != step:
+                            if (length == last_length and len(get_data) > len(item[0])) or length != last_length:
+                                get_data = item[0]
+                                score = item[1]
+                            last_length = length
+                        max_step = step
+
+                skip = max_step if max_step > 0 else 0
+                list_query.append(
+                    (get_data, 'Np' if max_step > 0 else query[start][1], score))
             else:
-                namesList = data.getSameKeywordsList(query[start][0])
-                for name in namesList:
-                    list_same_names.append(name)
+                list_query.append((query[start][0], query[start][1], 0))
+        start = start + 1
 
-                count_inclued = len(list_same_names)
-                if(count_inclued != 0):
-                    max_step = -1
-                    last_length = -1
-                    score = 0
-                    get_data = ""
-                    for item in list_same_names:
-                        step, length = getChildLength(
-                            query[start][0], item, query)
-                        #print(query[start][0], "---", item[1], "---",step, "+", max_step, last_length, length)
-                        if step >= max_step:
-                            if (max_step == -1 and step <= 0) or length == -1:
-                                get_data = query[start][0]
-                                score = 0 if length == -1 else item[1]
-                            elif (step == max_step and (last_length == -1 or length <= last_length)) or max_step != step:
-                                if (length == last_length and len(get_data) > len(item[0])) or length != last_length:
-                                    get_data = item[0]
-                                    score = item[1]
-                                last_length = length
-                            max_step = step
-
-                    skip = max_step if max_step > 0 else 0
-                    list_query.append(
-                        (get_data, 'Np' if max_step > 0 else query[start][1], score))
-                else:
-                    list_query.append((query[start][0], query[start][1], 0))
-            start = start + 1
-        print("Rút gọn:", list_query)
-
-
-# def reduce_words(query_data):
-#     for item in query_data:
-#         print("------------------------------------------")
-#         print("Gốc:", item)
-#         query = filter_words(pos_tag(handle_in_query(item)))
-#         skip = 0
-#         list_query = []
-#         start = 0
-#         while start < len(query):
-#             list_same_names = []
-#             if skip != 0:
-#                 skip = skip - 1
-#             else:
-#                 for type in data_type:
-#                     namesList = type.getParentsNames(query[start][0])
-#                     for name in namesList:
-#                         list_same_names.append(name)
-
-#                 count_inclued = len(list_same_names)
-#                 if(count_inclued != 0):
-#                     max_step = -1
-#                     last_length = -1
-#                     get_data = ""
-#                     for item in list_same_names:
-#                         step, length = getChildLength(
-#                             query[start][0], item, query)
-#                         #print(query[start][0], "---", item,"---", step, "+", max_step)
-#                         if step >= max_step:
-#                             if (max_step == -1 and step <= 0) or length == -1:
-#                                 get_data = query[start][0]
-#                             elif (step == max_step and (last_length == -1 or length < last_length)) or max_step != step:
-#                                 get_data = item
-#                                 last_length = length
-#                             max_step = step
-#                     skip = max_step if max_step > 0 else 0
-#                     list_query.append(
-#                         (get_data, 'Np' if max_step > 0 else query[start][1]))
-#                 else:
-#                     list_query.append(query[start])
-#             start = start + 1
-#         print("Rút gọn:", list_query)
+    return list_query
 
 def getChildLength(title, data, query):
     wordsList = filter_words(pos_tag(data[0]))
@@ -132,7 +89,7 @@ def getChildLength(title, data, query):
             end = index
         if end >= start and end != -1 and start != -1:
             break
-    #print(start, "///", end, query, wordsList)
+    # print(start, "///", end, query, wordsList)
     if(end == -1):
         return (-1, -1)
     else:
@@ -143,60 +100,20 @@ def getChildLength(title, data, query):
             # print(query[index][0])
             appearedWordsList.append(query[index])
             for item in wordsList:
-                #print(item[0], "====", query[index][0])
+                # print(item[0], "====", query[index][0])
                 if(item[0] == query[index][0]):
                     step = step + 1
                     appeared = True
             if appeared == False:
-                #print('Case 1')
-                return (0, 0)
-        #print(appearedWordsList, "---", checkVariableTypesIncluded(appearedWordsList),'==', wordsList, "---", data_types_included)
+                # print('Case 1')
+                return (0, -1)
+        # print(appearedWordsList, "---", checkVariableTypesIncluded(appearedWordsList),'==', wordsList, "---", data_types_included)
         if checkVariableTypesIncluded(appearedWordsList) == data_types_included or len(appearedWordsList) == len(wordsList):
-            #print('Case 2')
+            # print('Case 2')
             return (step, len(appearedWordsList))
         else:
-            #print('Case 3')
+            # print('Case 3')
             return (0, -1)
-
-
-# def getChildLength(title, data, query):
-#     wordsList = filter_words(pos_tag(data))
-#     data_types_included = checkVariableTypesIncluded(wordsList)
-#     start = -1
-#     end = -1
-#     for index in range(0, len(query)):
-#         if(query[index][0] == title):
-#             start = index
-#         if (wordsList[-1][0] == query[index][0]):
-#             end = index
-#         if end >= start and end != -1 and start != -1:
-#             break
-#     #print(start, "///", end, query, wordsList)
-#     if(end == -1):
-#         return (-1, -1)
-#     else:
-#         step = 0
-#         appearedWordsList = [query[start]]
-#         for index in range(start+1, end+1):
-#             appeared = False
-#             # print(query[index][0])
-#             appearedWordsList.append(query[index])
-#             for item in wordsList:
-#                 #print(item[0], "====", query[index][0])
-#                 if(item[0] == query[index][0]):
-#                     step = step + 1
-#                     appeared = True
-#             if appeared == False:
-#                 #print('Case 1')
-#                 return (0, 0)
-#         #print(appearedWordsList, "---", checkVariableTypesIncluded(appearedWordsList),'==', wordsList, "---", data_types_included)
-#         if checkVariableTypesIncluded(appearedWordsList) == data_types_included or len(appearedWordsList) == len(wordsList):
-#             #print('Case 2')
-#             return (step, len(appearedWordsList))
-#         else:
-#             #print('Case 3')
-#             return (0, -1)
-
 
 def checkVariableTypesIncluded(wordsList):
     data_has_verb = False
