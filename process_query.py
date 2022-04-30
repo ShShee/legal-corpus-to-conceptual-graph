@@ -4,7 +4,7 @@ from underthesea import word_tokenize, chunk, pos_tag, ner, classify
 def filter_words(input_list):
     reduced = []
     index = 0
-    #print(input_list)
+    # print(input_list)
     while index < len(input_list):
         if index+1 < len(input_list):
             if input_list[index][0] == 'tạm' and input_list[index+1][0] == 'dừng':
@@ -12,7 +12,8 @@ def filter_words(input_list):
                 index = index + 2
                 continue
             elif input_list[index][0] == 'không' and input_list[index+1][1] == 'V':
-                reduced.append(('không '+input_list[index+1][0], 'V'))
+                reduced.append(input_list[index][0])
+                reduced.append(input_list[index+1])
                 index = index + 2
                 continue
             elif input_list[index][0] == 'nâng' and input_list[index+1][0] == 'cao':
@@ -30,7 +31,7 @@ def filter_words(input_list):
 
         if input_list[index][1] == 'N' or input_list[index][1] == 'Nc' or input_list[index][1] == 'V':
             reduced.append(input_list[index])
-        elif input_list[index][0] == 'bảo hiểm' or input_list[index][0] == 'nghĩa vụ' or input_list[index][0] == 'covid-19':
+        elif input_list[index][0] == 'bảo hiểm' or input_list[index][0] == 'nghĩa vụ' or input_list[index][0] == 'covid-19' or input_list[index][0] == 'bảo lưu':
             reduced.append((input_list[index][0], 'N'))
         index = index + 1
 
@@ -57,20 +58,34 @@ def check_unnecessaries(word, word_behind):
         return 0
 
 
-def convert_synonyms(word, word_behind):
-    if(word == 'thời hạn'):
+def convert_synonyms(word, word_previous, word_behind):
+    if word == 'thời hạn':
         return "thời gian"
-    elif(word == 'xử lí' or word == 'xử lý'):
+    elif word == 'xử lí' or word == 'xử lý' or word == 'duyệt':
         return "giải quyết"
-    elif(word == 'giấy tờ'):
+    elif word == 'giấy tờ' or word == 'văn bản':
         return "hồ sơ"
-    elif(word == 'corona' or word == 'ncov'):
+    elif word == 'corona' or word == 'ncov':
         return "covid-19"
-    elif((word == 'xin' or word == 'yêu cầu') and word_behind != 'đề nghị'):
+    elif (word == 'xin' or word == 'yêu cầu') and word_behind != 'đề nghị':
         return "đề nghị"
-    elif(word == 'nộp' or word == 'gửi'):
+    elif word == 'nộp' or word == 'gửi':
         return "nộp"
-    elif(word == 'nhận' and word_behind == 'trợ cấp'):
+    elif word == 'nhận' and (word_behind == 'trợ cấp' or word_behind == 'hỗ trợ'):
         return "hưởng"
+    elif word == 'trình tự' or word == 'quy trình':  # and word_behind != 'thủ tục'
+        return "thủ tục"
+    elif word == 'trách nhiệm':
+        return "nghĩa vụ"
+    elif word == 'thay đổi' and word_behind == 'nơi':
+        return "chuyển"
+    elif word == 'mong muốn' and word_previous == 'có':
+        return "nhu cầu"
+    elif (word == 'dừng' and word_previous != 'tạm') or word == 'kết thúc':
+        return "chấm dứt"
+    elif word == 'trao' and word_behind == 'quyền':
+        return "ủy"
+    elif word == 'ngưng' or word == 'ngừng':
+        return "tạm dừng"
     else:
         return word

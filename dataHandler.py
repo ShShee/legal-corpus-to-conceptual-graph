@@ -77,7 +77,7 @@ class DataHandler:
         for data in self.graphs:
             print("------------------------")
             comparisonHandler = ComparisonHandler(graph, data[0])
-            print("Score of", data[1], "is",
+            print("Nodes:", data[0].getNodes(), "- Score of", data[1], "is",
                   comparisonHandler.getSimilarityScore())
 
     def print(self):

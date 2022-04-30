@@ -17,7 +17,12 @@ def handle_in_query(query):
         if exclude_next:
             exclude_next = False
         else:
-            if((idx+1) < len(query_tokenizes)):
+            if idx-1 != -1:
+                word_previous = query_tokenizes[idx-1]
+            else:
+                word_previous = ""
+
+            if idx+1 < len(query_tokenizes):
                 word_behind = query_tokenizes[idx+1]
             else:
                 word_behind = ""
@@ -26,7 +31,8 @@ def handle_in_query(query):
             if checked != 0:
                 exclude_next = True if checked == 2 else False
                 continue
-            result.append(convert_synonyms(val.lower(), word_behind.lower()))
+            result.append(convert_synonyms(
+                val.lower(), word_previous.lower(), word_behind.lower()))
 
     return ' '.join(result)
 
@@ -77,11 +83,13 @@ def reduce_words(query):
 
     return list_query
 
+
 def getChildLength(title, data, query):
     wordsList = filter_words(pos_tag(data[0]))
     data_types_included = checkVariableTypesIncluded(wordsList)
     start = -1
     end = -1
+    # print("Root:",pos_tag(data[0]),"-Extracted:",wordsList)
     for index in range(0, len(query)):
         if(query[index][0] == title):
             start = index
@@ -114,6 +122,7 @@ def getChildLength(title, data, query):
         else:
             # print('Case 3')
             return (0, -1)
+
 
 def checkVariableTypesIncluded(wordsList):
     data_has_verb = False
