@@ -11,3 +11,8 @@ class DataPathTypes(Enum):
     ARTICLES = 2
     RULES = 3
     LOOKUPS = 4
+
+class AdditionScores(Enum):
+    RELEVANT_THEME = 0.25
+    RELEVANT_WORD = 0.1
+    IS_ARTICLE = 0.05

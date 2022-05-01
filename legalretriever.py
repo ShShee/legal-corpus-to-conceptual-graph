@@ -38,7 +38,7 @@ class Ui_MainWindow(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout.addWidget(self.pushButton_2)
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(20, 120, 561, 711))
+        self.tableWidget.setGeometry(QtCore.QRect(20, 120, 1051, 711)) #561
         self.tableWidget.setSizeAdjustPolicy(
             QtWidgets.QAbstractScrollArea.AdjustIgnored)
         self.tableWidget.setObjectName("tableWidget")
@@ -119,7 +119,8 @@ class Ui_MainWindow(object):
         self.tableWidget.setRowCount(len(comparison_result))
         for idx, val in enumerate(comparison_result):
             self.tableWidget.setItem(idx, 0, QtWidgets.QTableWidgetItem(val[0]))
-            #self.tableWidget.setItem(idx, 1, QtGui.QTableWidgetItem(self.led.text()))
+            self.tableWidget.setItem(idx, 1, QtWidgets.QTableWidgetItem(val[2]))
+            self.tableWidget.setItem(idx, 3, QtWidgets.QTableWidgetItem(val[3]))
             self.tableWidget.setItem(idx, 2, QtWidgets.QTableWidgetItem(str(val[1])))
         
         self.tableWidget.sortItems(2, QtCore.Qt.DescendingOrder)

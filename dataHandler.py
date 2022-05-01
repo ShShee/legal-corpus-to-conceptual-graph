@@ -76,9 +76,10 @@ class DataHandler:
         Output: list of top similarities of this graph to data
         """
         for data in self.graphs:
-            #print("------------------------")
+            # print("------------------------")
             comparisonHandler = ComparisonHandler(graph, data[0])
-            result.append((data[1],comparisonHandler.getSimilarityScore()))
+            result.append((data[1], comparisonHandler.getSimilarityScore(data[2]), str(
+                data[0].getNodes()), str(comparisonHandler.getNodes())))
             # print("Nodes:", data[0].getNodes(), "- Score of", data[1], "is",comparisonHandler.getSimilarityScore())
         return result
 

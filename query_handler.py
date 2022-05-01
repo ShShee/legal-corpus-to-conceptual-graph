@@ -27,7 +27,8 @@ def handle_in_query(query):
             else:
                 word_behind = ""
 
-            checked = check_unnecessaries(val.lower(), word_behind.lower())
+            checked = check_unnecessaries(
+                val.lower(), word_previous.lower(), word_behind.lower())
             if checked != 0:
                 exclude_next = True if checked == 2 else False
                 continue

@@ -7,8 +7,6 @@ class ConceptualGraph:
         Input: List of keywords to init graph
         """
         self.graph = nx.Graph()
-
-        self.graph.add_nodes_from(keywords)
         self.graph.add_edges_from(self._create_edges(keywords))
 
     def _create_edges(self, keywords):
@@ -28,6 +26,15 @@ class ConceptualGraph:
         Output: Nodes of this graph
         """
         return self.graph.nodes
+
+    def countNodes(self):
+        """
+        Output: Number of nodes in this graph (every nodes has different score)
+        """
+        count = 0
+        for node in self.graph.nodes:
+            count = count + 1 + node[2]
+        return count
 
     def getEdges(self):
         """

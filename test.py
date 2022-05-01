@@ -10,14 +10,16 @@ from conceptualGraph import ConceptualGraph
 
 test = ConceptualGraph(reduce_words(
     "Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?"))
-# test2 = ConceptualGraph(reduce_words(
-#     "hưởng hiểm y tế trợ cấp thất nghiệp"))
+test2 = ConceptualGraph(reduce_words(
+    "hưởng bảo hiểm hiểm y tế trợ cấp thất nghiệp"))
 
+comparisonHandler = ComparisonHandler(test, test2)
+comparisonHandler.getNodes()
 # test3 = ComparisonHandler(test, test2)
 # #test.print()
 # print(test3.getSimilarityScore())
-dir = "./data/"
-dataHandler = DataHandler(
-    dir+"laws.json", dir+"articles.json", dir+"rules.json", dir+"lookups.json")
+# dir = "./data/"
+# dataHandler = DataHandler(
+#     dir+"laws.json", dir+"articles.json", dir+"rules.json", dir+"lookups.json")
 
-dataHandler.compare(test)
+# dataHandler.compare(test)
