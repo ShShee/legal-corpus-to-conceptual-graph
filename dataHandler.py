@@ -70,15 +70,17 @@ class DataHandler:
             return self.lookups
 
     def compare(self, graph):
+        result = []
         """
         Input: Graph of query that we want to compare
         Output: list of top similarities of this graph to data
         """
         for data in self.graphs:
-            print("------------------------")
+            #print("------------------------")
             comparisonHandler = ComparisonHandler(graph, data[0])
-            print("Nodes:", data[0].getNodes(), "- Score of", data[1], "is",
-                  comparisonHandler.getSimilarityScore())
+            result.append((data[1],comparisonHandler.getSimilarityScore()))
+            # print("Nodes:", data[0].getNodes(), "- Score of", data[1], "is",comparisonHandler.getSimilarityScore())
+        return result
 
     def print(self):
         print(self.laws)
