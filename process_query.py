@@ -4,7 +4,7 @@ from underthesea import word_tokenize, chunk, pos_tag, ner, classify
 def filter_words(input_list):
     reduced = []
     index = 0
-    # print(input_list)
+    #print(input_list)
     while index < len(input_list):
         if index+1 < len(input_list):
             if input_list[index][0] == 'tạm' and input_list[index+1][0] == 'dừng':

@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1090</width>
+    <width>1362</width>
     <height>901</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1090</width>
+    <width>1362</width>
     <height>901</height>
    </size>
   </property>
@@ -28,7 +28,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>1071</width>
+      <width>1341</width>
       <height>51</height>
      </rect>
     </property>
@@ -68,7 +68,7 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>20</x>
       <y>120</y>
-      <width>1051</width>
+      <width>1321</width>
       <height>711</height>
      </rect>
     </property>
@@ -98,13 +98,18 @@ p, li { white-space: pre-wrap; }
       <string>Đồ thị</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>Điều</string>
+     </property>
+    </column>
    </widget>
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>60</y>
-      <width>1051</width>
+      <width>1321</width>
       <height>41</height>
      </rect>
     </property>
@@ -121,7 +126,7 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>20</x>
       <y>850</y>
-      <width>1051</width>
+      <width>1321</width>
       <height>31</height>
      </rect>
     </property>

@@ -18,13 +18,13 @@ from dataHandler import DataHandler
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1090, 901)
-        MainWindow.setMaximumSize(QtCore.QSize(1090, 901))
+        MainWindow.resize(1362, 901)
+        MainWindow.setMaximumSize(QtCore.QSize(1362, 901))
         MainWindow.setDockNestingEnabled(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalFrame = QtWidgets.QFrame(self.centralwidget)
-        self.horizontalFrame.setGeometry(QtCore.QRect(10, 10, 1071, 51))
+        self.horizontalFrame.setGeometry(QtCore.QRect(10, 10, 1341, 51))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -38,12 +38,12 @@ class Ui_MainWindow(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout.addWidget(self.pushButton_2)
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(20, 120, 1051, 711)) #561
+        self.tableWidget.setGeometry(QtCore.QRect(20, 120, 1321, 711))  # 561
         self.tableWidget.setSizeAdjustPolicy(
             QtWidgets.QAbstractScrollArea.AdjustIgnored)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(4)
-        self.tableWidget.setRowCount(1)
+        self.tableWidget.setColumnCount(7)
+        self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
@@ -53,17 +53,21 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setItem(0, 0, item)
+        self.tableWidget.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setItem(0, 2, item)
+        self.tableWidget.setHorizontalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setItem(0, 3, item)
+        self.tableWidget.setHorizontalHeaderItem(6, item)
+        self.tableWidget.setColumnWidth(1,200)
+        self.tableWidget.setColumnWidth(3,200)
+        self.tableWidget.setColumnWidth(5,250)
+        self.tableWidget.setColumnWidth(6,250)
         self.tableWidget.horizontalHeader().setHighlightSections(True)
         self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser.setGeometry(QtCore.QRect(20, 60, 1051, 41))
+        self.textBrowser.setGeometry(QtCore.QRect(20, 60, 1321, 41))
         self.textBrowser.setObjectName("textBrowser")
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_2.setGeometry(QtCore.QRect(20, 850, 1051, 31))
+        self.textBrowser_2.setGeometry(QtCore.QRect(20, 850, 1321, 31))
         self.textBrowser_2.setObjectName("textBrowser_2")
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -87,10 +91,16 @@ class Ui_MainWindow(object):
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Trích dẫn"))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "Từ khóa"))
+        item.setText(_translate("MainWindow", "Điều"))
         item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Điểm"))
+        item.setText(_translate("MainWindow", "Khoản"))
         item = self.tableWidget.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Mã luật"))
+        item = self.tableWidget.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Điểm"))
+        item = self.tableWidget.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "Từ khóa"))
+        item = self.tableWidget.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Đồ thị"))
         self.textBrowser.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                             "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -110,7 +120,8 @@ class Ui_MainWindow(object):
 
     def onRetrieveClicked(self):
         input_value = self.textEdit.toPlainText()
-        reduced = reduce_words("Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?")
+        reduced = reduce_words(
+            "Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?")
         self.textBrowser.setText(str(reduced))
 
         graph = ConceptualGraph(reduced)
@@ -118,12 +129,10 @@ class Ui_MainWindow(object):
 
         self.tableWidget.setRowCount(len(comparison_result))
         for idx, val in enumerate(comparison_result):
-            self.tableWidget.setItem(idx, 0, QtWidgets.QTableWidgetItem(val[0]))
-            self.tableWidget.setItem(idx, 1, QtWidgets.QTableWidgetItem(val[2]))
-            self.tableWidget.setItem(idx, 3, QtWidgets.QTableWidgetItem(val[3]))
-            self.tableWidget.setItem(idx, 2, QtWidgets.QTableWidgetItem(str(val[1])))
+            for column in range(7):
+                self.tableWidget.setItem(idx, column, QtWidgets.QTableWidgetItem(val[column]))
         
-        self.tableWidget.sortItems(2, QtCore.Qt.DescendingOrder)
+        self.tableWidget.sortItems(4, QtCore.Qt.DescendingOrder)
 
 
 if __name__ == "__main__":

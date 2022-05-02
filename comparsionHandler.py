@@ -20,16 +20,14 @@ class ComparisonHandler(ConceptualGraph):
         self.nG1s = graph_1.countNodes()
         self.nG2s = graph_2.countNodes()
 
-        self.nGc = len(self.getNodes())
-        self.nG1 = len(graph_1.getNodes())
-        self.nG2 = len(graph_2.getNodes())
-
         # Size of same edges in comparison with this graph
         if len(same_nodes) != 0:
-            self.mGcG1 = self.__getRelevantEdges(graph_1)
-            self.mGcG2 = self.__getRelevantEdges(graph_2)
+            self.mGcG1 = self.__getRelevantEdges(graph_1, same_nodes)
+            self.mGcG2 = self.__getRelevantEdges(graph_2, same_nodes)
 
             self.graph.clear()
+            self.graph.add_nodes_from(same_nodes)
+
             init_edges = self._create_edges(same_nodes)
             init_edges.append((same_nodes[0], same_nodes[len(same_nodes)-1]))
             self.graph.add_edges_from(graph_2.getSameEdges(init_edges))
@@ -39,19 +37,21 @@ class ComparisonHandler(ConceptualGraph):
             self.mGcG1 = 0
             self.mGcG2 = 0
 
-    def __getRelevantEdges(self, graph):
+    def __getRelevantEdges(self, graph, same_nodes):
         """
         Input: graph that we need to find nodes of this graph in its edges
         Output: size of edges that satisfy the condition
         """
         self.graph.clear()
+        self.graph.add_nodes_from(same_nodes)
+
         for node in list(self.getNodes()):
             self.graph.add_edges_from(graph.getParentsEdges(node))
 
         return len(self.getEdges())
 
     def __conceptual_similarity(self):
-        return (2*self.nGcs)/(self.nG1s + self.nG2)
+        return (2*self.nGcs)/(self.nG1s + self.nG2s)
 
     def __relational_similarity(self):
         denominator = self.mGcG1 + self.mGcG2

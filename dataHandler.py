@@ -1,3 +1,4 @@
+from scipy.fftpack import idct
 from comparsionHandler import ComparisonHandler
 from conceptualGraph import ConceptualGraph
 from enums import DataPathTypes
@@ -78,9 +79,73 @@ class DataHandler:
         for data in self.graphs:
             # print("------------------------")
             comparisonHandler = ComparisonHandler(graph, data[0])
-            result.append((data[1], comparisonHandler.getSimilarityScore(data[2]), str(
-                data[0].getNodes()), str(comparisonHandler.getNodes())))
+            add_value = (
+                # Id of this type of data
+                data[1],
+                # get title of this data,
+                self.getArticleTitle(data[1], data[2]),
+                # get index of this rule in article
+                self.getRuleTitle(
+                    data[1], True) if data[2] == DataPathTypes.RULES else "",
+                # get law code of this data,
+                ', '.join(self.getCodeList(data[1], data[2])),
+                # Get comparison score
+                str(comparisonHandler.getSimilarityScore(data[2])),
+                # get nodes of data graph
+                str(data[0].getNodes()),
+                # get nodes of same graph,
+                str(comparisonHandler.getNodes())
+            )
+            result.append(add_value)
             # print("Nodes:", data[0].getNodes(), "- Score of", data[1], "is",comparisonHandler.getSimilarityScore())
+        return result
+
+    def getDataFromId(self, id, type):
+        return list(filter(lambda val: val["id"] == id, self.articles if type ==
+                           DataPathTypes.ARTICLES else self.rules))[0]
+
+    def getLookUpFromId(self, id, type):
+        lookUpId = self.getDataFromId(id, type)["lookUpId"]
+        return list(filter(lambda lk: lk["id"] == lookUpId, self.lookups))[0]
+
+    def getArticleTitle(self, id, dataType):
+        """
+        Input: id and type of rule or article
+        Output: string title of this article 
+        """
+        if dataType == DataPathTypes.ARTICLES:
+            return self.getDataFromId(id, DataPathTypes.ARTICLES)["title"]
+        elif dataType == DataPathTypes.RULES:
+            return self.getRuleTitle(id, False)
+
+    def getRuleTitle(self, id, onlyIndex):
+        """
+        Input: id and type of rule and if we only want to get index of this rule in article turn onlyIndex to True
+        Output: string title of the parent article of this rule 
+        """
+        lookUp = self.getLookUpFromId(id, DataPathTypes.RULES)
+
+        if(onlyIndex):
+            indexInArticle = [idx for idx, val in enumerate(
+                lookUp["rules"]) if val == id][0]
+            return "Khoản "+str(indexInArticle + 1)
+        else:
+            return self.getArticleTitle(lookUp["article"], DataPathTypes.ARTICLES)
+
+    def getLawFromCode(self, code):
+        return list(filter(lambda law: law["code"] == code, self.laws))[0]
+
+    def getArticleFromRule(self, id):
+        lookUp = self.getLookUpFromId(id, DataPathTypes.RULES)
+        return self.getDataFromId(lookUp["article"], DataPathTypes.ARTICLES)
+
+    def getCodeList(self, id, type):
+        return self.getDataFromId(id, type)['laws'] if type == DataPathTypes.ARTICLES else self.getArticleFromRule(id)['laws']
+
+    def getLawTitlesFromList(self, id, type):
+        result = []
+        for code in self.getCodeList(id, type):
+            result.append(self.getLawFromCode(code)['title'])
         return result
 
     def print(self):

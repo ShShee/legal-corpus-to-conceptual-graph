@@ -7,6 +7,7 @@ class ConceptualGraph:
         Input: List of keywords to init graph
         """
         self.graph = nx.Graph()
+        self.graph.add_nodes_from(keywords)
         self.graph.add_edges_from(self._create_edges(keywords))
 
     def _create_edges(self, keywords):
