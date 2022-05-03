@@ -11,20 +11,27 @@
 import enum
 from PyQt5 import QtCore, QtGui, QtWidgets
 from conceptualGraph import ConceptualGraph
+from enums import GraphTypes
 from query_handler import reduce_words
 from dataHandler import DataHandler
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+import networkx as nx
 
 
 class Ui_MainWindow(object):
+    NumButtons = ['Đồ thị câu truy vấn', 'Đồ thị dữ liệu', 'Đồ thị tương đồng']
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1362, 901)
-        MainWindow.setMaximumSize(QtCore.QSize(1362, 901))
+        MainWindow.resize(1881, 911)
+        MainWindow.setMaximumSize(QtCore.QSize(1881, 911))
         MainWindow.setDockNestingEnabled(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalFrame = QtWidgets.QFrame(self.centralwidget)
-        self.horizontalFrame.setGeometry(QtCore.QRect(10, 10, 1341, 51))
+        self.horizontalFrame.setGeometry(QtCore.QRect(890, 10, 981, 51))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -38,11 +45,11 @@ class Ui_MainWindow(object):
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout.addWidget(self.pushButton_2)
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(20, 120, 1321, 711))  # 561
+        self.tableWidget.setGeometry(QtCore.QRect(20, 20, 861, 871))
         self.tableWidget.setSizeAdjustPolicy(
             QtWidgets.QAbstractScrollArea.AdjustIgnored)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(7)
+        self.tableWidget.setColumnCount(5)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -55,25 +62,37 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(6, item)
-        self.tableWidget.setColumnWidth(1,200)
-        self.tableWidget.setColumnWidth(3,200)
-        self.tableWidget.setColumnWidth(5,250)
-        self.tableWidget.setColumnWidth(6,250)
+        self.tableWidget.setColumnWidth(1, 313)
+        self.tableWidget.setColumnWidth(3, 200)
         self.tableWidget.horizontalHeader().setHighlightSections(True)
-        self.textBrowser = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser.setGeometry(QtCore.QRect(20, 60, 1321, 41))
-        self.textBrowser.setObjectName("textBrowser")
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_2.setGeometry(QtCore.QRect(20, 850, 1321, 31))
+        self.textBrowser_2.setGeometry(QtCore.QRect(900, 500, 961, 391))
         self.textBrowser_2.setObjectName("textBrowser_2")
+
+        self.gridLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(900, 60, 961, 411))
+        self.gridLayoutWidget.setObjectName("gridLayoutWidget")
+        self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout.setObjectName("gridLayout1")
+        self.figure = plt.figure()
+        self.canvas = FigureCanvas(self.figure)
+        self.gridLayout.addWidget(self.canvas, 1, 0, 2, 2)
+
+        self.createVerticalGroupBox()
+        buttonLayout = QtWidgets.QVBoxLayout()
+        buttonLayout.addWidget(self.verticalGroupBox)
+        self.gridLayout.addLayout(buttonLayout, 0, 0)
+
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(900, 480, 111, 20))
+        self.label.setObjectName("label_2")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
         self.pushButton_2.clicked.connect(self.textEdit.clear)
         self.pushButton.clicked.connect(self.onRetrieveClicked)
+        self.tableWidget.itemClicked.connect(self.handleItemClicked)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -98,20 +117,12 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Mã luật"))
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Điểm"))
-        item = self.tableWidget.horizontalHeaderItem(5)
-        item.setText(_translate("MainWindow", "Từ khóa"))
-        item = self.tableWidget.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "Đồ thị"))
-        self.textBrowser.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                            "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                            "p, li { white-space: pre-wrap; }\n"
-                                            "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-                                            "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
         self.textBrowser_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                               "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
                                               "p, li { white-space: pre-wrap; }\n"
                                               "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-                                              "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Điều 69</p></body></html>"))
+                                              "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "Nội dung"))
 
     def loadData(self):
         dir = "./data/"
@@ -122,17 +133,60 @@ class Ui_MainWindow(object):
         input_value = self.textEdit.toPlainText()
         reduced = reduce_words(
             "Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?")
-        self.textBrowser.setText(str(reduced))
 
         graph = ConceptualGraph(reduced)
+        self.showGraph(graph, GraphTypes.QUERY)
         comparison_result = self.dataHandler.compare(graph)
+        self.comparison = comparison_result
 
         self.tableWidget.setRowCount(len(comparison_result))
         for idx, val in enumerate(comparison_result):
-            for column in range(7):
-                self.tableWidget.setItem(idx, column, QtWidgets.QTableWidgetItem(val[column]))
-        
+            for column in range(5):
+                self.tableWidget.setItem(
+                    idx, column, QtWidgets.QTableWidgetItem(val[column]))
+
         self.tableWidget.sortItems(4, QtCore.Qt.DescendingOrder)
+
+    def showGraph(self, graph, type):
+        self.figure.clf()
+
+        labeldict = {}
+        for node in graph.getNodes():
+            labeldict[node] = node[0]
+
+        color_for_node = "#000000"
+        if type == GraphTypes.QUERY:
+            color_for_node = '#0099ff'
+        elif type == GraphTypes.DATA:
+            color_for_node = "#00ff00"
+        elif type == GraphTypes.SIMILARITY:
+            color_for_node = "#ff3300"
+
+        nx.draw(graph.getGraph(), labels=labeldict, with_labels=True,
+                node_size=200, node_color=color_for_node)
+
+        self.canvas.draw_idle()
+
+    def createVerticalGroupBox(self):
+        self.verticalGroupBox = QtWidgets.QGroupBox()
+
+        layout = QtWidgets.QHBoxLayout()
+        for i in self.NumButtons:
+            button = QtWidgets.QPushButton(i)
+            button.setObjectName(i)
+            layout.addWidget(button)
+            layout.setSpacing(0)
+            layout.setContentsMargins(0, 0, 0, 0)
+            self.verticalGroupBox.setLayout(layout)
+            # button.clicked.connect(self.submitCommand)
+
+    def handleItemClicked(self):
+        indexes = self.tableWidget.selectedIndexes()
+        if indexes and len(indexes) == 1:
+            itemID = indexes[0].siblingAtColumn(0).data()
+
+            graph = self.dataHandler.getDataGraphFromId(itemID)[0]
+            self.showGraph(graph, GraphTypes.DATA)
 
 
 if __name__ == "__main__":

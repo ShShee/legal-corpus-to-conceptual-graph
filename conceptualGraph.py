@@ -22,6 +22,9 @@ class ConceptualGraph:
 
         return edges
 
+    def getGraph(self):
+        return self.graph
+
     def getNodes(self):
         """
         Output: Nodes of this graph

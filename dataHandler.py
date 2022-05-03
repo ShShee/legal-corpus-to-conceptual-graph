@@ -90,11 +90,7 @@ class DataHandler:
                 # get law code of this data,
                 ', '.join(self.getCodeList(data[1], data[2])),
                 # Get comparison score
-                str(comparisonHandler.getSimilarityScore(data[2])),
-                # get nodes of data graph
-                str(data[0].getNodes()),
-                # get nodes of same graph,
-                str(comparisonHandler.getNodes())
+                str(comparisonHandler.getSimilarityScore(data[2]))
             )
             result.append(add_value)
             # print("Nodes:", data[0].getNodes(), "- Score of", data[1], "is",comparisonHandler.getSimilarityScore())
@@ -147,6 +143,9 @@ class DataHandler:
         for code in self.getCodeList(id, type):
             result.append(self.getLawFromCode(code)['title'])
         return result
+
+    def getDataGraphFromId(self, id):
+        return list(filter(lambda graph: graph[1] == id, self.graphs))[0]
 
     def print(self):
         print(self.laws)
