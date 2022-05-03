@@ -22,6 +22,7 @@ import networkx as nx
 
 class Ui_MainWindow(object):
     NumButtons = ['Đồ thị câu truy vấn', 'Đồ thị dữ liệu', 'Đồ thị tương đồng']
+    tagOfCurrentTab = GraphTypes.QUERY
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -93,6 +94,9 @@ class Ui_MainWindow(object):
         self.pushButton_2.clicked.connect(self.textEdit.clear)
         self.pushButton.clicked.connect(self.onRetrieveClicked)
         self.tableWidget.itemClicked.connect(self.handleItemClicked)
+
+        self.tableWidget.setEditTriggers(
+            QtWidgets.QAbstractItemView.NoEditTriggers)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -130,13 +134,9 @@ class Ui_MainWindow(object):
             dir+"laws.json", dir+"articles.json", dir+"rules.json", dir+"lookups.json")
 
     def onRetrieveClicked(self):
-        input_value = self.textEdit.toPlainText()
-        reduced = reduce_words(
-            "Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?")
+        self.__toQueryView()
 
-        graph = ConceptualGraph(reduced)
-        self.showGraph(graph, GraphTypes.QUERY)
-        comparison_result = self.dataHandler.compare(graph)
+        comparison_result = self.dataHandler.compare(self.getGraphFromQuery())
         self.comparison = comparison_result
 
         self.tableWidget.setRowCount(len(comparison_result))
@@ -146,6 +146,13 @@ class Ui_MainWindow(object):
                     idx, column, QtWidgets.QTableWidgetItem(val[column]))
 
         self.tableWidget.sortItems(4, QtCore.Qt.DescendingOrder)
+
+    def getGraphFromQuery(self):
+        input_value = self.textEdit.toPlainText()
+        reduced = reduce_words(
+            "Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?")
+
+        return ConceptualGraph(reduced)
 
     def showGraph(self, graph, type):
         self.figure.clf()
@@ -171,22 +178,48 @@ class Ui_MainWindow(object):
         self.verticalGroupBox = QtWidgets.QGroupBox()
 
         layout = QtWidgets.QHBoxLayout()
-        for i in self.NumButtons:
-            button = QtWidgets.QPushButton(i)
-            button.setObjectName(i)
+        for i in range(len(self.NumButtons)):
+            button = QtWidgets.QPushButton(self.NumButtons[i])
+            button.setObjectName(self.NumButtons[i])
             layout.addWidget(button)
             layout.setSpacing(0)
             layout.setContentsMargins(0, 0, 0, 0)
             self.verticalGroupBox.setLayout(layout)
-            # button.clicked.connect(self.submitCommand)
+            if i == 0:
+                button.clicked.connect(self.__toQueryView)
+            elif i == 1:
+                button.clicked.connect(self.__toDataView)
+            elif i == 2:
+                button.clicked.connect(self.__toSimilarityView)
+
+    def __toQueryView(self):
+        self.tagOfCurrentTab = GraphTypes.QUERY
+        self.defineGraphToShow("")
+
+    def __toDataView(self):
+        self.tagOfCurrentTab = GraphTypes.DATA
+        self.handleItemClicked()
+
+    def __toSimilarityView(self):
+        self.tagOfCurrentTab = GraphTypes.SIMILARITY
+        self.handleItemClicked()
 
     def handleItemClicked(self):
         indexes = self.tableWidget.selectedIndexes()
         if indexes and len(indexes) == 1:
             itemID = indexes[0].siblingAtColumn(0).data()
+            self.defineGraphToShow(itemID)
 
+    def defineGraphToShow(self, itemID):
+        if self.tagOfCurrentTab == GraphTypes.DATA:
             graph = self.dataHandler.getDataGraphFromId(itemID)[0]
-            self.showGraph(graph, GraphTypes.DATA)
+        elif self.tagOfCurrentTab == GraphTypes.SIMILARITY:
+            graph = list(filter(lambda c: c[0] == itemID, self.comparison))[
+                0][5]
+        else:
+            graph = self.getGraphFromQuery()
+
+        self.showGraph(graph, self.tagOfCurrentTab)
 
 
 if __name__ == "__main__":

@@ -90,7 +90,9 @@ class DataHandler:
                 # get law code of this data,
                 ', '.join(self.getCodeList(data[1], data[2])),
                 # Get comparison score
-                str(comparisonHandler.getSimilarityScore(data[2]))
+                str(comparisonHandler.getSimilarityScore(data[2])),
+                #get graph of similarity
+                comparisonHandler
             )
             result.append(add_value)
             # print("Nodes:", data[0].getNodes(), "- Score of", data[1], "is",comparisonHandler.getSimilarityScore())
