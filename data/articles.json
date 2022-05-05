@@ -101,7 +101,7 @@
     "id": "article/19",
     "laws": ["28/2015/TT-BLĐTBXH"],
     "title": "Điều 13. Văn bản đề nghị hỗ trợ kinh phí đào tạo, bồi dưỡng, nâng cao trình độ kỹ năng nghề để duy trì việc làm cho người lao động",
-    "keyphrase": "hồ sơ đề nghị hỗ trợ đào tạo, bồi dưỡng, nâng cao trình độ kỹ năng nghề",
+    "keyphrase": "hồ sơ đề nghị hỗ trợ kinh phí đào tạo, bồi dưỡng, nâng cao trình độ kỹ năng nghề",
     "lookUpId": "lookUp/19"
   },
   {
@@ -164,7 +164,7 @@
     "id": "article/26",
     "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "title": "Điều 18. Giải quyết hưởng trợ cấp thất nghiệp",
-    "keyphrase": "nộp hồ sơ đề nghị hưởng trợ cấp thất nghiệp",
+    "keyphrase": "giải quyết hưởng trợ cấp thất nghiệp",
     "lookUpId": "lookUp/26"
   },
   {
@@ -276,7 +276,7 @@
     "id": "article/40",
     "laws": ["28/2015/TT-BLĐTBXH"],
     "title": "Điều 6. Từ chối nhận việc làm theo quy định tại Điểm đ Khoản 1 Điều 21 Nghị định số 28/2015/NĐ-CP",
-    "keyphrase": "từ chối nhận việc làm",
+    "keyphrase": "từ chối nhận việc làm từ tư vấn giới thiệu việc làm",
     "lookUpId": "lookUp/40"
   },
   {
@@ -332,28 +332,28 @@
     "id": "article/48",
     "laws": ["28/2015/NĐ-CP"],
     "title": "Điều 29. Quyền của người lao động",
-    "keyphrase": "quyền của người lao động",
+    "keyphrase": "quyền của người lao động tham gia bảo hiểm thất nghiệp",
     "lookUpId": "lookUp/48"
   },
   {
     "id": "article/49",
     "laws": ["28/2015/NĐ-CP"],
     "title": "Điều 30. Nghĩa vụ của người lao động",
-    "keyphrase": "nghĩa vụ của người lao động",
+    "keyphrase": "nghĩa vụ của người lao động tham gia bảo hiểm thất nghiệp",
     "lookUpId": "lookUp/49"
   },
   {
     "id": "article/50",
     "laws": ["28/2015/NĐ-CP"],
     "title": "Điều 31. Quyền của người sử dụng lao động",
-    "keyphrase": "quyền của người sử dụng lao động",
+    "keyphrase": "quyền của người sử dụng lao động tham gia bảo hiểm thất nghiệp",
     "lookUpId": "lookUp/50"
   },
   {
     "id": "article/51",
     "laws": ["28/2015/NĐ-CP"],
     "title": "Điều 32. Trách nhiệm của người sử dụng lao động",
-    "keyphrase": "trách nhiệm của người sử dụng lao động",
+    "keyphrase": "trách nhiệm của người sử dụng lao động tham gia bảo hiểm thất nghiệp",
     "lookUpId": "lookUp/51"
   },
   {
