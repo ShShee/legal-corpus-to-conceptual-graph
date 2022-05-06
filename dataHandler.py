@@ -1,3 +1,5 @@
+from cgitb import lookup
+import enum
 from scipy.fftpack import idct
 from comparsionHandler import ComparisonHandler
 from conceptualGraph import ConceptualGraph
@@ -91,7 +93,7 @@ class DataHandler:
                 ', '.join(self.getCodeList(data[1], data[2])),
                 # Get comparison score
                 str(comparisonHandler.getSimilarityScore(data[2])),
-                #get graph of similarity
+                # get graph of similarity
                 comparisonHandler
             )
             result.append(add_value)
@@ -130,6 +132,30 @@ class DataHandler:
         else:
             return self.getArticleTitle(lookUp["article"], DataPathTypes.ARTICLES)
 
+    def getContentData(self, id, type):
+        lookUp = self.getLookUpFromId(id, type)
+        refers = []
+        for refer in lookUp["references"]:
+            refer.add(refer)
+
+        content = ""
+        if type == DataPathTypes.ARTICLES:
+            for ruleId in lookUp["rules"]:
+                data = self.getDataFromId(
+                    ruleId, DataPathTypes.RULES)
+                content = content + \
+                    str(data["content"]) + "\n"
+                for refer in data["references"]:
+                    refers.append(refer)
+        elif type == DataPathTypes.RULES:
+            data = self.getDataFromId(
+                id, DataPathTypes.RULES)
+            content = str(data["content"]) + "\n"
+            for refer in data["references"]:
+                refers.append(refer)
+
+        return (content, refers)
+
     def getLawFromCode(self, code):
         return list(filter(lambda law: law["code"] == code, self.laws))[0]
 
@@ -147,7 +173,34 @@ class DataHandler:
         return result
 
     def getDataGraphFromId(self, id):
-        return list(filter(lambda graph: graph[1] == id, self.graphs))[0]
+        return list(filter(lambda graph: graph[1] == id, self.graphs))
+
+    def getContentFromId(self, itemId):
+        data = self.getDataGraphFromId(itemId)
+        type = data[0][2] if data else DataPathTypes.RULES
+        result = "Theo "
+        titles = self.getLawTitlesFromList(itemId, type)
+        for index, code in enumerate(self.getCodeList(itemId, type)):
+            ending = ":\n" if index + \
+                1 == len(self.getCodeList(itemId, type)) else " và "
+            result = result + titles[index] + " số "+code + ending
+
+        if type == DataPathTypes.RULES:
+            result =result + self.getRuleTitle(itemId, True) + " thuộc "
+
+        article = self.getArticleTitle(itemId, type)
+        contentData = self.getContentData(itemId, type)
+        result = result + article + "\n" + contentData[0]
+        if contentData[1]:
+            result = result + "\n\n"
+            for refer in contentData[1]:
+                if refer[0] == 'l':
+                    lookup = list(
+                        filter(lambda lk: lk["id"] == refer, self.lookups))[0]
+                    result = result + self.getContentFromId(lookup["article"])
+                else:
+                    result = result + self.getContentFromId(refer)
+        return result
 
     def print(self):
         print(self.laws)

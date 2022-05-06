@@ -86,12 +86,17 @@ class Ui_MainWindow(object):
         self.tableWidget.setColumnWidth(1, 313)
         self.tableWidget.setColumnWidth(3, 200)
         self.tableWidget.horizontalHeader().setHighlightSections(True)
+
+        
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_2.setGeometry(QtCore.QRect(900, 530, 961, 361))
+        self.textBrowser_2.setGeometry(QtCore.QRect(900, 470, 961, 421))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.textBrowser_2.setFont(font)
         self.textBrowser_2.setObjectName("textBrowser_2")
 
         self.gridLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(900, 80, 961, 421))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(900, 80, 961, 371))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -101,7 +106,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(4)
         self.canvas.setFont(font)
-        self.gridLayout.addWidget(self.canvas, 0, 1,9,5)
+        self.gridLayout.addWidget(self.canvas, 0, 1, 9, 5)
 
         self.createVerticalGroupBox()
         buttonLayout = QtWidgets.QVBoxLayout()
@@ -109,7 +114,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(buttonLayout, 0, 0)
 
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(900, 510, 111, 20))
+        self.label.setGeometry(QtCore.QRect(900, 450, 111, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label.setFont(font)
@@ -238,10 +243,12 @@ class Ui_MainWindow(object):
         if indexes and len(indexes) == 1:
             itemID = indexes[0].siblingAtColumn(0).data()
             self.defineGraphToShow(itemID)
+            self.textBrowser_2.setText(
+                self.dataHandler.getContentFromId(itemID))
 
     def defineGraphToShow(self, itemID):
         if self.tagOfCurrentTab == GraphTypes.DATA:
-            graph = self.dataHandler.getDataGraphFromId(itemID)[0]
+            graph = self.dataHandler.getDataGraphFromId(itemID)[0][0]
         elif self.tagOfCurrentTab == GraphTypes.SIMILARITY:
             graph = list(filter(lambda c: c[0] == itemID, self.comparison))[
                 0][5]

@@ -140,9 +140,9 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>900</x>
-      <y>530</y>
+      <y>480</y>
       <width>961</width>
-      <height>361</height>
+      <height>411</height>
      </rect>
     </property>
     <property name="html">
@@ -159,7 +159,7 @@ p, li { white-space: pre-wrap; }
       <x>900</x>
       <y>80</y>
       <width>961</width>
-      <height>421</height>
+      <height>371</height>
      </rect>
     </property>
     <property name="font">
@@ -172,7 +172,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>900</x>
-      <y>510</y>
+      <y>460</y>
       <width>111</width>
       <height>20</height>
      </rect>
