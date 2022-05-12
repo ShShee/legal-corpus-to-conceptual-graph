@@ -47,14 +47,14 @@ class DataHandler:
         for article in self.articles:
             keyphrase = article["keyphrase"]
             if keyphrase:
-                result.append((ConceptualGraph(reduce_words(keyphrase)),
+                result.append((ConceptualGraph(keyphrase),
                               article["id"], DataPathTypes.ARTICLES))
 
         for rule in self.rules:
             keyphrase = rule["keyphrase"]
             if keyphrase:
                 result.append(
-                    (ConceptualGraph(reduce_words(keyphrase)), rule["id"], DataPathTypes.RULES))
+                    (ConceptualGraph(keyphrase), rule["id"], DataPathTypes.RULES))
 
         return result
 

@@ -1,5 +1,7 @@
 import networkx as nx
 
+from query_handler import define_connection, reduce_words
+
 
 class ConceptualGraph:
     def __init__(self, keywords):
@@ -7,8 +9,24 @@ class ConceptualGraph:
         Input: List of keywords to init graph
         """
         self.graph = nx.Graph()
-        self.graph.add_nodes_from(keywords)
-        self.graph.add_edges_from(self._create_edges(keywords))
+
+        # Old way
+        # reduced = reduce_words(keywords)
+        # self.graph.add_nodes_from(reduced)
+        # self.graph.add_edges_from(self._create_edges(reduced))
+
+        # New way
+        connection = define_connection(keywords)
+        remove_advs = []
+        for word in connection[1]:
+            if word[1] != 'AD':
+                remove_advs.append(word)
+
+        self.graph.add_nodes_from(remove_advs)
+
+        for connector in connection[0]:
+            self.graph.add_edge(
+                connector[0], connector[1], weight=connector[2].value)
 
     def _create_edges(self, keywords):
         """
@@ -37,7 +55,7 @@ class ConceptualGraph:
         """
         count = 0
         for node in self.graph.nodes:
-            count = count + 1 + node[2]
+            count = count + 1 + node[2].value
         return count
 
     def getEdges(self):
@@ -63,6 +81,10 @@ class ConceptualGraph:
                     break
         return result
 
+    def get_edge_attributes(self, name):
+        edges = self.graph.edges(data=True)
+        return dict( (x[:-1], x[-1][name]) for x in edges if name in x[-1] )
+
     def getSameEdges(self, edges):
         """
         Input: Edges that needs to be checked is belong to this graph
@@ -71,9 +93,8 @@ class ConceptualGraph:
         result = []
         for edge in self.getEdges():
             for item in edges:
-                if (item[0] == edge[0] and item[1] == edge[1]) or (item[0] == edge[1] and item[1] == edge[0]):
+                if ((item[0] == edge[0] and item[1] == edge[1]) or (item[0] == edge[1] and item[1] == edge[0])) and self.get_edge_attributes("weight")[edge]:
                     result.append(edge)
-
         return result
 
     def getParentsEdges(self, node):

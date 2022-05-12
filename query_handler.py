@@ -1,12 +1,13 @@
 from re import S
 from turtle import pos
+from unittest import result
 from matplotlib.pyplot import title
 
 from numpy import append
 from data_initiation import data
 from process_query import filter_words, check_unnecessaries, convert_synonyms
 from underthesea import word_tokenize, chunk, pos_tag, ner, classify
-from enums import VariableTypes
+from enums import AdditionScores, VariableTypes
 
 
 def handle_in_query(query):
@@ -38,10 +39,137 @@ def handle_in_query(query):
     return ' '.join(result)
 
 
-def reduce_words(query):
+def define_connection(input_query):
+    #print(pos_tag(handle_in_query(input_query)))
+    new_query = readd_adverbs(input_query)
+    result = []
+    idx = 0
+    first_action = -1  # position of first verb that trigger has done
+    while idx < len(new_query):
+        start = idx
+        end = -1
+        connector = AdditionScores.NONE
+        #print('Item:', new_query[idx])
+        if idx + 1 < len(new_query):
+            if new_query[idx][1] != 'AD':
+                if new_query[idx+1][1] == 'AD':
+                    end = idx + 2
+                else:
+                    end = idx + 1
+            if end >= len(new_query):
+                break
+            if checkConditionType(new_query[idx][1]):
+                if new_query[idx+1][0] == 'không' and idx + 2 < len(new_query) and new_query[idx+2][1] == 'V' and first_action == -1:
+                    connector = AdditionScores.TRIGGER_NOT
+                    first_action = idx + 2
+                    idx = idx + 1
+                elif new_query[end][1] == 'V' and first_action == -1:
+                    connector = AdditionScores.TRIGGER
+                    first_action = end
+                elif checkConditionType(new_query[end][1]):
+                    if end == idx + 2:
+                        if new_query[idx+1][0] == 'của':
+                            connector = AdditionScores.INCLUDE
+                        elif new_query[idx+1][0] == 'cho':
+                            connector = AdditionScores.TARGET
+                    else:
+                        connector = AdditionScores.NONE
+                else:
+                    end = -1
+            elif new_query[idx][1] == 'V':
+                if idx - 1 >= 0:
+                    tag = AdditionScores.NONE
+                    if checkConditionTarget(new_query[idx-1][0]):
+                        tag = AdditionScores.TARGET
+                    elif checkConditionTheme(new_query[idx-1][0]):
+                        tag = AdditionScores.THEME
+
+                    if tag != AdditionScores.NONE and new_query[first_action][0] != new_query[idx][0]:
+                        result.append(
+                            (new_query[first_action], new_query[idx], tag))
+
+                if new_query[end][1] != 'V':
+                    for i in range(idx-1, 0, -1):
+                        if checkConditionTarget(new_query[i][0]):
+                            connector = AdditionScores.DESTINATION
+                            break
+                        elif checkConditionTheme(new_query[i][0]):
+                            connector = AdditionScores.SOURCE
+                            break
+
+                if (checkConditionTarget(new_query[idx+1][0]) or checkConditionTheme(new_query[idx+1][0])) and idx + 2 < len(new_query) and new_query[idx + 2][1] == 'V':
+                    end = -1
+                    connector = AdditionScores.SKIP
+
+                if connector == AdditionScores.NONE:
+                    for i in range(idx+1, len(new_query)):
+                        if checkConditionTarget(new_query[i][0]):
+                            if checkConditionType(new_query[end][1]):
+                                connector = AdditionScores.SOURCE
+                            elif new_query[end][1] == 'V':
+                                connector = AdditionScores.THEME
+                            break
+                        elif checkConditionTheme(new_query[i][0]):
+                            if checkConditionType(new_query[end][1]):
+                                connector = AdditionScores.DESTINATION
+                            elif new_query[end][1] == 'V':
+                                connector = AdditionScores.TARGET
+                            break
+
+                if connector == AdditionScores.NONE:
+                    #end = -1
+                    if checkConditionType(new_query[end][1]):
+                        connector = AdditionScores.DESTINATION
+                    elif new_query[end][1] == 'V':
+                        connector = AdditionScores.TARGET
+        if end >= 0:
+            result.append(
+                (new_query[start], new_query[end], connector))
+        idx = idx + 1
+    return (result,new_query)
+
+
+def checkConditionTheme(item):
+    if item == 'khi' or item == 'do' or item == 'bởi' or item == 'để':
+        return True
+    else:
+        return False
+
+
+def checkConditionTarget(item):
+    if item == 'được':
+        return True
+    else:
+        return False
+
+
+def checkConditionType(item):
+    if item == 'N' or item == 'Np' or item == 'Nc':
+        return True
+    else:
+        return False
+
+
+def readd_adverbs(input_query):
+    reduced = reduce_words(input_query)
+    result = []
+    idx = 0
+    while idx < len(reduced):
+        result.append(reduced[idx])
+        if idx + 1 < len(reduced):
+            if reduced[idx][1] == 'V' and reduced[idx][1] == 'hưởng':
+                result.append(('nhằm', 'AD', AdditionScores.NONE))
+            elif reduced[idx][1] == 'V' and reduced[idx+1][1] == 'V':
+                result.append(('việc', 'AD', AdditionScores.NONE))
+        idx = idx + 1
+
+    return result
+
+
+def reduce_words(input_query):
     # print("------------------------------------------")
+    query = filter_words(pos_tag(handle_in_query(input_query)))
     # print("Gốc:", query)
-    query = filter_words(pos_tag(handle_in_query(query)))
     skip = 0
     list_query = []
     start = 0
@@ -58,16 +186,17 @@ def reduce_words(query):
             if(count_inclued != 0):
                 max_step = -1
                 last_length = -1
-                score = 0
+                score = AdditionScores.NONE
                 get_data = ""
                 for item in list_same_names:
                     step, length = getChildLength(
                         query[start][0], item, query)
-                    #print(query[start][0], "---", item[1], "---",step, "+", max_step, last_length, length)
+                    # print(query[start][0], "---", item[1], "---",step, "+", max_step, last_length, length)
                     if step >= max_step:
                         if (max_step == -1 and step <= 0) or length == -1:
                             get_data = query[start][0]
-                            score = 0 if length == -1 else item[1]
+                            score = AdditionScores.NONE if length == - \
+                                1 else item[1]
                         elif (step == max_step and (last_length == -1 or length <= last_length)) or max_step != step:
                             if (length == last_length and len(get_data) > len(item[0])) or length != last_length:
                                 get_data = item[0]
@@ -79,7 +208,8 @@ def reduce_words(query):
                 list_query.append(
                     (get_data, 'Np' if max_step > 0 else query[start][1], score))
             else:
-                list_query.append((query[start][0], query[start][1], 0))
+                list_query.append(
+                    (query[start][0], query[start][1], AdditionScores.NONE))
         start = start + 1
 
     return list_query
@@ -145,23 +275,23 @@ def checkVariableTypesIncluded(wordsList):
         return VariableTypes.ONLY_NOUNS
 
 
-def define_connection(word_1, word_2):
-    type_of_connection = ""
-    if(word_2[1] == 'V'):
-        for item in data_type:
-            value = item.getConntectorType(word_1[0])
-            if value:
-                type_of_connection = value
-        if type_of_connection == 'người':
-            return 'tác nhân'
-        else:
-            return 'ngữ cảnh'
-    else:
-        for item in data_type:
-            value = item.getConntectorType(word_2[0])
-            if value:
-                type_of_connection = value
-        if not type_of_connection:
-            return 'đối tượng'
-        else:
-            return type_of_connection
+# def define_connection(word_1, word_2):
+#     type_of_connection = ""
+#     if(word_2[1] == 'V'):
+#         for item in data_type:
+#             value = item.getConntectorType(word_1[0])
+#             if value:
+#                 type_of_connection = value
+#         if type_of_connection == 'người':
+#             return 'tác nhân'
+#         else:
+#             return 'ngữ cảnh'
+#     else:
+#         for item in data_type:
+#             value = item.getConntectorType(word_2[0])
+#             if value:
+#                 type_of_connection = value
+#         if not type_of_connection:
+#             return 'đối tượng'
+#         else:
+#             return type_of_connection

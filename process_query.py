@@ -4,7 +4,7 @@ from underthesea import word_tokenize, chunk, pos_tag, ner, classify
 def filter_words(input_list):
     reduced = []
     index = 0
-    #print(input_list)
+    # print(input_list)
     while index < len(input_list):
         if index+1 < len(input_list):
             if input_list[index][0] == 'tạm' and input_list[index+1][0] == 'dừng':
@@ -12,7 +12,7 @@ def filter_words(input_list):
                 index = index + 2
                 continue
             elif input_list[index][0] == 'không' and input_list[index+1][1] == 'V':
-                reduced.append(input_list[index])
+                reduced.append((input_list[index][0], 'AD'))
                 reduced.append(input_list[index+1])
                 index = index + 2
                 continue
@@ -29,7 +29,9 @@ def filter_words(input_list):
                 index = index + 2
                 continue
 
-        if input_list[index][1] == 'N' or input_list[index][1] == 'Nc' or input_list[index][1] == 'V':
+        if ((input_list[index-1][1] == 'V' or input_list[index-1][1] == 'N') and (input_list[index][0] == 'được' or input_list[index][0] == 'để')) or input_list[index][0] == 'khi' or input_list[index][0] == 'bởi' or input_list[index][0] == 'do' or input_list[index][0] == 'của' or input_list[index][0] == 'cho':
+            reduced.append((input_list[index][0], 'AD'))
+        elif (input_list[index][1] == 'N' or input_list[index][1] == 'Nc' or input_list[index][1] == 'V') and (input_list[index][0] != 'được' or input_list[index][0] == 'để'):
             reduced.append(input_list[index])
         elif input_list[index][0] == 'bảo hiểm' or input_list[index][0] == 'nghĩa vụ' or input_list[index][0] == 'covid-19' or input_list[index][0] == 'bảo lưu' or input_list[index][0] == 'bưu điện':
             reduced.append((input_list[index][0], 'N'))
@@ -43,14 +45,17 @@ def filter_words(input_list):
 
 
 def check_unnecessaries(word, word_previous, word_behind):
-    if((word == 'có' and word_behind == 'được')
-       or (word == 'diễn' and word_behind == 'ra')
+    if((word == 'diễn' and word_behind == 'ra') or (word == 'được' and (word_behind == 'quy định' or word_behind == 'tính')) or (word == 'theo' and word_behind == 'quy định')
        or ((word == 'các' or word == 'những') and word_behind == 'bước') or (word == 'không' and (word_behind == '?' or word_behind == ''))):
         return 2
     elif(word == 'như thế nào' or word == 'về' or word == 'phải'
-         or word == 'cần' or word == 'tính' or word == 'được'
-         or word == 'theo' or (word == 'có' and word_previous != 'không') or word == 'gồm'
-         or word == 'trường hợp' or word == 'bị' or word == 'khi'
+         or word == 'cần'
+         or (word == 'có' and word_behind == 'được')
+         or (word == 'để' and word_behind == 'được')
+         or (word == 'có' and word_previous != 'không') or word == 'gồm'
+         or word == 'trường hợp'
+         or (word == 'trong' and word_behind == 'khi')
+         # or word == 'bị' or word == 'khi'
          or word == 'là' or word == 'như thế nào'
          or word == 'bao nhiêu' or word == 'bao gồm' or word == 'hiện nay'):
         return 1
@@ -85,6 +90,8 @@ def convert_synonyms(word, word_previous, word_behind):
         return "chấm dứt"
     elif word == 'trao' and word_behind == 'quyền':
         return "ủy"
+    elif word == 'đối với':
+        return "khi"
     elif word == 'ngưng' or word == 'ngừng':
         return "tạm dừng"
     else:

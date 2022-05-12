@@ -87,7 +87,6 @@ class Ui_MainWindow(object):
         self.tableWidget.setColumnWidth(3, 200)
         self.tableWidget.horizontalHeader().setHighlightSections(True)
 
-        
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser_2.setGeometry(QtCore.QRect(900, 470, 961, 421))
         font = QtGui.QFont()
@@ -183,8 +182,8 @@ class Ui_MainWindow(object):
 
     def getGraphFromQuery(self):
         input_value = self.textEdit.toPlainText()
-        reduced = reduce_words(
-            input_value if input_value else str(self.comboBox.currentText()))
+        reduced = input_value if input_value else str(
+            self.comboBox.currentText())
 
         return ConceptualGraph(reduced)
 
@@ -193,7 +192,12 @@ class Ui_MainWindow(object):
 
         labeldict = {}
         for node in graph.getNodes():
-            labeldict[node] = node[0]
+            words = node[0].split()
+            if len(words) > 1:
+                letters = [word[0] for word in words]
+            else:
+                letters = [node[0]]
+            labeldict[node] = "".join(letters)
 
         color_for_node = "#000000"
         if type == GraphTypes.QUERY:
