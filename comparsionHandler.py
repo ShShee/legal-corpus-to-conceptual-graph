@@ -22,33 +22,49 @@ class ComparisonHandler(ConceptualGraph):
 
         # Size of same edges in comparison with this graph
         if len(same_nodes) != 0:
-            self.mGcG1 = self.__getRelevantEdges(graph_1, same_nodes)
-            self.mGcG2 = self.__getRelevantEdges(graph_2, same_nodes)
+            self.__addEdgeWithWeight(
+                graph_2.getEdgesFromGivenNodes(same_nodes, True))
+            sameEdges = self.__getSameEdges(graph_1)
 
             self.graph.clear()
             self.graph.add_nodes_from(same_nodes)
+            self.__addEdgeWithWeight(sameEdges)
 
-            init_edges = self._create_edges(same_nodes)
-            init_edges.append((same_nodes[0], same_nodes[len(same_nodes)-1]))
-            self.graph.add_edges_from(graph_2.getSameEdges(init_edges))
             self.mGc = len(self.getEdges())
+            self.mGcG1 = len(self.getEdgesFromGivenNodes(
+                graph_1.getNodes(), False))
+            self.mGcG2 = len(self.getEdgesFromGivenNodes(
+                graph_2.getNodes(), False))
         else:
             self.mGc = 0
             self.mGcG1 = 0
             self.mGcG2 = 0
 
-    def __getRelevantEdges(self, graph, same_nodes):
-        """
-        Input: graph that we need to find nodes of this graph in its edges
-        Output: size of edges that satisfy the condition
-        """
-        self.graph.clear()
-        self.graph.add_nodes_from(same_nodes)
+    def __addEdgeWithWeight(self, result):
+        edges, weights = result
 
-        for node in list(self.getNodes()):
-            self.graph.add_edges_from(graph.getParentsEdges(node))
+        for idx, value in enumerate(edges):
+            self.graph.add_edge(value[0], value[1], weight=weights[idx])
 
-        return len(self.getEdges())
+    def __compare2Edges(self, graph, edge_1, edge_2):
+        #print(self.get_edge_attributes("weight"))
+        weight = self.get_edge_attributes(
+            "weight")[edge_1] == graph.get_edge_attributes("weight")[edge_2]
+        if weight:
+            if ((edge_2[0][0] == edge_1[0][0] and edge_2[1][0] == edge_1[1][0]) or (edge_2[0][0] == edge_1[1][0] and edge_2[1][0] == edge_1[0][0])):
+                return True
+        else:
+            return False
+
+    def __getSameEdges(self, graph):
+        result = []
+        weights = []
+        for edge in self.getEdges():
+            for edge_compare in graph.getEdges():
+                if self.__compare2Edges(graph, edge, edge_compare):
+                    result.append(edge)
+                    weights.append(self.get_edge_attributes("weight")[edge])
+        return (result, weights)
 
     def __conceptual_similarity(self):
         return (2*self.nGcs)/(self.nG1s + self.nG2s)

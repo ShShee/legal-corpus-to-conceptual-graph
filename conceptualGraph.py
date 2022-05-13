@@ -83,28 +83,20 @@ class ConceptualGraph:
 
     def get_edge_attributes(self, name):
         edges = self.graph.edges(data=True)
-        return dict( (x[:-1], x[-1][name]) for x in edges if name in x[-1] )
+        return dict((x[:-1], x[-1][name]) for x in edges if name in x[-1])
 
-    def getSameEdges(self, edges):
+    def getEdgesFromGivenNodes(self, nodes, fullEdge):
         """
-        Input: Edges that needs to be checked is belong to this graph
-        Output: Edges that appear in this graph
+        Turn fullEdge flag on to get edge that connects 2 of nodes in given list
         """
         result = []
+        weights = []
         for edge in self.getEdges():
-            for item in edges:
-                if ((item[0] == edge[0] and item[1] == edge[1]) or (item[0] == edge[1] and item[1] == edge[0])) and self.get_edge_attributes("weight")[edge]:
-                    result.append(edge)
-        return result
+            start_node = list(filter(lambda node: node == edge[0], nodes))
+            end_node = list(filter(lambda node: node == edge[1], nodes))
 
-    def getParentsEdges(self, node):
-        """
-        Input: Node that needs to be found its edges
-        Output: Edges that have input node in it
-        """
-        result = []
-        for edge in self.getEdges():
-            if edge[0] == node or edge[1] == node:
+            if (fullEdge and start_node and end_node) or (not fullEdge and (start_node or end_node)):
                 result.append(edge)
+                weights.append(self.get_edge_attributes("weight")[edge])
 
-        return result
+        return (result,weights)

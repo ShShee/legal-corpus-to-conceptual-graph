@@ -136,7 +136,7 @@ class DataHandler:
         lookUp = self.getLookUpFromId(id, type)
         refers = []
         for refer in lookUp["references"]:
-            refer.add(refer)
+            refers.add(refer)
 
         content = ""
         if type == DataPathTypes.ARTICLES:
