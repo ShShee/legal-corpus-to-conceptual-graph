@@ -1,4 +1,5 @@
 query_data = [
+    "Người tham gia bảo hiểm thất nghiệp có được hưởng chế độ bảo hiểm y tế không?",
     "Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?",
     "Điều kiện để được hỗ trợ học nghề ?",
     "Hồ sơ xin được hỗ trợ học nghề cần những gì ?",

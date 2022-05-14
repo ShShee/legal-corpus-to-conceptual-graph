@@ -1,7 +1,7 @@
 import networkx as nx
 
 from query_handler import define_connection, reduce_words
-
+from enums import additionScoring
 
 class ConceptualGraph:
     def __init__(self, keywords):
@@ -26,7 +26,7 @@ class ConceptualGraph:
 
         for connector in connection[0]:
             self.graph.add_edge(
-                connector[0], connector[1], weight=connector[2].value)
+                connector[0], connector[1], weight=additionScoring(connector[2]))
 
     def _create_edges(self, keywords):
         """
@@ -55,7 +55,7 @@ class ConceptualGraph:
         """
         count = 0
         for node in self.graph.nodes:
-            count = count + 1 + node[2].value
+            count = count + 1 + additionScoring(node[2])
         return count
 
     def getEdges(self):
@@ -85,7 +85,7 @@ class ConceptualGraph:
         edges = self.graph.edges(data=True)
         return dict((x[:-1], x[-1][name]) for x in edges if name in x[-1])
 
-    def getEdgesFromGivenNodes(self, nodes, fullEdge):
+    def getEdgesFromGivenNodes(self, nodes):
         """
         Turn fullEdge flag on to get edge that connects 2 of nodes in given list
         """
@@ -95,8 +95,38 @@ class ConceptualGraph:
             start_node = list(filter(lambda node: node == edge[0], nodes))
             end_node = list(filter(lambda node: node == edge[1], nodes))
 
-            if (fullEdge and start_node and end_node) or (not fullEdge and (start_node or end_node)):
+            if start_node and end_node:
                 result.append(edge)
                 weights.append(self.get_edge_attributes("weight")[edge])
 
-        return (result,weights)
+        return (result, weights)
+    
+    def getEdgesFromGivenGraph(self, graph):
+        """
+        Turn fullEdge flag on to get edge that connects 2 of nodes in given list
+        """
+        result = []
+        weights = []
+        for edge in graph.getEdges():
+            start_node = list(filter(lambda node: node == edge[0], self.getNodes()))
+            end_node = list(filter(lambda node: node == edge[1], self.getNodes()))
+
+            if start_node or end_node:
+                result.append(edge)
+                weights.append(graph.get_edge_attributes("weight")[edge])
+
+        return (result, weights)
+
+    def countEdgesWithWeights(self, graph=None):
+        total = 0
+
+        if graph is not None:
+            edges, weights = self.getEdgesFromGivenGraph(graph)
+
+            for idx, val in enumerate(edges):
+                total = total + 1 + weights[idx]
+        else:
+            for idx, val in enumerate(self.getEdges()):
+                total = total + 1 + self.get_edge_attributes("weight")[val]
+
+        return total

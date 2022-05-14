@@ -94,6 +94,9 @@ class DataHandler:
                 # Get comparison score
                 str(comparisonHandler.getSimilarityScore(data[2])),
                 # get graph of similarity
+                str(round(comparisonHandler.conceptual_similarity(),5)),
+                # get graph of similarity
+                str(round(comparisonHandler.relational_similarity(),5)),
                 comparisonHandler
             )
             result.append(add_value)
@@ -136,7 +139,7 @@ class DataHandler:
         lookUp = self.getLookUpFromId(id, type)
         refers = []
         for refer in lookUp["references"]:
-            refers.add(refer)
+            refers.append(refer)
 
         content = ""
         if type == DataPathTypes.ARTICLES:

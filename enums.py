@@ -15,22 +15,37 @@ class DataPathTypes(Enum):
 
 
 class AdditionScores(Enum):
-    NONE = 0.11
+    NONE = 0
     RELEVANT_THEME = 1
-    RELEVANT_WORD = 0.3
-    IS_ARTICLE = 0.05
+    RELEVANT_WORD = 2
+    IS_ARTICLE = 3
 
-    TRIGGER = 0.2
-    TRIGGER_NOT = 0.4
-    TARGET = 0.5
-    DESTINATION = 0.6
-    # TARGET_FOR = 0.0
-    # TARGET_FROM = 0.0
-    # TARGET_BY = 0.0
-    THEME = 0.7
-    SOURCE = 0.71
-    INCLUDE = 0.72
-    SKIP = 0.73
+    UNDEFINED = 4
+    TRIGGER = 5
+    TRIGGER_NOT = 6
+    TARGET = 7
+    DESTINATION = 8
+    THEME = 9
+    SOURCE = 10
+    INCLUDE = 11
+    SKIP = 12
+
+
+def additionScoring(type):
+    return {
+        AdditionScores.RELEVANT_THEME: 1,
+        AdditionScores.RELEVANT_WORD: 0.3,
+        AdditionScores.IS_ARTICLE: 0.05,
+        AdditionScores.UNDEFINED: 0.0,
+        AdditionScores.TRIGGER: 0.25,
+        AdditionScores.TRIGGER_NOT: 0.25,
+        AdditionScores.TARGET: 0.5,
+        AdditionScores.DESTINATION: 0.75,
+        AdditionScores.THEME: -0.5,
+        AdditionScores.SOURCE: -0.75,
+        AdditionScores.INCLUDE: 0.25
+    }.get(type, 0.0)
+
 
 class GraphTypes(Enum):
     QUERY = 1

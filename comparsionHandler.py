@@ -2,7 +2,7 @@ from ast import keyword
 import networkx as nx
 
 from conceptualGraph import ConceptualGraph
-from enums import DataPathTypes, AdditionScores
+from enums import DataPathTypes, AdditionScores, additionScoring
 
 
 class ComparisonHandler(ConceptualGraph):
@@ -23,18 +23,16 @@ class ComparisonHandler(ConceptualGraph):
         # Size of same edges in comparison with this graph
         if len(same_nodes) != 0:
             self.__addEdgeWithWeight(
-                graph_2.getEdgesFromGivenNodes(same_nodes, True))
+                graph_2.getEdgesFromGivenNodes(same_nodes))
             sameEdges = self.__getSameEdges(graph_1)
 
             self.graph.clear()
             self.graph.add_nodes_from(same_nodes)
             self.__addEdgeWithWeight(sameEdges)
 
-            self.mGc = len(self.getEdges())
-            self.mGcG1 = len(self.getEdgesFromGivenNodes(
-                graph_1.getNodes(), False))
-            self.mGcG2 = len(self.getEdgesFromGivenNodes(
-                graph_2.getNodes(), False))
+            self.mGc = self.countEdgesWithWeights()
+            self.mGcG1 = self.countEdgesWithWeights(graph_1)
+            self.mGcG2 = self.countEdgesWithWeights(graph_2)
         else:
             self.mGc = 0
             self.mGcG1 = 0
@@ -66,10 +64,11 @@ class ComparisonHandler(ConceptualGraph):
                     weights.append(self.get_edge_attributes("weight")[edge])
         return (result, weights)
 
-    def __conceptual_similarity(self):
+    def conceptual_similarity(self):
         return (2*self.nGcs)/(self.nG1s + self.nG2s)
 
-    def __relational_similarity(self):
+    def relational_similarity(self):
+        #print("1: ",self.mGcG1,"--- 2: ",self.mGcG2, "--- same:",self.mGc)
         denominator = self.mGcG1 + self.mGcG2
         return (2*self.mGc)/denominator if denominator != 0 else 0
 
@@ -78,10 +77,10 @@ class ComparisonHandler(ConceptualGraph):
         return (2*self.nGcs)/denominator if denominator != 0 else 0
 
     def getSimilarityScore(self, dataType):
-        addition_type_score = AdditionScores.IS_ARTICLE.value if dataType == DataPathTypes.ARTICLES else 0
-        similariy_score = self.__conceptual_similarity() * (self.__calculate_a() +
-                                                            (1 - self.__calculate_a()) * self.__relational_similarity())
+        addition_type_score = additionScoring(AdditionScores.IS_ARTICLE) if dataType == DataPathTypes.ARTICLES else 0
+        similariy_score = self.conceptual_similarity() * (self.__calculate_a() +
+                                                            (1 - self.__calculate_a()) * self.relational_similarity())
 
         total = round(similariy_score +
                       addition_type_score if similariy_score != 0 else 0, 5)
-        return total if total < 1 else 1
+        return total

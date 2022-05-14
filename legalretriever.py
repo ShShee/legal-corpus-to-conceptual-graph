@@ -70,7 +70,7 @@ class Ui_MainWindow(object):
         self.tableWidget.setSizeAdjustPolicy(
             QtWidgets.QAbstractScrollArea.AdjustIgnored)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(5)
+        self.tableWidget.setColumnCount(7)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -82,6 +82,10 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(6, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setColumnWidth(1, 313)
         self.tableWidget.setColumnWidth(3, 200)
@@ -154,6 +158,10 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Mã luật"))
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Điểm"))
+        item = self.tableWidget.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "Khái niệm"))
+        item = self.tableWidget.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "Quan hệ"))
         self.textBrowser_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                               "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
                                               "p, li { white-space: pre-wrap; }\n"
@@ -174,7 +182,7 @@ class Ui_MainWindow(object):
 
         self.tableWidget.setRowCount(len(comparison_result))
         for idx, val in enumerate(comparison_result):
-            for column in range(5):
+            for column in range(7):
                 self.tableWidget.setItem(
                     idx, column, QtWidgets.QTableWidgetItem(val[column]))
 
@@ -207,8 +215,19 @@ class Ui_MainWindow(object):
         elif type == GraphTypes.SIMILARITY:
             color_for_node = "#ff3300"
 
-        nx.draw(graph.getGraph(), labels=labeldict, with_labels=True,
+        # For better example looking
+        pos = nx.spring_layout(graph.getGraph(), k=10)
+
+        nx.draw(graph.getGraph(), pos, labels=labeldict, with_labels=True,
                 node_size=200, node_color=color_for_node)
+
+        edges_labels = {e: graph.get_edge_attributes(
+            'weight')[e] for e in graph.getEdges()}
+        nx.draw_networkx_edge_labels(
+            graph.getGraph(), pos, edge_labels=edges_labels)
+
+        # nx.draw_networkx_edge_labels(graph.getGraph(), labels=labeldict, with_labels=True,
+        #         node_size=200, node_color=color_for_node)
 
         self.canvas.draw_idle()
 
@@ -255,7 +274,7 @@ class Ui_MainWindow(object):
             graph = self.dataHandler.getDataGraphFromId(itemID)[0][0]
         elif self.tagOfCurrentTab == GraphTypes.SIMILARITY:
             graph = list(filter(lambda c: c[0] == itemID, self.comparison))[
-                0][5]
+                0][7]
         else:
             graph = self.getGraphFromQuery()
 

@@ -1,3 +1,4 @@
+from platform import mac_ver
 from re import S
 from turtle import pos
 from unittest import result
@@ -40,7 +41,7 @@ def handle_in_query(query):
 
 
 def define_connection(input_query):
-    #print(pos_tag(handle_in_query(input_query)))
+    # print(pos_tag(handle_in_query(input_query)))
     new_query = readd_adverbs(input_query)
     result = []
     idx = 0
@@ -73,7 +74,7 @@ def define_connection(input_query):
                         elif new_query[idx+1][0] == 'cho':
                             connector = AdditionScores.TARGET
                     else:
-                        connector = AdditionScores.NONE
+                        connector = AdditionScores.UNDEFINED
                 else:
                     end = -1
             elif new_query[idx][1] == 'V':
@@ -99,7 +100,7 @@ def define_connection(input_query):
 
                 if (checkConditionTarget(new_query[idx+1][0]) or checkConditionTheme(new_query[idx+1][0])) and idx + 2 < len(new_query) and new_query[idx + 2][1] == 'V':
                     end = -1
-                    connector = AdditionScores.SKIP
+                    connector = AdditionScores.UNDEFINED
 
                 if connector == AdditionScores.NONE:
                     for i in range(idx+1, len(new_query)):
@@ -126,7 +127,7 @@ def define_connection(input_query):
             result.append(
                 (new_query[start], new_query[end], connector))
         idx = idx + 1
-    return (result,new_query)
+    return (result, new_query)
 
 
 def checkConditionTheme(item):
@@ -152,6 +153,7 @@ def checkConditionType(item):
 
 def readd_adverbs(input_query):
     reduced = reduce_words(input_query)
+
     result = []
     idx = 0
     while idx < len(reduced):
@@ -185,28 +187,36 @@ def reduce_words(input_query):
             count_inclued = len(list_same_names)
             if(count_inclued != 0):
                 max_step = -1
-                last_length = -1
+                matched = False
                 score = AdditionScores.NONE
                 get_data = ""
                 for item in list_same_names:
-                    step, length = getChildLength(
+                    step = getChildLength(
                         query[start][0], item, query)
-                    # print(query[start][0], "---", item[1], "---",step, "+", max_step, last_length, length)
-                    if step >= max_step:
-                        if (max_step == -1 and step <= 0) or length == -1:
-                            get_data = query[start][0]
-                            score = AdditionScores.NONE if length == - \
-                                1 else item[1]
-                        elif (step == max_step and (last_length == -1 or length <= last_length)) or max_step != step:
-                            if (length == last_length and len(get_data) > len(item[0])) or length != last_length:
-                                get_data = item[0]
-                                score = item[1]
-                            last_length = length
-                        max_step = step
+
+                    text = query[start][0]
+
+                    if step > 0:
+                        for idx in range(1, step+1):
+                            text = text + " " + query[start+idx][0]
+
+                    # print(query[start][0], "---", item[0], "------------------------    Step:", step,
+                    #       "/Max-step:", max_step, "/text:", text)
+
+                    if step > max_step or matched == False:
+                        if text == item[0]:
+                            max_step = step
+                            get_data = text
+                            score = item[1]
+                            matched = True
+                        elif matched == False:
+                            max_step = step
+                            get_data = item[0]
+                            score = item[1]
 
                 skip = max_step if max_step > 0 else 0
                 list_query.append(
-                    (get_data, 'Np' if max_step > 0 else query[start][1], score))
+                    (query[start][0] if max_step == -1 else get_data, 'Np' if max_step > 0 else query[start][1], score))
             else:
                 list_query.append(
                     (query[start][0], query[start][1], AdditionScores.NONE))
@@ -228,31 +238,32 @@ def getChildLength(title, data, query):
             end = index
         if end >= start and end != -1 and start != -1:
             break
-    # print(start, "///", end, query, wordsList)
+    #print(start, "///", end, query, wordsList)
     if(end == -1):
-        return (-1, -1)
+        return -1
     else:
-        step = 0
-        appearedWordsList = [query[start]]
-        for index in range(start+1, end+1):
+        step = -1
+        appearedWordsList = []
+        for index in range(start, end+1):
             appeared = False
             # print(query[index][0])
             appearedWordsList.append(query[index])
-            for item in wordsList:
-                # print(item[0], "====", query[index][0])
-                if(item[0] == query[index][0]):
+            for it in wordsList:
+
+                if(it[0] == query[index][0]):
                     step = step + 1
                     appeared = True
+                #print(it[0], "==+==", query[index][0])
             if appeared == False:
-                # print('Case 1')
-                return (0, -1)
-        # print(appearedWordsList, "---", checkVariableTypesIncluded(appearedWordsList),'==', wordsList, "---", data_types_included)
+                #print('Case 1')
+                return 0
+        #print(appearedWordsList, "---", checkVariableTypesIncluded(appearedWordsList),'==', wordsList, "---", data_types_included)
         if checkVariableTypesIncluded(appearedWordsList) == data_types_included or len(appearedWordsList) == len(wordsList):
-            # print('Case 2')
-            return (step, len(appearedWordsList))
+            #print('Case 2')
+            return step
         else:
-            # print('Case 3')
-            return (0, -1)
+            #print('Case 3')
+            return 0
 
 
 def checkVariableTypesIncluded(wordsList):
