@@ -20,7 +20,7 @@ query_data = [
     "Việc hủy hưởng trợ cấp thất nghiệp được quy định như thế nào?",
     "Trường hợp người lao động không đến nhận trợ cấp thất nghiệp được quy định như thế nào?",
     "Hồ sơ đề nghị hưởng trợ cấp thất nghiệp gồm những gì?",
-    "Theo quy định của pháp luật về bảo hiểm thất nghiệp hiện nay thì trường hợp nào được ủy quyền cho người khác nộp hồ sơ đề nghị hưởng trợ cấp thất nghiệp qua đường bưu điện?",
+    "Trường hợp nào được ủy quyền cho người khác nộp hồ sơ đề nghị hưởng trợ cấp thất nghiệp qua đường bưu điện?",
     "Những trường hợp nào được ủy quyền cho người khác đến nhận quyết định hưởng trợ cấp thất nghiệp  ?",
     "Việc giải quyết hưởng trợ cấp thất nghiệp được quy định như thế nào?",
     "Thời hạn nộp hồ sơ xin hưởng trợ cấp thất nghiệp theo quy định là bao lâu?",
@@ -43,8 +43,8 @@ query_data = [
     "Quyền của người sử dụng lao động tham gia bảo hiểm thất nghiệp được quy định như thế nào?",
     "Trách nhiệm của người sử dụng lao động tham gia bảo hiểm thất nghiệp được quy định như thế nào?",
     "Thời gian duyệt hồ sơ xin hưởng trợ cấp thất nghiệp là bao lâu ?",
-    "Đối tượng người lao động nào được hưởng hỗ trợ từ quỹ bảo hiểm thất nghiệp do ảnh hưởng bởi dịch COVID-19 ?",
-    "Mức hỗ trợ mà người lao động được hưởng từ quỹ bảo hiểm thất nghiệp do ảnh hưởng bởi đại dịch COVID-19 ?",
-    "Mức hỗ trợ mà người sử dụng lao động được hưởng từ quỹ bảo hiểm thất nghiệp do ảnh hưởng bởi đại dịch COVID-19 ?",
-    "Thủ tục để hưởng trợ cấp từ quỹ bảo hiểm thất nghiệp do ảnh hưởng bởi đại dịch COVID-19 gồm những bước nào ?"
+    "Đối tượng người lao động nào được hưởng hỗ trợ do ảnh hưởng của dịch COVID-19 ?",
+    "Mức hỗ trợ cho người lao động bị ảnh hưởng của đại dịch COVID-19 ?",
+    "Mức hỗ trợ mà người sử dụng lao động bị ảnh hưởng của đại dịch COVID-19 ?",
+    "Thủ tục để được nhận hỗ trợ do ảnh hưởng từ đại dịch COVID-19 gồm những bước nào ?"
 ]

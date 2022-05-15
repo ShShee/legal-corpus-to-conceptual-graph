@@ -20,34 +20,43 @@ import networkx as nx
 from query import query_data
 
 
+class HoverButton(QtWidgets.QToolButton):
+    def __init__(self, parent=None):
+        super(HoverButton, self).__init__(parent)
+        self.setStyleSheet('''border-image: url("search.png")''')
+
+    def resizeEvent(self, event):
+        self.setMask(QtGui.QRegion(self.rect(), QtGui.QRegion.Ellipse))
+        QtWidgets.QToolButton.resizeEvent(self, event)
+
 class Ui_MainWindow(object):
     NumButtons = ['Đồ thị câu truy vấn', 'Đồ thị dữ liệu', 'Đồ thị tương đồng']
     tagOfCurrentTab = GraphTypes.QUERY
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1881, 911)
-        MainWindow.setMaximumSize(QtCore.QSize(1881, 911))
+        MainWindow.resize(1521, 911)
+        MainWindow.setMaximumSize(QtCore.QSize(1521, 911))
         MainWindow.setDockNestingEnabled(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalFrame = QtWidgets.QFrame(self.centralwidget)
-        self.horizontalFrame.setGeometry(QtCore.QRect(890, 10, 981, 71))
+        self.horizontalFrame.setGeometry(QtCore.QRect(10, 0, 1501, 61))
         self.horizontalFrame.setObjectName("horizontalFrame")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.horizontalFrame)
         self.horizontalLayout.setObjectName("horizontalLayout")
 
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
-        self.textEdit = QtWidgets.QTextEdit(self.horizontalFrame)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.textEdit.setFont(font)
-        self.textEdit.setObjectName("textEdit")
-        self.verticalLayout.addWidget(self.textEdit)
+        # self.textEdit = QtWidgets.QTextEdit(self.horizontalFrame)
+        # font = QtGui.QFont()
+        # font.setPointSize(10)
+        # self.textEdit.setFont(font)
+        # self.textEdit.setObjectName("textEdit")
+        # self.verticalLayout.addWidget(self.textEdit)
         self.comboBox = QtWidgets.QComboBox(self.horizontalFrame)
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setPointSize(16)
         self.comboBox.setFont(font)
         self.comboBox.setObjectName("comboBox")
         for _ in query_data:
@@ -57,20 +66,23 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.pushButton = QtWidgets.QPushButton(self.horizontalFrame)
+        self.pushButton = HoverButton(self.horizontalFrame)
         self.pushButton.setObjectName("pushButton")
         self.verticalLayout_2.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(self.horizontalFrame)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.verticalLayout_2.addWidget(self.pushButton_2)
+        # self.pushButton_2 = QtWidgets.QPushButton(self.horizontalFrame)
+        # self.pushButton_2.setObjectName("pushButton_2")
+        # self.verticalLayout_2.addWidget(self.pushButton_2)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
 
         self.tableWidget = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidget.setGeometry(QtCore.QRect(20, 20, 861, 871))
+        self.tableWidget.setGeometry(QtCore.QRect(20, 60, 731, 831))
         self.tableWidget.setSizeAdjustPolicy(
             QtWidgets.QAbstractScrollArea.AdjustIgnored)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.tableWidget.setFont(font)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(7)
+        self.tableWidget.setColumnCount(10)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -87,19 +99,27 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(6, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setColumnWidth(1, 313)
+        self.tableWidget.setHorizontalHeaderItem(7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(8, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(9, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setColumnWidth(0, 85)
+        self.tableWidget.setColumnWidth(1, 205)
+        self.tableWidget.setColumnWidth(2, 85)
         self.tableWidget.setColumnWidth(3, 200)
         self.tableWidget.horizontalHeader().setHighlightSections(True)
 
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
-        self.textBrowser_2.setGeometry(QtCore.QRect(900, 470, 961, 421))
+        self.textBrowser_2.setGeometry(QtCore.QRect(770, 480, 731, 411))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.textBrowser_2.setFont(font)
         self.textBrowser_2.setObjectName("textBrowser_2")
 
         self.gridLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.gridLayoutWidget.setGeometry(QtCore.QRect(900, 80, 961, 371))
+        self.gridLayoutWidget.setGeometry(QtCore.QRect(770, 60, 731, 391))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -117,7 +137,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(buttonLayout, 0, 0)
 
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(900, 450, 111, 20))
+        self.label.setGeometry(QtCore.QRect(770, 460, 111, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label.setFont(font)
@@ -125,7 +145,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.pushButton_2.clicked.connect(self.textEdit.clear)
+        # self.pushButton_2.clicked.connect(self.textEdit.clear)
         self.pushButton.clicked.connect(self.onRetrieveClicked)
         self.tableWidget.itemClicked.connect(self.handleItemClicked)
 
@@ -136,18 +156,18 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Legal Retriever"))
-        self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                                         "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                                         "p, li { white-space: pre-wrap; }\n"
-                                         "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
-                                         "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p></body></html>"))
-        self.textEdit.setPlaceholderText(_translate(
-            "MainWindow", "Nhập vào câu hỏi cần tra cứu"))
+        # self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        #                                  "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+        #                                  "p, li { white-space: pre-wrap; }\n"
+        #                                  "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:10pt; font-weight:400; font-style:normal;\">\n"
+        #                                  "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;\"><br /></p></body></html>"))
+        # self.textEdit.setPlaceholderText(_translate(
+        #     "MainWindow", "Nhập vào câu hỏi cần tra cứu"))
 
         for index, query in enumerate(query_data):
             self.comboBox.setItemText(index, _translate("MainWindow", query))
-        self.pushButton.setText(_translate("MainWindow", "Tra cứu"))
-        self.pushButton_2.setText(_translate("MainWindow", "Xóa "))
+        #self.pushButton.setText(_translate("MainWindow", "Tra cứu"))
+        # self.pushButton_2.setText(_translate("MainWindow", "Xóa "))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Trích dẫn"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -162,6 +182,12 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Khái niệm"))
         item = self.tableWidget.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Quan hệ"))
+        item = self.tableWidget.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "mGc"))
+        item = self.tableWidget.horizontalHeaderItem(8)
+        item.setText(_translate("MainWindow", "mGc1"))
+        item = self.tableWidget.horizontalHeaderItem(9)
+        item.setText(_translate("MainWindow", "mGc2"))
         self.textBrowser_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                               "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
                                               "p, li { white-space: pre-wrap; }\n"
@@ -182,16 +208,17 @@ class Ui_MainWindow(object):
 
         self.tableWidget.setRowCount(len(comparison_result))
         for idx, val in enumerate(comparison_result):
-            for column in range(7):
+            for column in range(10):
                 self.tableWidget.setItem(
                     idx, column, QtWidgets.QTableWidgetItem(val[column]))
 
         self.tableWidget.sortItems(4, QtCore.Qt.DescendingOrder)
 
     def getGraphFromQuery(self):
-        input_value = self.textEdit.toPlainText()
-        reduced = input_value if input_value else str(
-            self.comboBox.currentText())
+        # input_value = self.textEdit.toPlainText()
+        # reduced = input_value if input_value else str(
+        #     self.comboBox.currentText())
+        reduced = self.comboBox.currentText()
 
         return ConceptualGraph(reduced)
 
@@ -274,7 +301,7 @@ class Ui_MainWindow(object):
             graph = self.dataHandler.getDataGraphFromId(itemID)[0][0]
         elif self.tagOfCurrentTab == GraphTypes.SIMILARITY:
             graph = list(filter(lambda c: c[0] == itemID, self.comparison))[
-                0][7]
+                0][10]
         else:
             graph = self.getGraphFromQuery()
 

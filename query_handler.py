@@ -41,7 +41,7 @@ def handle_in_query(query):
 
 
 def define_connection(input_query):
-    # print(pos_tag(handle_in_query(input_query)))
+    #print(pos_tag(handle_in_query(input_query)))
     new_query = readd_adverbs(input_query)
     result = []
     idx = 0
@@ -59,6 +59,7 @@ def define_connection(input_query):
                     end = idx + 1
             if end >= len(new_query):
                 break
+
             if checkConditionType(new_query[idx][1]):
                 if new_query[idx+1][0] == 'không' and idx + 2 < len(new_query) and new_query[idx+2][1] == 'V' and first_action == -1:
                     connector = AdditionScores.TRIGGER_NOT
@@ -127,18 +128,20 @@ def define_connection(input_query):
             result.append(
                 (new_query[start], new_query[end], connector))
         idx = idx + 1
+    
+    #print(result)
     return (result, new_query)
 
 
 def checkConditionTheme(item):
-    if item == 'khi' or item == 'do' or item == 'bởi' or item == 'để':
+    if item == 'khi' or item == 'để' or item == 'bởi':
         return True
     else:
         return False
 
 
 def checkConditionTarget(item):
-    if item == 'được':
+    if item == 'được' or item == 'do' or item == 'bị':
         return True
     else:
         return False

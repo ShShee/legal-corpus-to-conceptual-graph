@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1881</width>
+    <width>1521</width>
     <height>911</height>
    </rect>
   </property>
@@ -26,34 +26,15 @@
    <widget class="QFrame" name="horizontalFrame">
     <property name="geometry">
      <rect>
-      <x>890</x>
-      <y>10</y>
-      <width>981</width>
-      <height>71</height>
+      <x>10</x>
+      <y>0</y>
+      <width>1501</width>
+      <height>61</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QTextEdit" name="textEdit">
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="html">
-          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8.25pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="placeholderText">
-          <string>Nhập vào câu hỏi cần tra cứu</string>
-         </property>
-        </widget>
-       </item>
        <item>
         <widget class="QComboBox" name="comboBox">
          <property name="font">
@@ -74,20 +55,11 @@ p, li { white-space: pre-wrap; }
            <pointsize>8</pointsize>
           </font>
          </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Tra cứu</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="font">
-          <font>
-           <pointsize>8</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Xóa </string>
          </property>
         </widget>
        </item>
@@ -99,9 +71,9 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>20</y>
-      <width>861</width>
-      <height>871</height>
+      <y>60</y>
+      <width>731</width>
+      <height>831</height>
      </rect>
     </property>
     <property name="sizeAdjustPolicy">
@@ -139,9 +111,9 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextBrowser" name="textBrowser_2">
     <property name="geometry">
      <rect>
-      <x>900</x>
+      <x>770</x>
       <y>480</y>
-      <width>961</width>
+      <width>731</width>
       <height>411</height>
      </rect>
     </property>
@@ -156,10 +128,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextBrowser" name="canvas1_4">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>80</y>
-      <width>961</width>
-      <height>371</height>
+      <x>770</x>
+      <y>60</y>
+      <width>731</width>
+      <height>391</height>
      </rect>
     </property>
     <property name="font">
@@ -171,7 +143,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>900</x>
+      <x>770</x>
       <y>460</y>
       <width>111</width>
       <height>20</height>
@@ -190,22 +162,6 @@ p, li { white-space: pre-wrap; }
  </widget>
  <resources/>
  <connections>
-  <connection>
-   <sender>pushButton_2</sender>
-   <signal>clicked()</signal>
-   <receiver>textEdit</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1023</x>
-     <y>25</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>862</x>
-     <y>23</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>pushButton</sender>
    <signal>clicked()</signal>

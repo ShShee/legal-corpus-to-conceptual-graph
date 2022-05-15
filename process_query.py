@@ -4,7 +4,7 @@ from underthesea import word_tokenize, chunk, pos_tag, ner, classify
 def filter_words(input_list):
     reduced = []
     index = 0
-    #print(input_list)
+    # print(input_list)
     while index < len(input_list):
         if index+1 < len(input_list):
             if input_list[index][0] == 'tạm' and input_list[index+1][0] == 'dừng':
@@ -29,7 +29,7 @@ def filter_words(input_list):
                 index = index + 2
                 continue
 
-        if ((input_list[index-1][1] == 'V' or input_list[index-1][1] == 'N') and (input_list[index][0] == 'được' or input_list[index][0] == 'để')) or input_list[index][0] == 'khi' or input_list[index][0] == 'bởi' or input_list[index][0] == 'do' or input_list[index][0] == 'của' or input_list[index][0] == 'cho':
+        if ((input_list[index-1][1] == 'V' or input_list[index-1][1] == 'N') and (input_list[index][0] == 'được' or input_list[index][0] == 'để')) or input_list[index][0] == 'khi' or input_list[index][0] == 'bởi' or input_list[index][0] == 'do' or input_list[index][0] == 'của' or input_list[index][0] == 'cho' or input_list[index][0] == 'bị':
             reduced.append((input_list[index][0], 'AD'))
         elif (input_list[index][1] == 'N' or input_list[index][1] == 'Nc' or input_list[index][1] == 'V') and (input_list[index][0] != 'được' or input_list[index][0] == 'để'):
             reduced.append(input_list[index])
@@ -98,5 +98,6 @@ def dictSynonyms(word):
         "kết thúc": "chấm dứt",
         "đối với": "khi",
         "ngưng": "tạm dừng",
-        "ngừng": "tạm dừng"
+        "ngừng": "tạm dừng",
+        "hỗ trợ": "trợ cấp"
     }.get(word, word)

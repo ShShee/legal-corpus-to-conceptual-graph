@@ -367,7 +367,7 @@
     "id": "article/53",
     "laws": ["28/2021/QĐ-TTg", "3535/LĐTBXH-VL"],
     "title": "Điều 1. Đối tượng được hỗ trợ",
-    "keyphrase": "đối tượng người lao động bị ảnh hưởng của covid-19 được hỗ trợ",
+    "keyphrase": "đối tượng người lao động được hỗ trợ do ảnh hưởng của đại dịch covid-19",
     "lookUpId": "lookUp/53"
   },
   {
@@ -381,28 +381,28 @@
     "id": "article/55",
     "laws": ["28/2021/QĐ-TTg"],
     "title": "Điều 2. Thời gian đóng bảo hiểm thất nghiệp làm căn cứ tính và mức hỗ trợ",
-    "keyphrase": "thời gian đóng bảo hiểm thất nghiệp và mức hỗ trợ cho người lao động bị ảnh hưởng của covid-19",
+    "keyphrase": "thời gian đóng bảo hiểm thất nghiệp và mức hỗ trợ cho người lao động bị ảnh hưởng của đại dịch covid-19",
     "lookUpId": "lookUp/55"
   },
   {
     "id": "article/56",
     "laws": ["28/2021/QĐ-TTg"],
     "title": "Điều 3. Trình tự, thủ tục thực hiện",
-    "keyphrase": "thủ tục thực hiện hỗ trợ cho người lao động bị ảnh hưởng của covid-19",
+    "keyphrase": "thủ tục thực hiện hỗ trợ cho người lao động bị ảnh hưởng của đại dịch covid-19",
     "lookUpId": "lookUp/56"
   },
   {
     "id": "article/57",
     "laws": ["28/2021/QĐ-TTg"],
     "title": "Điều 4. Đối tượng được hỗ trợ",
-    "keyphrase": "đối tượng người sử dụng lao động bị ảnh hưởng của covid-19 được hỗ trợ",
+    "keyphrase": "đối tượng người sử dụng lao động bị ảnh hưởng của đại dịch covid-19 được hỗ trợ",
     "lookUpId": "lookUp/57"
   },
   {
     "id": "article/58",
     "laws": ["28/2021/QĐ-TTg"],
     "title": "Điều 5. Giảm mức đóng và thời gian thực hiện",
-    "keyphrase": "hỗ trợ mức đóng, thời gian thực hiện hỗ trợ cho người sử dụng lao động bị ảnh hưởng của covid-19",
+    "keyphrase": "hỗ trợ mức đóng, thời gian thực hiện hỗ trợ cho người sử dụng lao động bị ảnh hưởng của đại dịch covid-19",
     "lookUpId": "lookUp/58"
   }
 ]

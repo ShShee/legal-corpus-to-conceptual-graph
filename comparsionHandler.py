@@ -10,15 +10,15 @@ class ComparisonHandler(ConceptualGraph):
         """
         Input: graph_1 and graph_2 for initialization of same graph between them
         """
-        self.graph = nx.Graph()
+        self.graph = nx.DiGraph()
 
         same_nodes = graph_2.getSameNodes(graph_1)
         self.graph.add_nodes_from(same_nodes)
 
         # Size of nodes in graph
-        self.nGcs = self.countNodes()
-        self.nG1s = graph_1.countNodes()
-        self.nG2s = graph_2.countNodes()
+        self.nGcs = self.countNodesWithWeights(graph_1)
+        self.nG1s = graph_1.countNodesWithWeights()
+        self.nG2s = graph_2.countNodesWithWeights()
 
         # Size of same edges in comparison with this graph
         if len(same_nodes) != 0:
@@ -45,7 +45,7 @@ class ComparisonHandler(ConceptualGraph):
             self.graph.add_edge(value[0], value[1], weight=weights[idx])
 
     def __compare2Edges(self, graph, edge_1, edge_2):
-        #print(self.get_edge_attributes("weight"))
+        # print(self.get_edge_attributes("weight"))
         weight = self.get_edge_attributes(
             "weight")[edge_1] == graph.get_edge_attributes("weight")[edge_2]
         if weight:
@@ -68,7 +68,6 @@ class ComparisonHandler(ConceptualGraph):
         return (2*self.nGcs)/(self.nG1s + self.nG2s)
 
     def relational_similarity(self):
-        #print("1: ",self.mGcG1,"--- 2: ",self.mGcG2, "--- same:",self.mGc)
         denominator = self.mGcG1 + self.mGcG2
         return (2*self.mGc)/denominator if denominator != 0 else 0
 
@@ -77,9 +76,10 @@ class ComparisonHandler(ConceptualGraph):
         return (2*self.nGcs)/denominator if denominator != 0 else 0
 
     def getSimilarityScore(self, dataType):
-        addition_type_score = additionScoring(AdditionScores.IS_ARTICLE) if dataType == DataPathTypes.ARTICLES else 0
+        addition_type_score = additionScoring(
+            AdditionScores.IS_ARTICLE) if dataType == DataPathTypes.ARTICLES else 0
         similariy_score = self.conceptual_similarity() * (self.__calculate_a() +
-                                                            (1 - self.__calculate_a()) * self.relational_similarity())
+                                                          (1 - self.__calculate_a()) * self.relational_similarity())
 
         total = round(similariy_score +
                       addition_type_score if similariy_score != 0 else 0, 5)

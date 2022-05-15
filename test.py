@@ -23,8 +23,8 @@ dir = "./data/"
 # dataHandler = DataHandler(
 #     dir+"laws.json", dir+"articles.json", dir+"rules.json", dir+"lookups.json")
 
-for query in query_data:
-    print("_-------------------_")
-    print(reduce_words(query))
+# for query in query_data:
+#     print("_-------------------_")
+#     print(reduce_words(query))
 
-# print(reduce_words("Người tham gia bảo hiểm thất nghiệp có được hưởng chế độ bảo hiểm y tế không?"))
+define_connection("Tư vấn giới thiệu việc làm đối với người tham gia bảo hiểm thất nghiệp được quy định như thế nào?")

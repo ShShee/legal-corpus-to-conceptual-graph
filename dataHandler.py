@@ -94,9 +94,12 @@ class DataHandler:
                 # Get comparison score
                 str(comparisonHandler.getSimilarityScore(data[2])),
                 # get graph of similarity
-                str(round(comparisonHandler.conceptual_similarity(),5)),
+                str(round(comparisonHandler.conceptual_similarity(), 5)),
                 # get graph of similarity
-                str(round(comparisonHandler.relational_similarity(),5)),
+                str(round(comparisonHandler.relational_similarity(), 5)),
+                str(round(comparisonHandler.nGcs,5)),
+                str(round(comparisonHandler.nG1s,5)),
+                str(round(comparisonHandler.nG2s,5)),
                 comparisonHandler
             )
             result.append(add_value)
@@ -129,9 +132,8 @@ class DataHandler:
         lookUp = self.getLookUpFromId(id, DataPathTypes.RULES)
 
         if(onlyIndex):
-            indexInArticle = [idx for idx, val in enumerate(
-                lookUp["rules"]) if val == id][0]
-            return "Khoản "+str(indexInArticle + 1)
+            content = self.getDataFromId(id, DataPathTypes.RULES)["content"]
+            return "Khoản " + content.split(".")[0]
         else:
             return self.getArticleTitle(lookUp["article"], DataPathTypes.ARTICLES)
 
@@ -189,7 +191,7 @@ class DataHandler:
             result = result + titles[index] + " số "+code + ending
 
         if type == DataPathTypes.RULES:
-            result =result + self.getRuleTitle(itemId, True) + " thuộc "
+            result = result + self.getRuleTitle(itemId, True) + " thuộc "
 
         article = self.getArticleTitle(itemId, type)
         contentData = self.getContentData(itemId, type)
