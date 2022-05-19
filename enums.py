@@ -23,12 +23,14 @@ class AdditionScores(Enum):
     UNDEFINED = 4
     TRIGGER = 5
     TRIGGER_NOT = 6
-    TARGET = 7
-    DESTINATION = 8
-    THEME = 9
-    SOURCE = 10
-    INCLUDE = 11
-    SKIP = 12
+
+    TARGET_EVENT = 7
+    TARGET_ACTION = 8
+    INTENT = 9
+
+    THEME_EVENT = 10
+    THEME_ACTION = 11
+    SITUATION = 12
 
 
 def additionScoring(type):
@@ -39,11 +41,12 @@ def additionScoring(type):
         AdditionScores.UNDEFINED: 0.0,
         AdditionScores.TRIGGER: 0.25,
         AdditionScores.TRIGGER_NOT: 0.25,
-        AdditionScores.TARGET: 0.5,
-        AdditionScores.DESTINATION: 0.75,
-        AdditionScores.THEME: -0.5,
-        AdditionScores.SOURCE: -0.75,
-        AdditionScores.INCLUDE: 0.25
+        AdditionScores.TARGET_EVENT: 0.75,
+        AdditionScores.TARGET_ACTION: 0.5,
+        AdditionScores.INTENT: 0.75,
+        AdditionScores.THEME_ACTION: -0.5,
+        AdditionScores.THEME_EVENT: -0.75,
+        AdditionScores.SITUATION: -0.75
     }.get(type, 0.0)
 
 

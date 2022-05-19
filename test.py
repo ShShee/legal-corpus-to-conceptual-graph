@@ -27,4 +27,4 @@ dir = "./data/"
 #     print("_-------------------_")
 #     print(reduce_words(query))
 
-define_connection("Tư vấn giới thiệu việc làm đối với người tham gia bảo hiểm thất nghiệp được quy định như thế nào?")
+define_connection("Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?")

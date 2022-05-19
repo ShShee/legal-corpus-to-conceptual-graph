@@ -41,7 +41,7 @@ def handle_in_query(query):
 
 
 def define_connection(input_query):
-    #print(pos_tag(handle_in_query(input_query)))
+    # print(pos_tag(handle_in_query(input_query)))
     new_query = readd_adverbs(input_query)
     result = []
     idx = 0
@@ -69,22 +69,16 @@ def define_connection(input_query):
                     connector = AdditionScores.TRIGGER
                     first_action = end
                 elif checkConditionType(new_query[end][1]):
-                    if end == idx + 2:
-                        if new_query[idx+1][0] == 'của':
-                            connector = AdditionScores.INCLUDE
-                        elif new_query[idx+1][0] == 'cho':
-                            connector = AdditionScores.TARGET
-                    else:
-                        connector = AdditionScores.UNDEFINED
+                    connector = AdditionScores.UNDEFINED
                 else:
                     end = -1
             elif new_query[idx][1] == 'V':
                 if idx - 1 >= 0:
                     tag = AdditionScores.NONE
                     if checkConditionTarget(new_query[idx-1][0]):
-                        tag = AdditionScores.TARGET
+                        tag = AdditionScores.TARGET_ACTION
                     elif checkConditionTheme(new_query[idx-1][0]):
-                        tag = AdditionScores.THEME
+                        tag = AdditionScores.THEME_ACTION
 
                     if tag != AdditionScores.NONE and new_query[first_action][0] != new_query[idx][0]:
                         result.append(
@@ -93,10 +87,10 @@ def define_connection(input_query):
                 if new_query[end][1] != 'V':
                     for i in range(idx-1, 0, -1):
                         if checkConditionTarget(new_query[i][0]):
-                            connector = AdditionScores.DESTINATION
+                            connector = AdditionScores.INTENT
                             break
                         elif checkConditionTheme(new_query[i][0]):
-                            connector = AdditionScores.SOURCE
+                            connector = AdditionScores.SITUATION
                             break
 
                 if (checkConditionTarget(new_query[idx+1][0]) or checkConditionTheme(new_query[idx+1][0])) and idx + 2 < len(new_query) and new_query[idx + 2][1] == 'V':
@@ -107,30 +101,58 @@ def define_connection(input_query):
                     for i in range(idx+1, len(new_query)):
                         if checkConditionTarget(new_query[i][0]):
                             if checkConditionType(new_query[end][1]):
-                                connector = AdditionScores.SOURCE
+                                connector = AdditionScores.SITUATION
                             elif new_query[end][1] == 'V':
-                                connector = AdditionScores.THEME
+                                connector = AdditionScores.THEME_ACTION
                             break
                         elif checkConditionTheme(new_query[i][0]):
                             if checkConditionType(new_query[end][1]):
-                                connector = AdditionScores.DESTINATION
+                                connector = AdditionScores.INTENT
                             elif new_query[end][1] == 'V':
-                                connector = AdditionScores.TARGET
+                                connector = AdditionScores.TARGET_ACTION
                             break
 
                 if connector == AdditionScores.NONE:
                     #end = -1
                     if checkConditionType(new_query[end][1]):
-                        connector = AdditionScores.DESTINATION
+                        connector = AdditionScores.INTENT
                     elif new_query[end][1] == 'V':
-                        connector = AdditionScores.TARGET
+                        connector = AdditionScores.TARGET_ACTION
         if end >= 0:
             result.append(
                 (new_query[start], new_query[end], connector))
         idx = idx + 1
-    
-    #print(result)
-    return (result, new_query)
+
+    # print(recheckConditions(result))
+    return (recheckConditions(result), new_query)
+
+
+def recheckConditions(result):
+    new_result = []
+
+    theme_flag = -1
+    target_flag = -1
+
+    for idx in range(len(result)-1, 0, -1):
+        if (result[idx][2] == AdditionScores.SITUATION or result[idx][2] == AdditionScores.THEME_ACTION) and theme_flag == -1:
+            theme_flag = idx
+        elif (result[idx][2] == AdditionScores.INTENT or result[idx][2] == AdditionScores.TARGET_ACTION) and target_flag == -1:
+            target_flag = idx
+
+        if target_flag != -1 and theme_flag != -1:
+            break
+
+    for idx, item in enumerate(result):
+        if item[2] == AdditionScores.UNDEFINED:
+            new_result.append((item[0], item[1], AdditionScores.TARGET_EVENT if (target_flag < theme_flag and idx <
+                               theme_flag) or (target_flag > theme_flag and idx >
+                               theme_flag) or theme_flag == -1 else AdditionScores.THEME_EVENT))
+        elif item[2] == AdditionScores.TRIGGER or item[2] == AdditionScores.TRIGGER_NOT or item[2] == AdditionScores.THEME_ACTION:
+            new_result.append((item[1], item[0], item[2]))
+        else:
+            new_result.append(item)
+
+    return new_result
 
 
 def checkConditionTheme(item):

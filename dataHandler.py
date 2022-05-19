@@ -97,9 +97,9 @@ class DataHandler:
                 str(round(comparisonHandler.conceptual_similarity(), 5)),
                 # get graph of similarity
                 str(round(comparisonHandler.relational_similarity(), 5)),
-                str(round(comparisonHandler.nGcs,5)),
-                str(round(comparisonHandler.nG1s,5)),
-                str(round(comparisonHandler.nG2s,5)),
+                str(round(comparisonHandler.mGc,5)),
+                str(round(comparisonHandler.mGcG1,5)),
+                str(round(comparisonHandler.mGcG2,5)),
                 comparisonHandler
             )
             result.append(add_value)
