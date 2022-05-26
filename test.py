@@ -28,3 +28,25 @@ dir = "./data/"
 #     print(reduce_words(query))
 
 define_connection("Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?")
+# class Phanso:
+#     def __init__(self,tu_so,mau_so):
+#         self.tu = tu_so
+#         self.mau = mau_so
+
+#     def __add__(self,other):
+#         return Phanso(self.tu + other.tu,self.mau + other.mau)
+
+#     def __lt__(self,other):
+#         print(self.tu,other.tu)
+#         return self.tu > other.tu
+    
+#     def __invert__(self):
+#         return Phanso(self.mau,self.tu)
+    
+#     def printt(self):
+#         print(str(self.tu) + "/" + str(self.mau))
+    
+# a = Phanso(3,5)
+# b = Phanso (6,5)
+# c = ~b
+# c.printt()

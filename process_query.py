@@ -66,7 +66,7 @@ def check_unnecessaries(word, word_previous, word_behind):
 def convert_synonyms(word, word_previous, word_behind):
     if (word == 'xin' or word == 'yêu cầu') and word_behind != 'đề nghị':
         return "đề nghị"
-    elif word == 'nhận' and (word_behind == 'trợ cấp' or word_behind == 'hỗ trợ'):
+    elif (word == 'nhận' and (word_behind == 'trợ cấp' or word_behind == 'hỗ trợ')) or (word == 'thực hiện' and word_behind == 'hỗ trợ'):
         return "hưởng"
     elif word == 'thay đổi' and word_behind == 'nơi':
         return "chuyển"

@@ -183,11 +183,11 @@ class Ui_MainWindow(object):
         item = self.tableWidget.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Quan hệ"))
         item = self.tableWidget.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "mGc"))
+        item.setText(_translate("MainWindow", "nGc"))
         item = self.tableWidget.horizontalHeaderItem(8)
-        item.setText(_translate("MainWindow", "mGc1"))
+        item.setText(_translate("MainWindow", "nG1"))
         item = self.tableWidget.horizontalHeaderItem(9)
-        item.setText(_translate("MainWindow", "mGc2"))
+        item.setText(_translate("MainWindow", "nG2"))
         self.textBrowser_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                               "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
                                               "p, li { white-space: pre-wrap; }\n"

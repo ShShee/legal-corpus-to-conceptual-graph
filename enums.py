@@ -27,6 +27,7 @@ class AdditionScores(Enum):
     TARGET_EVENT = 7
     TARGET_ACTION = 8
     INTENT = 9
+    INTENT_EXTRA = 13
 
     THEME_EVENT = 10
     THEME_ACTION = 11
@@ -35,8 +36,8 @@ class AdditionScores(Enum):
 
 def additionScoring(type):
     return {
-        AdditionScores.RELEVANT_THEME: 1,
-        AdditionScores.RELEVANT_WORD: 0.3,
+        AdditionScores.RELEVANT_THEME: 3,
+        AdditionScores.RELEVANT_WORD: 1,
         AdditionScores.IS_ARTICLE: 0.05,
         AdditionScores.UNDEFINED: 0.0,
         AdditionScores.TRIGGER: 0.25,
@@ -44,6 +45,7 @@ def additionScoring(type):
         AdditionScores.TARGET_EVENT: 0.75,
         AdditionScores.TARGET_ACTION: 0.5,
         AdditionScores.INTENT: 0.75,
+        AdditionScores.INTENT_EXTRA: 0.4,
         AdditionScores.THEME_ACTION: -0.5,
         AdditionScores.THEME_EVENT: -0.75,
         AdditionScores.SITUATION: -0.75

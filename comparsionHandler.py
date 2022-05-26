@@ -22,10 +22,14 @@ class ComparisonHandler(ConceptualGraph):
 
         # Size of same edges in comparison with this graph
         if len(same_nodes) != 0:
+            #add all edges from graph 2
             self.__addEdgeWithWeight(
                 graph_2.getEdgesFromGivenNodes(same_nodes))
+            
+            #find same edges from graph 2 to graph 1
             sameEdges = self.__getSameEdges(graph_1)
 
+            #clear previous edges then add same edges
             self.graph.clear()
             self.graph.add_nodes_from(same_nodes)
             self.__addEdgeWithWeight(sameEdges)
@@ -39,16 +43,16 @@ class ComparisonHandler(ConceptualGraph):
             self.mGcG2 = 0
 
     def __addEdgeWithWeight(self, result):
-        edges, weights = result
+        edges, weightTypes = result
 
         for idx, value in enumerate(edges):
-            self.graph.add_edge(value[0], value[1], weight=weights[idx])
+            self.graph.add_edge(value[0], value[1], weight=weightTypes[idx])
 
     def __compare2Edges(self, graph, edge_1, edge_2):
-        # print(self.get_edge_attributes("weight"))
-        weight = self.get_edge_attributes(
-            "weight")[edge_1] == graph.get_edge_attributes("weight")[edge_2]
-        if weight:
+        edge_1_type = self.get_edge_attributes("weight")[edge_1]
+        edge_2_type = graph.get_edge_attributes("weight")[edge_2]
+        weightType = (edge_1_type == edge_2_type) or (AdditionScores(edge_1_type) == AdditionScores.INTENT and AdditionScores(edge_2_type) == AdditionScores.INTENT_EXTRA)
+        if weightType:
             if ((edge_2[0][0] == edge_1[0][0] and edge_2[1][0] == edge_1[1][0]) or (edge_2[0][0] == edge_1[1][0] and edge_2[1][0] == edge_1[0][0])):
                 return True
         else:
@@ -56,13 +60,13 @@ class ComparisonHandler(ConceptualGraph):
 
     def __getSameEdges(self, graph):
         result = []
-        weights = []
+        weightTypes = []
         for edge in self.getEdges():
             for edge_compare in graph.getEdges():
                 if self.__compare2Edges(graph, edge, edge_compare):
                     result.append(edge)
-                    weights.append(self.get_edge_attributes("weight")[edge])
-        return (result, weights)
+                    weightTypes.append(self.get_edge_attributes("weight")[edge])
+        return (result, weightTypes)
 
     def conceptual_similarity(self):
         return (2*self.nGcs)/(self.nG1s + self.nG2s)
@@ -71,15 +75,15 @@ class ComparisonHandler(ConceptualGraph):
         denominator = self.mGcG1 + self.mGcG2
         return (2*self.mGc)/denominator if denominator != 0 else 0
 
-    def __calculate_a(self):
+    def calculate_a(self):
         denominator = 2*self.nGcs + self.mGcG1 + self.mGcG2
         return (2*self.nGcs)/denominator if denominator != 0 else 0
 
     def getSimilarityScore(self, dataType):
         addition_type_score = additionScoring(
             AdditionScores.IS_ARTICLE) if dataType == DataPathTypes.ARTICLES else 0
-        similariy_score = self.conceptual_similarity() * (self.__calculate_a() +
-                                                          (1 - self.__calculate_a()) * self.relational_similarity())
+        similariy_score = self.conceptual_similarity() * (self.calculate_a() +
+                                                          (1 - self.calculate_a()) * self.relational_similarity())
 
         total = round(similariy_score +
                       addition_type_score if similariy_score != 0 else 0, 5)

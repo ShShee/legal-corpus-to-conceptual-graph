@@ -44,6 +44,8 @@ def define_connection(input_query):
     # print(pos_tag(handle_in_query(input_query)))
     new_query = readd_adverbs(input_query)
     result = []
+    first_intent = -1
+    main_verb = -1
     idx = 0
     first_action = -1  # position of first verb that trigger has done
     while idx < len(new_query):
@@ -119,11 +121,22 @@ def define_connection(input_query):
                     elif new_query[end][1] == 'V':
                         connector = AdditionScores.TARGET_ACTION
         if end >= 0:
+            if connector == AdditionScores.INTENT:
+                first_intent = end
+                main_verb = idx
             result.append(
                 (new_query[start], new_query[end], connector))
+
         idx = idx + 1
 
-    # print(recheckConditions(result))
+    # start connect main verb to all nouns behind it
+    if main_verb != -1:
+        for i in range(first_intent + 1, len(new_query)):
+            if checkConditionType(new_query[i][1]):
+                result.append(
+                    (new_query[main_verb], new_query[i], AdditionScores.INTENT_EXTRA))
+
+    #print(recheckConditions(result))
     return (recheckConditions(result), new_query)
 
 
@@ -143,7 +156,7 @@ def recheckConditions(result):
             break
 
     for idx, item in enumerate(result):
-        if item[2] == AdditionScores.UNDEFINED:
+        if item[2] == AdditionScores.UNDEFINED and item[1][1] == 'N' and item[0][1] == 'N':
             new_result.append((item[0], item[1], AdditionScores.TARGET_EVENT if (target_flag < theme_flag and idx <
                                theme_flag) or (target_flag > theme_flag and idx >
                                theme_flag) or theme_flag == -1 else AdditionScores.THEME_EVENT))
