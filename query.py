@@ -1,4 +1,4 @@
-query_data = [
+query_data_2 = [
     "Người tham gia bảo hiểm thất nghiệp có được hưởng chế độ bảo hiểm y tế không?",
     "Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?",
     "Người đang nhận hỗ trợ học nghề có được hưởng chế độ trợ cấp thất nghiệp của bảo hiểm thất nghiệp không?",
@@ -49,4 +49,46 @@ query_data = [
     "Mức hỗ trợ cho người lao động bị ảnh hưởng của đại dịch COVID-19 ?",
     "Mức hỗ trợ mà người sử dụng lao động bị ảnh hưởng của đại dịch COVID-19 ?",
     "Thủ tục để được nhận hỗ trợ do ảnh hưởng từ đại dịch COVID-19 gồm những bước nào ?"
+]
+
+query_data = [
+    "Mức bảo hiểm thất nghiệp được nhận là bao nhiêu ?",
+    "điều kiện để được hưởng bảo hiểm thất nghiệp ?",
+    "Tôi có đủ điều kiện nhận trợ cấp thất nghiệp không?",
+    "Trách nhiệm của người sử dụng lao động về bảo hiểm thất nghiệp được quy định như thế nào?",
+    "Trách nhiệm của người lao động về bảo hiểm thất nghiệp được quy định như thế nào?",
+    "Mức hỗ trợ học nghề cho người lao động đang hưởng trợ cấp thất nghiệp là bao nhiêu?",
+    "Trong thời gian hưởng trợ cấp thất nghiệp, hàng tháng người thất nghiệp có phải đến thông báo với Trung tâm Giới thiệu việc làm về việc tìm kiếm việc làm hay không?",
+    "Trường hợp người đang hưởng trợ cấp thất nghiệp có nhu cầu học nghề với mức chi phí cao hơn mức chi phí học nghề ngắn hạn theo quy định của pháp luật thì có hỗ trợ thêm cho người lao động hay không?",
+    "Thời hạn giải quyết hưởng bảo hiểm thất nghiệp được quy định như thế nào?",
+    "Những trường hợp nào người đang hưởng trợ cấp thất nghiệp bị chấm dứt hưởng trợ cấp thất nghiệp do có việc làm?",
+    "Thời gian được hỗ trợ tư vấn, giới thiệu việc làm được quy định như thế nào?",
+    "Việc tổ chức thực hiện hỗ trợ tư vấn, giới thiệu việc làm cho người lao động được hưởng trợ cấp thất nghiệp do cơ quan nào thực hiện?",
+    "Mức trợ cấp thất nghiệp hàng tháng được quy định như thế nào?",
+    "Thời gian hưởng trợ cấp thất nghiệp hằng tháng được tính như thế nào?",
+    "Để được hưởng chế độ bảo hiểm thất nghiệp người thất nghiệp phải có các điều kiện gì?",
+    " Những người lao động nào thuộc đối tượng tham gia bảo hiểm thất nghiệp?",
+    "Chế độ bảo hiểm thất nghiệp là gì?",
+    "Mức đóng bảo hiểm thất nghiệp của người sử dụng lao động",
+    "Mức đóng bảo hiểm thất nghiệp của người lao động",
+    " Đóng bảo hiểm thất nghiệp bao lâu thì được hưởng trợ cấp thất nghiệp?",
+    "Cách tính thời gian đóng bảo hiểm thất nghiệp để hưởng trợ cấp",
+    "Cách tính mức đóng bảo hiểm thất nghiệp được tính như thế nào?",
+    "Người lao động tham gia đóng bảo hiểm thất nghiệp phải đáp ứng đủ những điều kiện nào thì sẽ được hưởng trợ cấp thất nghiệp?",
+    "Hồ sơ đăng ký hưởng bảo hiểm thất nghiệp được quy định như thế nào?",
+    "Công thức tính tiền bảo hiểm thất nghiệp mới nhất?",
+    "Mức hưởng trợ cấp thất nghiệp tối đa là bao nhiêu ?",
+    "Thời gian được hưởng bảo hiểm thất nghiệp là bao lâu ?",
+    "Đóng bảo hiểm thất nghiệp gián đoạn có được hưởng trợ cấp thất nghiệp?",
+    "Bảo hiểm thất nghiệp có được cộng dồn không ?",
+    "Nếu người lao động có quyết định hưởng trợ cấp thất nghiệp nhưng không nhận thì sao?",
+    "Muốn chuyển nơi hưởng trợ cấp thất nghiệp có được không?",
+    "Hồ sơ đề nghị hưởng trợ cấp khi không nhận được tiền bảo hiểm thất nghiệp ?",
+    "người lao động đã dừng tham gia bảo hiểm thất nghiệp do chấm dứt hợp đồng lao động có thuộc diện được nhận hỗ trợ do ảnh hưởng của covid-19 hay không?",
+    "Trình tự giải quyết hồ sơ hưởng trợ cấp thất nghiệp",
+    "Điều kiện về thời gian đóng Bảo hiểm thất nghiệp?",
+    "Cách tính thời gian đóng bảo hiểm thất nghiệp được bảo lưu",
+    "Thời gian giải quyết thủ tục hưởng bảo hiểm thất nghiệp",
+    "Thủ tục làm bảo hiểm thất nghiệp gồm các bước nào ?",
+    "Người lao động chấm dứt hợp đồng lao động được xác định là không đủ điều kiện hưởng trợ cấp thất nghiệp trong trường hợp nào?"
 ]

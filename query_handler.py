@@ -41,7 +41,7 @@ def handle_in_query(query):
 
 
 def define_connection(input_query):
-    # print(pos_tag(handle_in_query(input_query)))
+    #print(pos_tag(handle_in_query(input_query)))
     new_query = readd_adverbs(input_query)
     result = []
     first_intent = -1
@@ -191,7 +191,7 @@ def checkConditionType(item):
 
 def readd_adverbs(input_query):
     reduced = reduce_words(input_query)
-
+    #print(reduced)
     result = []
     idx = 0
     while idx < len(reduced):
@@ -230,7 +230,7 @@ def reduce_words(input_query):
                 get_data = ""
                 for item in list_same_names:
                     step = getChildLength(
-                        query[start][0], item, query)
+                        query[start][0],start, item, query)
 
                     text = query[start][0]
 
@@ -238,8 +238,7 @@ def reduce_words(input_query):
                         for idx in range(1, step+1):
                             text = text + " " + query[start+idx][0]
 
-                    # print(query[start][0], "---", item[0], "------------------------    Step:", step,
-                    #       "/Max-step:", max_step, "/text:", text)
+                    #print(query[start][0], "---", item[0], "------------------------    Step:", step, "/Max-step:", max_step, "/text:", text)
 
                     if step > max_step or matched == False:
                         if text == item[0]:
@@ -263,21 +262,18 @@ def reduce_words(input_query):
     return list_query
 
 
-def getChildLength(title, data, query):
+def getChildLength(title, start,data, query):
     wordsList = filter_words(pos_tag(data[0]))
     data_types_included = checkVariableTypesIncluded(wordsList)
-    start = -1
     end = -1
-    # print("Root:",pos_tag(data[0]),"-Extracted:",wordsList)
+    #print("Root:",pos_tag(data[0]),"-Extracted:",wordsList)
     for index in range(0, len(query)):
-        if(query[index][0] == title):
-            start = index
         if wordsList[-1][0] == query[index][0]:
             end = index
-        if end >= start and end != -1 and start != -1:
+        if end >= start and end != -1:
             break
     #print(start, "///", end, query, wordsList)
-    if(end == -1):
+    if end == -1 or end - start + 1 > len(wordsList):
         return -1
     else:
         step = -1

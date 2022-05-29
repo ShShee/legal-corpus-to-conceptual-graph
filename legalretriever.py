@@ -227,12 +227,12 @@ class Ui_MainWindow(object):
 
         labeldict = {}
         for node in graph.getNodes():
-            words = node[0].split()
-            if len(words) > 1:
-                letters = [word[0] for word in words]
-            else:
-                letters = [node[0]]
-            labeldict[node] = "".join(letters)
+            # words = node[0].split()
+            # if len(words) > 1:
+            #     letters = [word[0] for word in words]
+            # else:
+            #     letters = [node[0]]
+            labeldict[node] =  node[0]#"".join(letters)
 
         color_for_node = "#000000"
         if type == GraphTypes.QUERY:

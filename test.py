@@ -27,7 +27,7 @@ dir = "./data/"
 #     print("_-------------------_")
 #     print(reduce_words(query))
 
-define_connection("Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?")
+define_connection("Mức hỗ trợ học nghề cho người lao động đang hưởng trợ cấp thất nghiệp là bao nhiêu?")
 # class Phanso:
 #     def __init__(self,tu_so,mau_so):
 #         self.tu = tu_so
