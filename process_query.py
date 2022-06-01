@@ -99,5 +99,6 @@ def dictSynonyms(word):
         "đối với": "khi",
         "ngưng": "tạm dừng",
         "ngừng": "tạm dừng",
-        "hỗ trợ": "trợ cấp"
+        "hỗ trợ": "trợ cấp",
+        "bao lâu": "thời gian"
     }.get(word, word)

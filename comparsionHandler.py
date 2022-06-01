@@ -82,8 +82,7 @@ class ComparisonHandler(ConceptualGraph):
     def getSimilarityScore(self, dataType):
         addition_type_score = additionScoring(
             AdditionScores.IS_ARTICLE) if dataType == DataPathTypes.ARTICLES else 0
-        similariy_score = self.conceptual_similarity() * (self.calculate_a() +
-                                                          (1 - self.calculate_a()) * self.relational_similarity())
+        similariy_score = self.conceptual_similarity() * (self.calculate_a() + (1 - self.calculate_a()) * self.relational_similarity())
 
         total = round(similariy_score +
                       addition_type_score if similariy_score != 0 else 0, 5)

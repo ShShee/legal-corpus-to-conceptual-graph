@@ -1,6 +1,7 @@
 from platform import mac_ver
 from re import S
 from turtle import pos
+from types import new_class
 from unittest import result
 from matplotlib.pyplot import title
 
@@ -41,10 +42,12 @@ def handle_in_query(query):
 
 
 def define_connection(input_query):
-    #print(pos_tag(handle_in_query(input_query)))
+    # print(pos_tag(handle_in_query(input_query)))
     new_query = readd_adverbs(input_query)
     result = []
     first_intent = -1
+    # last connector to verb that is the one which is connected to trigger
+    last_connector = AdditionScores.NONE
     main_verb = -1
     idx = 0
     first_action = -1  # position of first verb that trigger has done
@@ -117,9 +120,25 @@ def define_connection(input_query):
                 if connector == AdditionScores.NONE:
                     #end = -1
                     if checkConditionType(new_query[end][1]):
-                        connector = AdditionScores.INTENT
+                        print(new_query[first_action], new_query[idx])
+                        if last_connector != AdditionScores.SITUATION and last_connector != AdditionScores.THEME_ACTION and checkAnyWordsBetween(new_query, first_action, idx) and last_connector != AdditionScores.NONE:
+                            if first_action != idx:
+                                result.append(
+                                    (new_query[first_action], new_query[idx], AdditionScores.THEME_ACTION))
+                            connector = AdditionScores.SITUATION
+                        else:
+                            if first_action != idx and checkAnyWordsBetween(new_query, first_action, idx):
+                                result.append(
+                                    (new_query[first_action], new_query[idx], AdditionScores.TARGET_ACTION))
+                            connector = AdditionScores.INTENT
                     elif new_query[end][1] == 'V':
-                        connector = AdditionScores.TARGET_ACTION
+                        if last_connector != AdditionScores.INTENT and last_connector != AdditionScores.TARGET_ACTION:
+                            connector = AdditionScores.TARGET_ACTION
+                        else:
+                            connector = AdditionScores.TARGET_EVENT
+
+                if first_action == idx:
+                    last_connector = connector
         if end >= 0:
             if connector == AdditionScores.INTENT:
                 first_intent = end
@@ -136,7 +155,7 @@ def define_connection(input_query):
                 result.append(
                     (new_query[main_verb], new_query[i], AdditionScores.INTENT_EXTRA))
 
-    #print(recheckConditions(result))
+    print(recheckConditions(result))
     return (recheckConditions(result), new_query)
 
 
@@ -156,7 +175,7 @@ def recheckConditions(result):
             break
 
     for idx, item in enumerate(result):
-        if item[2] == AdditionScores.UNDEFINED and item[1][1] == 'N' and item[0][1] == 'N':
+        if item[2] == AdditionScores.UNDEFINED and checkConditionType(item[1][1]) and checkConditionType(item[0][1]):
             new_result.append((item[0], item[1], AdditionScores.TARGET_EVENT if (target_flag < theme_flag and idx <
                                theme_flag) or (target_flag > theme_flag and idx >
                                theme_flag) or theme_flag == -1 else AdditionScores.THEME_EVENT))
@@ -168,8 +187,25 @@ def recheckConditions(result):
     return new_result
 
 
+def checkAnyWordsBetween(new_query, start, end):
+    first = end - 1
+    second = end - 2
+    if first >= 0 and new_query[first][1] != 'AD':
+        if first == start:
+            return False
+        else:
+            return True
+    elif second >= 0 and new_query[second][1] != 'AD':
+        if second == start:
+            return False
+        else:
+            return True
+
+    return False
+
+
 def checkConditionTheme(item):
-    if item == 'khi' or item == 'để' or item == 'bởi':
+    if item == 'khi' or item == 'để' or item == 'bởi' or item == 'cho':
         return True
     else:
         return False
@@ -191,7 +227,7 @@ def checkConditionType(item):
 
 def readd_adverbs(input_query):
     reduced = reduce_words(input_query)
-    #print(reduced)
+    
     result = []
     idx = 0
     while idx < len(reduced):
@@ -203,6 +239,13 @@ def readd_adverbs(input_query):
                 result.append(('việc', 'AD', AdditionScores.NONE))
         idx = idx + 1
 
+    result_size = len(result) - 1
+
+    if (result_size >= 0):
+        if checkConditionTheme(result[result_size][0]) or checkConditionTarget(result[result_size][0]):
+            result.pop()
+
+    print(result)
     return result
 
 
@@ -230,7 +273,7 @@ def reduce_words(input_query):
                 get_data = ""
                 for item in list_same_names:
                     step = getChildLength(
-                        query[start][0],start, item, query)
+                        query[start][0], start, item, query)
 
                     text = query[start][0]
 
@@ -238,7 +281,8 @@ def reduce_words(input_query):
                         for idx in range(1, step+1):
                             text = text + " " + query[start+idx][0]
 
-                    #print(query[start][0], "---", item[0], "------------------------    Step:", step, "/Max-step:", max_step, "/text:", text)
+                    print(query[start][0], "---", item[0], "------------------------    Step:",
+                          step, "/Max-step:", max_step, "/text:", text)
 
                     if step > max_step or matched == False:
                         if text == item[0]:
@@ -246,7 +290,7 @@ def reduce_words(input_query):
                             get_data = text
                             score = item[1]
                             matched = True
-                        elif matched == False:
+                        elif matched == False and step > 0:
                             max_step = step
                             get_data = item[0]
                             score = item[1]
@@ -262,11 +306,11 @@ def reduce_words(input_query):
     return list_query
 
 
-def getChildLength(title, start,data, query):
+def getChildLength(title, start, data, query):
     wordsList = filter_words(pos_tag(data[0]))
     data_types_included = checkVariableTypesIncluded(wordsList)
     end = -1
-    #print("Root:",pos_tag(data[0]),"-Extracted:",wordsList)
+    # print("Root:",pos_tag(data[0]),"-Extracted:",wordsList)
     for index in range(0, len(query)):
         if wordsList[-1][0] == query[index][0]:
             end = index

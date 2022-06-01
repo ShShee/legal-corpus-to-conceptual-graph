@@ -9,7 +9,7 @@
   {
     "id": "rule/02",
     "lookUpId": "lookUp/01",
-    "keyphrase": "mức đóng bảo hiểm thất nghiệp",
+    "keyphrase": "mức đóng bảo hiểm thất nghiệp của người lao động",
     "content": "2. Mức đóng bảo hiểm thất nghiệp được tính trên cơ sở tiền lương của người lao động.",
     "references": []
   },
@@ -65,21 +65,21 @@
   {
     "id": "rule/10",
     "lookUpId": "lookUp/03",
-    "keyphrase": "đối tượng tham gia bảo hiểm thất nghiệp",
+    "keyphrase": "đối tượng người lao động tham gia bảo hiểm thất nghiệp",
     "content": "1. Người lao động phải tham gia bảo hiểm thất nghiệp khi làm việc theo hợp đồng lao động hoặc hợp đồng làm việc như sau:\na) Hợp đồng lao động hoặc hợp đồng làm việc không xác định thời hạn;\nb) Hợp đồng lao động hoặc hợp đồng làm việc xác định thời hạn;\nc) Hợp đồng lao động theo mùa vụ hoặc theo một công việc nhất định có thời hạn từ đủ 03 tháng đến dưới 12 tháng.\nTrong trường hợp người lao động giao kết và đang thực hiện nhiều hợp đồng lao động quy định tại khoản này thì người lao động và người sử dụng lao động của hợp đồng lao động giao kết đầu tiên có trách nhiệm tham gia bảo hiểm thất nghiệp.",
     "references": []
   },
   {
     "id": "rule/11",
     "lookUpId": "lookUp/03",
-    "keyphrase": "đối tượng không phải tham gia bảo hiểm thất nghiệp",
+    "keyphrase": "đối tượng người lao động không phải tham gia bảo hiểm thất nghiệp",
     "content": "2. Người lao động theo quy định tại khoản 1 Điều này đang hưởng lương hưu, giúp việc gia đình thì không phải tham gia bảo hiểm thất nghiệp.",
     "references": ["rule/10"]
   },
   {
     "id": "rule/12",
     "lookUpId": "lookUp/03",
-    "keyphrase": "người sử dụng lao động tham gia bảo hiểm thất nghiệp",
+    "keyphrase": "đối tượng người sử dụng lao động tham gia bảo hiểm thất nghiệp",
     "content": "3. Người sử dụng lao động tham gia bảo hiểm thất nghiệp bao gồm cơ quan nhà nước, đơn vị sự nghiệp công lập, đơn vị vũ trang nhân dân; tổ chức chính trị, tổ chức chính trị - xã hội, tổ chức chính trị xã hội - nghề nghiệp, tổ chức xã hội, tổ chức xã hội - nghề nghiệp; cơ quan, tổ chức nước ngoài, tổ chức quốc tế hoạt động trên lãnh thổ Việt Nam; doanh nghiệp, hợp tác xã, hộ gia đình, hộ kinh doanh, tổ hợp tác, tổ chức khác và cá nhân có thuê mướn, sử dụng lao động theo hợp đồng làm việc hoặc hợp đồng lao động quy định tại khoản 1 Điều này.",
     "references": ["rule/10"]
   },
@@ -93,7 +93,7 @@
   {
     "id": "rule/14",
     "lookUpId": "lookUp/04",
-    "keyphrase": "tham gia bảo hiểm thất nghiệp cho người lao động",
+    "keyphrase": "thủ tục tham gia bảo hiểm thất nghiệp cho người lao động",
     "content": "2. Người sử dụng lao động lập và nộp hồ sơ tham gia bảo hiểm thất nghiệp của người lao động cho tổ chức bảo hiểm xã hội trong thời hạn 30 ngày, kể từ ngày hợp đồng lao động hoặc hợp đồng làm việc của người lao động có hiệu lực.\nTrường hợp người lao động đã giao kết hợp đồng lao động theo mùa vụ hoặc theo một công việc nhất định có thời hạn từ đủ 03 tháng đến dưới 12 tháng trước ngày 01 tháng 01 năm 2015 và đang thực hiện hợp đồng lao động này thì người sử dụng lao động phải tham gia bảo hiểm thất nghiệp cho những người lao động này nếu thời hạn kết thúc hợp đồng còn ít nhất 03 tháng trở lên.\nTrường hợp người lao động giao kết nhiều hợp đồng lao động theo quy định tại Khoản 1 Điều 43 Luật Việc làm và đang tham gia bảo hiểm thất nghiệp theo hợp đồng lao động giao kết có hiệu lực đầu tiên mà khi chấm dứt hoặc thay đổi hợp đồng dẫn đến người lao động không thuộc đối tượng tham gia bảo hiểm thất nghiệp thì người lao động và người sử dụng lao động thuộc đối tượng tham gia bảo hiểm thất nghiệp của hợp đồng lao động giao kết có hiệu lực kế tiếp có trách nhiệm tham gia bảo hiểm thất nghiệp theo quy định của pháp luật.\nTrường hợp người lao động nghỉ việc hưởng chế độ thai sản hoặc ốm đau từ 14 ngày làm việc trở lên không hưởng tiền lương tháng tại đơn vị mà hưởng trợ cấp bảo hiểm xã hội, người lao động tạm hoãn thực hiện hợp đồng lao động hoặc hợp đồng làm việc đã giao kết theo quy định của pháp luật thì người lao động không thuộc đối tượng tham gia bảo hiểm thất nghiệp trong thời gian này.",
     "references": ["rule/10"]
   },
@@ -107,7 +107,7 @@
   {
     "id": "rule/16",
     "lookUpId": "lookUp/05",
-    "keyphrase": "người lao động đóng bảo hiểm thất nghiệp",
+    "keyphrase": "xác định người lao động đóng bảo hiểm thất nghiệp",
     "content": "2. Người lao động được xác định là đang đóng bảo hiểm thất nghiệp theo quy định tại Điều 49 Luật Việc làm khi thuộc một trong các trường hợp sau:\na) Người lao động đã đóng bảo hiểm thất nghiệp của tháng chấm dứt hợp đồng lao động hoặc hợp đồng làm việc và được cơ quan bảo hiểm xã hội xác nhận trên sổ bảo hiểm xã hội;\nb) Người lao động đã đóng bảo hiểm thất nghiệp của tháng liền kề trước tháng chấm dứt hợp đồng lao động hoặc hợp đồng làm việc và được cơ quan bảo hiểm xã hội xác nhận trên sổ bảo hiểm xã hội;\nc) Người lao động có tháng liền kề trước tháng chấm dứt hợp đồng lao động, hợp đồng làm việc hoặc tháng chấm dứt hợp đồng lao động, hợp đồng làm việc mà nghỉ việc do ốm đau, thai sản từ 14 ngày làm việc trở lên trong tháng, không hưởng tiền lương tháng tại đơn vị và được cơ quan bảo hiểm xã hội xác nhận trên sổ bảo hiểm xã hội;\nd) Người lao động có tháng liền kề trước tháng chấm dứt hợp đồng lao động, hợp đồng làm việc hoặc tháng chấm dứt hợp đồng lao động, hợp đồng làm việc mà nghỉ việc không hưởng lương từ 14 ngày làm việc trở lên trong tháng tại đơn vị và được cơ quan bảo hiểm xã hội xác nhận trên sổ bảo hiểm xã hội;\nđ) Người lao động có tháng liền kề trước tháng chấm dứt hợp đồng lao động, hợp đồng làm việc hoặc tháng chấm dứt hợp đồng lao động, hợp đồng làm việc mà tạm hoãn thực hiện hợp đồng lao động hoặc hợp đồng làm việc từ 14 ngày làm việc trở lên trong tháng tại đơn vị và được cơ quan bảo hiểm xã hội xác nhận trên sổ bảo hiểm xã hội.",
     "references": ["lookUp/06"]
   },
@@ -219,7 +219,7 @@
   {
     "id": "rule/32",
     "lookUpId": "lookUp/11",
-    "keyphrase": "mức đóng bảo hiểm thất nghiệp",
+    "keyphrase": "mức đóng bảo hiểm thất nghiệp của người lao động",
     "content": "1. Người lao động đóng bảo hiểm thất nghiệp theo chế độ tiền lương do người sử dụng lao động quyết định mà mức tiền lương tháng của người lao động cao hơn hai mươi tháng lương tối thiểu vùng thì người sử dụng lao động và người lao động phải đóng bảo hiểm thất nghiệp theo mức tiền lương bằng hai mươi tháng lương tối thiểu vùng từ ngày 01/01/2015 trở đi.",
     "references": []
   },
@@ -730,14 +730,14 @@
   {
     "id": "rule/105",
     "lookUpId": "lookUp/38",
-    "keyphrase": "",
+    "keyphrase": "thủ tục đề nghị tư vấn, giới thiệu việc làm",
     "content": "1. Người lao động ghi đầy đủ các thông tin vào phiếu tư vấn, giới thiệu việc làm theo mẫu do Bộ trưởng Bộ Lao động - Thương binh và Xã hội quy định và nộp trực tiếp cho trung tâm dịch vụ việc làm.",
     "references": []
   },
   {
     "id": "rule/106",
     "lookUpId": "lookUp/38",
-    "keyphrase": "",
+    "keyphrase": "cơ quan tổ chức tư vấn, giới thiệu việc làm",
     "content": "2. Trung tâm dịch vụ việc làm thực hiện tư vấn, giới thiệu việc làm trên cơ sở nhu cầu, khả năng của người lao động và nhu cầu của thị trường lao động.",
     "references": []
   },
@@ -870,7 +870,7 @@
   {
     "id": "rule/125",
     "lookUpId": "lookUp/45",
-    "keyphrase": "mức đúng quỹ bảo hiểm thất nghiệp",
+    "keyphrase": "mức đóng bảo hiểm thất nghiệp",
     "content": "1. Mức đóng và trách nhiệm đóng bảo hiểm thất nghiệp được quy định như sau:\na) Người lao động đóng bằng 1% tiền lương tháng;\nb) Người sử dụng lao động đóng bằng 1% quỹ tiền lương tháng của những người lao động đang tham gia bảo hiểm thất nghiệp;\nc) Nhà nước hỗ trợ tối đa 1% quỹ tiền lương tháng đóng bảo hiểm thất nghiệp của những người lao động đang tham gia bảo hiểm thất nghiệp và do ngân sách trung ương bảo đảm.",
     "references": []
   },

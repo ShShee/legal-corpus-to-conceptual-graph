@@ -47,7 +47,7 @@ query_data_2 = [
     "Thời gian duyệt hồ sơ xin hưởng trợ cấp thất nghiệp là bao lâu ?",
     "Đối tượng người lao động nào được hưởng hỗ trợ do ảnh hưởng của dịch COVID-19 ?",
     "Mức hỗ trợ cho người lao động bị ảnh hưởng của đại dịch COVID-19 ?",
-    "Mức hỗ trợ mà người sử dụng lao động bị ảnh hưởng của đại dịch COVID-19 ?",
+    "Mức hỗ trợ cho người sử dụng lao động bị ảnh hưởng của đại dịch COVID-19 ?",
     "Thủ tục để được nhận hỗ trợ do ảnh hưởng từ đại dịch COVID-19 gồm những bước nào ?"
 ]
 
@@ -63,15 +63,16 @@ query_data = [
     "Thời hạn giải quyết hưởng bảo hiểm thất nghiệp được quy định như thế nào?",
     "Những trường hợp nào người đang hưởng trợ cấp thất nghiệp bị chấm dứt hưởng trợ cấp thất nghiệp do có việc làm?",
     "Thời gian được hỗ trợ tư vấn, giới thiệu việc làm được quy định như thế nào?",
-    "Việc tổ chức thực hiện hỗ trợ tư vấn, giới thiệu việc làm cho người lao động được hưởng trợ cấp thất nghiệp do cơ quan nào thực hiện?",
+    "Việc tổ chức tư vấn, giới thiệu việc làm cho người lao động đang hưởng trợ cấp thất nghiệp do cơ quan nào thực hiện?",
     "Mức trợ cấp thất nghiệp hàng tháng được quy định như thế nào?",
+    "Thời gian trong tháng được nhận trợ cấp thất nghiệp là khi nào?",
     "Thời gian hưởng trợ cấp thất nghiệp hằng tháng được tính như thế nào?",
     "Để được hưởng chế độ bảo hiểm thất nghiệp người thất nghiệp phải có các điều kiện gì?",
-    " Những người lao động nào thuộc đối tượng tham gia bảo hiểm thất nghiệp?",
+    "Những người lao động nào thuộc đối tượng tham gia bảo hiểm thất nghiệp?",
     "Chế độ bảo hiểm thất nghiệp là gì?",
-    "Mức đóng bảo hiểm thất nghiệp của người sử dụng lao động",
-    "Mức đóng bảo hiểm thất nghiệp của người lao động",
-    " Đóng bảo hiểm thất nghiệp bao lâu thì được hưởng trợ cấp thất nghiệp?",
+    "Mức đóng bảo hiểm thất nghiệp của người sử dụng lao động ?",
+    "Mức đóng bảo hiểm thất nghiệp của người lao động ?",
+    "Đóng bảo hiểm thất nghiệp bao lâu thì được hưởng trợ cấp thất nghiệp?",
     "Cách tính thời gian đóng bảo hiểm thất nghiệp để hưởng trợ cấp",
     "Cách tính mức đóng bảo hiểm thất nghiệp được tính như thế nào?",
     "Người lao động tham gia đóng bảo hiểm thất nghiệp phải đáp ứng đủ những điều kiện nào thì sẽ được hưởng trợ cấp thất nghiệp?",
@@ -84,11 +85,12 @@ query_data = [
     "Nếu người lao động có quyết định hưởng trợ cấp thất nghiệp nhưng không nhận thì sao?",
     "Muốn chuyển nơi hưởng trợ cấp thất nghiệp có được không?",
     "Hồ sơ đề nghị hưởng trợ cấp khi không nhận được tiền bảo hiểm thất nghiệp ?",
-    "người lao động đã dừng tham gia bảo hiểm thất nghiệp do chấm dứt hợp đồng lao động có thuộc diện được nhận hỗ trợ do ảnh hưởng của covid-19 hay không?",
     "Trình tự giải quyết hồ sơ hưởng trợ cấp thất nghiệp",
     "Điều kiện về thời gian đóng Bảo hiểm thất nghiệp?",
-    "Cách tính thời gian đóng bảo hiểm thất nghiệp được bảo lưu",
+    "Cách tính thời gian đóng bảo hiểm thất nghiệp được bảo lưu ?",
+    "Cách tính thời gian được bảo lưu đóng bảo hiểm thất nghiệp ?",
     "Thời gian giải quyết thủ tục hưởng bảo hiểm thất nghiệp",
     "Thủ tục làm bảo hiểm thất nghiệp gồm các bước nào ?",
-    "Người lao động chấm dứt hợp đồng lao động được xác định là không đủ điều kiện hưởng trợ cấp thất nghiệp trong trường hợp nào?"
+    "Người lao động chấm dứt hợp đồng lao động được xác định là không đủ điều kiện hưởng trợ cấp thất nghiệp trong trường hợp nào?",
+    "Hỗ trợ mức đóng cho người sử dụng lao động bị ảnh hưởng bởi covid-19 là như thế nào ?"
 ]
