@@ -16,8 +16,8 @@ class DataPathTypes(Enum):
 
 class AdditionScores(Enum):
     NONE = 0
-    RELEVANT_THEME = 1
-    RELEVANT_WORD = 2
+    CONCEPT_MAIN = 1
+    CONCEPT_SIDE = 2
     IS_ARTICLE = 3
 
     UNDEFINED = 4
@@ -36,8 +36,8 @@ class AdditionScores(Enum):
 
 def additionScoring(type):
     return {
-        AdditionScores.RELEVANT_THEME: 3,
-        AdditionScores.RELEVANT_WORD: 1,
+        AdditionScores.CONCEPT_MAIN: 3,
+        AdditionScores.CONCEPT_SIDE: 1,
         AdditionScores.IS_ARTICLE: 0.05,
         AdditionScores.UNDEFINED: 0.0,
         AdditionScores.TRIGGER: 0.25,

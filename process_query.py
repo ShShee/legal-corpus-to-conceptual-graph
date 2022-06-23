@@ -91,7 +91,6 @@ def dictSynonyms(word):
         'corona':  "covid-19",
         'ncov':  "covid-19",
         'gửi':  "nộp",
-        'gửi':  "nộp",
         'trình tự': "thủ tục",
         "quy trình": "thủ tục",
         "trách nhiệm": "nghĩa vụ",

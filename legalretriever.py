@@ -248,8 +248,8 @@ class Ui_MainWindow(object):
         nx.draw(graph.getGraph(), pos, labels=labeldict, with_labels=True,
                 node_size=200, node_color=color_for_node)
 
-        edges_labels = {e: graph.get_edge_attributes(
-            'weight')[e] for e in graph.getEdges()}
+        edges_labels = {e: "Kind-"+ str(graph.get_edge_attributes(
+            'weight')[e]) for e in graph.getEdges()}
         nx.draw_networkx_edge_labels(
             graph.getGraph(), pos, edge_labels=edges_labels)
 

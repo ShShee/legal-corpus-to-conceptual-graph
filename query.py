@@ -1,4 +1,4 @@
-query_data_2 = [
+query_data1 = [
     "Người tham gia bảo hiểm thất nghiệp có được hưởng chế độ bảo hiểm y tế không?",
     "Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?",
     "Người đang nhận hỗ trợ học nghề có được hưởng chế độ trợ cấp thất nghiệp của bảo hiểm thất nghiệp không?",
@@ -17,6 +17,7 @@ query_data_2 = [
     "Thời gian hưởng hỗ trợ đào tạo, bồi dưỡng, nâng cao trình độ kỹ năng nghề để duy trì việc làm cho người lao động là bao lâu?",
     "Hồ sơ đề nghị hưởng hỗ trợ đào tạo kỹ năng nghề để duy trì việc làm cho người lao động theo quy định gồm những gì?",
     "Thời gian hưởng hỗ trợ học nghề được quy định như thế nào?",
+    "Thời gian hưởng hỗ trợ học nghề khi tham gia bảo hiểm thất nghiệp được quy định như thế nào?",
     "Mức hỗ trợ học nghề được quy định như thế nào?",
     "Tư vấn giới thiệu việc làm đối với người tham gia bảo hiểm thất nghiệp được quy định như thế nào?",
     "Việc hủy hưởng trợ cấp thất nghiệp được quy định như thế nào?",
@@ -45,6 +46,7 @@ query_data_2 = [
     "Quyền của người sử dụng lao động tham gia bảo hiểm thất nghiệp được quy định như thế nào?",
     "Trách nhiệm của người sử dụng lao động tham gia bảo hiểm thất nghiệp được quy định như thế nào?",
     "Thời gian duyệt hồ sơ xin hưởng trợ cấp thất nghiệp là bao lâu ?",
+    "Tôi đang tham gia bảo hiểm thất nghiệp có được hưởng trợ cấp thất nghiệp không ?",
     "Đối tượng người lao động nào được hưởng hỗ trợ do ảnh hưởng của dịch COVID-19 ?",
     "Mức hỗ trợ cho người lao động bị ảnh hưởng của đại dịch COVID-19 ?",
     "Mức hỗ trợ cho người sử dụng lao động bị ảnh hưởng của đại dịch COVID-19 ?",
@@ -73,7 +75,7 @@ query_data = [
     "Mức đóng bảo hiểm thất nghiệp của người sử dụng lao động ?",
     "Mức đóng bảo hiểm thất nghiệp của người lao động ?",
     "Đóng bảo hiểm thất nghiệp bao lâu thì được hưởng trợ cấp thất nghiệp?",
-    "Cách tính thời gian đóng bảo hiểm thất nghiệp để hưởng trợ cấp",
+    "Cách tính thời gian đóng bảo hiểm thất nghiệp để hưởng trợ cấp ?",
     "Cách tính mức đóng bảo hiểm thất nghiệp được tính như thế nào?",
     "Người lao động tham gia đóng bảo hiểm thất nghiệp phải đáp ứng đủ những điều kiện nào thì sẽ được hưởng trợ cấp thất nghiệp?",
     "Hồ sơ đăng ký hưởng bảo hiểm thất nghiệp được quy định như thế nào?",
