@@ -31,6 +31,8 @@ def filter_words(input_list):
 
         if ((input_list[index-1][1] == 'V' or input_list[index-1][1] == 'N') and (input_list[index][0] == 'được' or input_list[index][0] == 'để')) or input_list[index][0] == 'khi' or input_list[index][0] == 'bởi' or input_list[index][0] == 'do' or input_list[index][0] == 'của' or input_list[index][0] == 'cho' or input_list[index][0] == 'bị':
             reduced.append((input_list[index][0], 'AD'))
+        # elif input_list[index][0] == ',' or input_list[index][0] == 'và':
+        #     reduced.append(('và', 'CJ'))
         elif (input_list[index][1] == 'N' or input_list[index][1] == 'Nc' or input_list[index][1] == 'V') and (input_list[index][0] != 'được' or input_list[index][0] == 'để'):
             reduced.append(input_list[index])
         elif input_list[index][0] == 'bảo hiểm' or input_list[index][0] == 'nghĩa vụ' or input_list[index][0] == 'covid-19' or input_list[index][0] == 'bảo lưu' or input_list[index][0] == 'bưu điện':

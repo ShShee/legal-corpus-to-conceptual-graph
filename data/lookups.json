@@ -1,264 +1,351 @@
 [
   {
     "id": "lookUp/01",
+    "laws": ["38/2013/QH13"],
     "article": "article/01",
     "rules": ["rule/01", "rule/02", "rule/03", "rule/04", "rule/05"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/02",
+    "laws": ["38/2013/QH13"],
     "article": "article/02",
     "rules": ["rule/06", "rule/07", "rule/08", "rule/09"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/03",
+    "laws": ["38/2013/QH13"],
     "article": "article/03",
     "rules": ["rule/10", "rule/11", "rule/12"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/04",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/04",
     "rules": ["rule/13", "rule/14"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/05",
+    "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "article": "article/05",
     "rules": ["rule/15", "rule/16", "rule/17"],
-    "references": []
+    "references": [],
+    "lastest": 2020
   },
   {
     "id": "lookUp/06",
+    "laws": ["38/2013/QH13"],
     "article": "article/06",
     "rules": ["rule/18"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/07",
+    "laws": ["38/2013/QH13"],
     "article": "article/07",
     "rules": ["rule/19", "rule/20", "rule/21"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/08",
+    "laws": ["38/2013/QH13"],
     "article": "article/08",
     "rules": ["rule/22", "rule/23", "rule/24", "rule/25"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/09",
+    "laws": ["38/2013/QH13"],
     "article": "article/09",
     "rules": ["rule/26", "rule/27", "rule/28"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/10",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/10",
     "rules": ["rule/29", "rule/30", "rule/31"],
-    "references": ["rule/14"]
+    "references": ["rule/14"],
+    "lastest": 2015
   },
   {
     "id": "lookUp/11",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/11",
     "rules": ["rule/32", "rule/33"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/12",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/12",
     "rules": ["rule/34", "rule/35"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/13",
+    "laws": ["38/2013/QH13"],
     "article": "article/13",
     "rules": ["rule/36", "rule/37", "rule/38"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/14",
+    "laws": ["38/2013/QH13"],
     "article": "article/14",
     "rules": ["rule/39", "rule/40", "rule/41"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/15",
+    "laws": ["38/2013/QH13"],
     "article": "article/15",
     "rules": ["rule/42", "rule/43"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/16",
+    "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "article": "article/16",
     "rules": ["rule/44"],
-    "references": []
+    "references": [],
+    "lastest": 2020
   },
   {
     "id": "lookUp/17",
+    "laws": ["38/2013/QH13"],
     "article": "article/17",
     "rules": ["rule/45", "rule/46", "rule/47"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/18",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/18",
     "rules": ["rule/48", "rule/49"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/19",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/19",
     "rules": ["rule/50"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/20",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/20",
     "rules": ["rule/51"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/21",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/21",
     "rules": ["rule/52"],
-    "references": ["rule/48"]
+    "references": ["rule/48"],
+    "lastest": 2015
   },
   {
     "id": "lookUp/22",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/22",
     "rules": ["rule/53", "rule/54", "rule/55"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/23",
+    "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "article": "article/23",
     "rules": ["rule/56", "rule/57", "rule/58", "rule/59"],
-    "references": []
+    "references": [],
+    "lastest": 2020
   },
   {
     "id": "lookUp/24",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/24",
     "rules": ["rule/60"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/25",
+    "laws": ["38/2013/QH13"],
     "article": "article/25",
     "rules": ["rule/61", "rule/62", "rule/63"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/26",
+    "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "article": "article/26",
     "rules": ["rule/64", "rule/65", "rule/66", "rule/68", "rule/69", "rule/70"],
-    "references": []
+    "references": [],
+    "lastest": 2020
   },
   {
     "id": "lookUp/27",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/27",
     "rules": ["rule/71", "rule/72", "rule/73"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/28",
+    "laws": ["38/2013/QH13"],
     "article": "article/28",
     "rules": ["rule/74", "rule/75"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/29",
+    "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "article": "article/29",
     "rules": ["rule/76", "rule/77"],
-    "references": []
+    "references": [],
+    "lastest": 2020
   },
   {
     "id": "lookUp/30",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/30",
     "rules": ["rule/78", "rule/79", "rule/80", "rule/81", "rule/82", "rule/83"],
-    "references": ["lookUp/09"]
+    "references": ["lookUp/09"],
+    "lastest": 2015
   },
   {
     "id": "lookUp/31",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/31",
     "rules": ["rule/84", "rule/85"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/32",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/32",
     "rules": ["rule/86", "rule/87"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/33",
+    "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "article": "article/33",
     "rules": ["rule/88", "rule/89", "rule/90", "rule/91", "rule/92"],
-    "references": []
+    "references": [],
+    "lastest": 2020
   },
   {
     "id": "lookUp/34",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/34",
     "rules": ["rule/93", "rule/94", "rule/95", "rule/96"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/35",
+    "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "article": "article/35",
     "rules": ["rule/67", "rule/97", "rule/98", "rule/99", "rule/100"],
-    "references": []
+    "references": [],
+    "lastest": 2020
   },
   {
     "id": "lookUp/36",
+    "laws": ["38/2013/QH13"],
     "article": "article/36",
     "rules": ["rule/101"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/37",
+    "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "article": "article/37",
     "rules": ["rule/102", "rule/103", "rule/104"],
-    "references": []
+    "references": [],
+    "lastest": 2020
   },
   {
     "id": "lookUp/38",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/38",
     "rules": ["rule/105", "rule/106", "rule/107"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/39",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/39",
     "rules": ["rule/108", "rule/109", "rule/110", "rule/111"],
-    "references": ["lookUp/38"]
+    "references": ["lookUp/38"],
+    "lastest": 2015
   },
   {
     "id": "lookUp/40",
+    "laws": ["28/2015/TT-BLĐTBXH"],
     "article": "article/40",
     "rules": ["rule/112"],
-    "references": ["rule/88"]
+    "references": ["rule/88"],
+    "lastest": 2015
   },
   {
     "id": "lookUp/41",
+    "laws": ["38/2013/QH13"],
     "article": "article/41",
     "rules": ["rule/113"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/42",
+    "laws": ["38/2013/QH13"],
     "article": "article/42",
     "rules": ["rule/114", "rule/115"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/43",
+    "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "article": "article/43",
     "rules": ["rule/116", "rule/117", "rule/118"],
-    "references": []
+    "references": [],
+    "lastest": 2020
   },
   {
     "id": "lookUp/44",
+    "laws": ["28/2015/NĐ-CP", "61/2020/NĐ-CP"],
     "article": "article/44",
     "rules": [
       "rule/119",
@@ -268,28 +355,36 @@
       "rule/123",
       "rule/124"
     ],
-    "references": []
+    "references": [],
+    "lastest": 2020
   },
   {
     "id": "lookUp/45",
+    "laws": ["38/2013/QH13"],
     "article": "article/45",
     "rules": ["rule/125", "rule/126", "rule/127"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/46",
+    "laws": ["38/2013/QH13"],
     "article": "article/46",
     "rules": ["rule/128", "rule/129"],
-    "references": []
+    "references": [],
+    "lastest": 2013
   },
   {
     "id": "lookUp/47",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/47",
     "rules": ["rule/130", "rule/131"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/48",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/48",
     "rules": [
       "rule/132",
@@ -299,10 +394,12 @@
       "rule/136",
       "rule/137"
     ],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/49",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/49",
     "rules": [
       "rule/138",
@@ -317,16 +414,20 @@
       "rule/147",
       "rule/148"
     ],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/50",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/50",
     "rules": ["rule/149", "rule/150", "rule/151", "rule/152"],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/51",
+    "laws": ["28/2015/NĐ-CP"],
     "article": "article/51",
     "rules": [
       "rule/153",
@@ -340,48 +441,63 @@
       "rule/161",
       "rule/162"
     ],
-    "references": []
+    "references": [],
+    "lastest": 2015
   },
   {
     "id": "lookUp/52",
+    "laws": ["77/2014/QĐ-TTg"],
     "article": "article/52",
     "rules": ["rule/163", "rule/164"],
-    "references": []
+    "references": [],
+    "lastest": 2014
   },
   {
     "id": "lookUp/53",
+    "laws": ["28/2021/QĐ-TTg", "3535/LĐTBXH-VL"],
     "article": "article/53",
     "rules": ["rule/165", "rule/166", "rule/167", "rule/172"],
-    "references": []
+    "references": [],
+    "lastest": 2021
   },
   {
     "id": "lookUp/54",
+    "laws": ["60/2021/NĐ-CP"],
     "article": "article/54",
     "rules": ["rule/168", "rule/169", "rule/170", "rule/171"],
-    "references": []
+    "references": [],
+    "lastest": 2021
   },
   {
     "id": "lookUp/55",
+    "laws": ["28/2021/QĐ-TTg"],
     "article": "article/55",
     "rules": ["rule/173", "rule/174"],
-    "references": []
+    "references": [],
+    "lastest": 2021
   },
   {
     "id": "lookUp/56",
+    "laws": ["28/2021/QĐ-TTg"],
     "article": "article/56",
     "rules": ["rule/175", "rule/176", "rule/177", "rule/178"],
-    "references": []
+    "references": [],
+    "lastest": 2021
   },
   {
     "id": "lookUp/57",
+    "laws": ["28/2021/QĐ-TTg"],
     "article": "article/57",
     "rules": ["rule/179"],
-    "references": []
+    "references": [],
+    "lastest": 2021
   },
   {
     "id": "lookUp/58",
+    "laws": ["28/2021/QĐ-TTg"],
     "article": "article/58",
     "rules": ["rule/180", "rule/181", "rule/182"],
-    "references": []
+    "references": [],
+    "lastest": 2021
   }
 ]

@@ -82,7 +82,7 @@ class Ui_MainWindow(object):
         font.setPointSize(12)
         self.tableWidget.setFont(font)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(10)
+        self.tableWidget.setColumnCount(7)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(0, item)
@@ -98,12 +98,12 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(6, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(7, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(8, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(9, item)
+        # item = QtWidgets.QTableWidgetItem()
+        # self.tableWidget.setHorizontalHeaderItem(7, item)
+        # item = QtWidgets.QTableWidgetItem()
+        # self.tableWidget.setHorizontalHeaderItem(8, item)
+        # item = QtWidgets.QTableWidgetItem()
+        # self.tableWidget.setHorizontalHeaderItem(9, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setColumnWidth(0, 85)
         self.tableWidget.setColumnWidth(1, 205)
@@ -155,7 +155,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Legal Retriever"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Phương pháp cải tiến"))
         # self.textEdit.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
         #                                  "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
         #                                  "p, li { white-space: pre-wrap; }\n"
@@ -182,12 +182,12 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Khái niệm"))
         item = self.tableWidget.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Quan hệ"))
-        item = self.tableWidget.horizontalHeaderItem(7)
-        item.setText(_translate("MainWindow", "nGc"))
-        item = self.tableWidget.horizontalHeaderItem(8)
-        item.setText(_translate("MainWindow", "nG1"))
-        item = self.tableWidget.horizontalHeaderItem(9)
-        item.setText(_translate("MainWindow", "nG2"))
+        # item = self.tableWidget.horizontalHeaderItem(7)
+        # item.setText(_translate("MainWindow", "nGc"))
+        # item = self.tableWidget.horizontalHeaderItem(8)
+        # item.setText(_translate("MainWindow", "nG1"))
+        # item = self.tableWidget.horizontalHeaderItem(9)
+        # item.setText(_translate("MainWindow", "nG2"))
         self.textBrowser_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                               "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
                                               "p, li { white-space: pre-wrap; }\n"
@@ -208,7 +208,7 @@ class Ui_MainWindow(object):
 
         self.tableWidget.setRowCount(len(comparison_result))
         for idx, val in enumerate(comparison_result):
-            for column in range(10):
+            for column in range(7):
                 self.tableWidget.setItem(
                     idx, column, QtWidgets.QTableWidgetItem(val[column]))
 

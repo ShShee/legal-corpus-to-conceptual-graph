@@ -32,6 +32,25 @@ class AdditionScores(Enum):
     THEME_EVENT = 10
     THEME_ACTION = 11
     SITUATION = 12
+    
+class AdditionScores2(Enum):
+    NONE = 0
+    CONCEPT_MAIN = 0
+    CONCEPT_SIDE = 0
+    IS_ARTICLE = 0
+
+    UNDEFINED = 0
+    TRIGGER = 0
+    TRIGGER_NOT = 0
+
+    TARGET_EVENT = 0
+    TARGET_ACTION = 0
+    INTENT = 0
+    INTENT_EXTRA = 0
+
+    THEME_EVENT = 0
+    THEME_ACTION = 0
+    SITUATION = 0
 
 
 def additionScoring(type):

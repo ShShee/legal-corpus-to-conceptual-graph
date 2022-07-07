@@ -22,14 +22,14 @@ class ComparisonHandler(ConceptualGraph):
 
         # Size of same edges in comparison with this graph
         if len(same_nodes) != 0:
-            #add all edges from graph 2
+            # add all edges from graph 2
             self.__addEdgeWithWeight(
                 graph_2.getEdgesFromGivenNodes(same_nodes))
-            
-            #find same edges from graph 2 to graph 1
+
+            # find same edges from graph 2 to graph 1
             sameEdges = self.__getSameEdges(graph_1)
 
-            #clear previous edges then add same edges
+            # clear previous edges then add same edges
             self.graph.clear()
             self.graph.add_nodes_from(same_nodes)
             self.__addEdgeWithWeight(sameEdges)
@@ -51,7 +51,8 @@ class ComparisonHandler(ConceptualGraph):
     def __compare2Edges(self, graph, edge_1, edge_2):
         edge_1_type = self.get_edge_attributes("weight")[edge_1]
         edge_2_type = graph.get_edge_attributes("weight")[edge_2]
-        weightType = (edge_1_type == edge_2_type) or (AdditionScores(edge_1_type) == AdditionScores.INTENT and AdditionScores(edge_2_type) == AdditionScores.INTENT_EXTRA)
+        weightType = (edge_1_type == edge_2_type) or (AdditionScores(
+            edge_1_type) == AdditionScores.INTENT and AdditionScores(edge_2_type) == AdditionScores.INTENT_EXTRA)
         if weightType:
             if ((edge_2[0][0] == edge_1[0][0] and edge_2[1][0] == edge_1[1][0]) or (edge_2[0][0] == edge_1[1][0] and edge_2[1][0] == edge_1[0][0])):
                 return True
@@ -65,7 +66,8 @@ class ComparisonHandler(ConceptualGraph):
             for edge_compare in graph.getEdges():
                 if self.__compare2Edges(graph, edge, edge_compare):
                     result.append(edge)
-                    weightTypes.append(self.get_edge_attributes("weight")[edge])
+                    weightTypes.append(
+                        self.get_edge_attributes("weight")[edge])
         return (result, weightTypes)
 
     def conceptual_similarity(self):
@@ -82,8 +84,8 @@ class ComparisonHandler(ConceptualGraph):
     def getSimilarityScore(self, dataType):
         addition_type_score = additionScoring(
             AdditionScores.IS_ARTICLE) if dataType == DataPathTypes.ARTICLES else 0
-        similariy_score = self.conceptual_similarity() * (self.calculate_a() + (1 - self.calculate_a()) * self.relational_similarity())
+        similariy_score = self.conceptual_similarity() * (self.calculate_a() +
+                                                          (1 - self.calculate_a()) * self.relational_similarity())
 
-        total = round(similariy_score +
-                      addition_type_score if similariy_score != 0 else 0, 5)
+        total = similariy_score + addition_type_score if similariy_score != 0 else 0
         return total

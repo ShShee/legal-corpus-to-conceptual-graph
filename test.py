@@ -27,7 +27,8 @@ dir = "./data/"
 #     print("_-------------------_")
 #     print(reduce_words(query))
 
-define_connection("Thời gian hưởng hỗ trợ học nghề khi tham gia bảo hiểm thất nghiệp được quy định như thế nào?")
+define_connection("hồ sơ theo dõi việc đóng, hưởng bảo hiểm thất nghiệp")
+define_connection("điều kiện hỗ trợ đào tạo, bồi dưỡng, nâng cao trình độ kỹ năng nghề")
 # class Phanso:
 #     def __init__(self,tu_so,mau_so):
 #         self.tu = tu_so

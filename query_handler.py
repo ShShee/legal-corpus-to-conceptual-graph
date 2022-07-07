@@ -42,7 +42,7 @@ def handle_in_query(query):
 
 
 def define_connection(input_query):
-    # print(pos_tag(handle_in_query(input_query)))
+    #print(pos_tag(handle_in_query(input_query)))
     new_query = readd_adverbs(input_query)
     result = []
     first_intent = -1
@@ -120,7 +120,7 @@ def define_connection(input_query):
                 if connector == AdditionScores.NONE:
                     #end = -1
                     if checkConditionType(new_query[end][1]):
-                        print(new_query[first_action], new_query[idx])
+                        #print(new_query[first_action], new_query[idx])
                         if last_connector != AdditionScores.SITUATION and last_connector != AdditionScores.THEME_ACTION and checkAnyWordsBetween(new_query, first_action, idx) and last_connector != AdditionScores.NONE:
                             if first_action != idx:
                                 result.append(
@@ -155,7 +155,7 @@ def define_connection(input_query):
                 result.append(
                     (new_query[main_verb], new_query[i], AdditionScores.INTENT_EXTRA))
 
-    print(recheckConditions(result))
+    #print(recheckConditions(result))
     return (recheckConditions(result), new_query)
 
 
@@ -227,7 +227,7 @@ def checkConditionType(item):
 
 def readd_adverbs(input_query):
     reduced = reduce_words(input_query)
-    
+    print(reduced)
     result = []
     idx = 0
     while idx < len(reduced):
@@ -245,14 +245,14 @@ def readd_adverbs(input_query):
         if checkConditionTheme(result[result_size][0]) or checkConditionTarget(result[result_size][0]):
             result.pop()
 
-    print(result)
+    #print(result)
     return result
 
 
 def reduce_words(input_query):
     # print("------------------------------------------")
     query = filter_words(pos_tag(handle_in_query(input_query)))
-    # print("Gốc:", query)
+    #print("Gốc:", query)
     skip = 0
     list_query = []
     start = 0
@@ -281,8 +281,7 @@ def reduce_words(input_query):
                         for idx in range(1, step+1):
                             text = text + " " + query[start+idx][0]
 
-                    print(query[start][0], "---", item[0], "------------------------    Step:",
-                          step, "/Max-step:", max_step, "/text:", text)
+                    #print(query[start][0], "---", item[0], "------------------------    Step:", step, "/Max-step:", max_step, "/text:", text)
 
                     if step > max_step or matched == False:
                         if text == item[0]:
@@ -310,7 +309,7 @@ def getChildLength(title, start, data, query):
     wordsList = filter_words(pos_tag(data[0]))
     data_types_included = checkVariableTypesIncluded(wordsList)
     end = -1
-    # print("Root:",pos_tag(data[0]),"-Extracted:",wordsList)
+    #print("Root:",pos_tag(data[0]),"-Extracted:",wordsList)
     for index in range(0, len(query)):
         if wordsList[-1][0] == query[index][0]:
             end = index
@@ -324,20 +323,21 @@ def getChildLength(title, start, data, query):
         appearedWordsList = []
         for index in range(start, end+1):
             appeared = False
-            # print(query[index][0])
+            #print(query[index][0])
             appearedWordsList.append(query[index])
+            #print(wordsList)
             for it in wordsList:
-
                 if(it[0] == query[index][0]):
                     step = step + 1
                     appeared = True
+                    break
                 #print(it[0], "==+==", query[index][0])
             if appeared == False:
                 #print('Case 1')
                 return 0
         #print(appearedWordsList, "---", checkVariableTypesIncluded(appearedWordsList),'==', wordsList, "---", data_types_included)
         if checkVariableTypesIncluded(appearedWordsList) == data_types_included or len(appearedWordsList) == len(wordsList):
-            #print('Case 2')
+            #print(step)
             return step
         else:
             #print('Case 3')

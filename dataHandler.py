@@ -92,14 +92,16 @@ class DataHandler:
                 # get law code of this data,
                 ', '.join(self.getCodeList(data[1], data[2])),
                 # Get comparison score
-                str(comparisonHandler.getSimilarityScore(data[2])),
+                str(self.applyYearReleaseCount(
+                    comparisonHandler.getSimilarityScore(data[2]), data[1], data[2])),
+                # str(comparisonHandler.getSimilarityScore(data[2])),
                 # get graph of similarity
                 str(round(comparisonHandler.conceptual_similarity(), 5)),
                 # get graph of similarity
                 str(round(comparisonHandler.relational_similarity(), 5)),
-                str(round(comparisonHandler.nGcs,5)),
-                str(round(comparisonHandler.nG1s,5)),
-                str(round(comparisonHandler.nG2s,5)),
+                str(round(comparisonHandler.nGcs, 5)),
+                str(round(comparisonHandler.nG1s, 5)),
+                str(round(comparisonHandler.nG2s, 5)),
                 comparisonHandler
             )
             result.append(add_value)
@@ -113,6 +115,9 @@ class DataHandler:
     def getLookUpFromId(self, id, type):
         lookUpId = self.getDataFromId(id, type)["lookUpId"]
         return list(filter(lambda lk: lk["id"] == lookUpId, self.lookups))[0]
+
+    def getCodeList(self, id, type):
+        return self.getLookUpFromId(id, type)['laws']
 
     def getArticleTitle(self, id, dataType):
         """
@@ -168,9 +173,6 @@ class DataHandler:
         lookUp = self.getLookUpFromId(id, DataPathTypes.RULES)
         return self.getDataFromId(lookUp["article"], DataPathTypes.ARTICLES)
 
-    def getCodeList(self, id, type):
-        return self.getDataFromId(id, type)['laws'] if type == DataPathTypes.ARTICLES else self.getArticleFromRule(id)['laws']
-
     def getLawTitlesFromList(self, id, type):
         result = []
         for code in self.getCodeList(id, type):
@@ -206,6 +208,9 @@ class DataHandler:
                 else:
                     result = result + self.getContentFromId(refer)
         return result
+
+    def applyYearReleaseCount(self, score, id, type):
+        return round(score + (self.getLookUpFromId(id, type)['lastest'] / 10000),5)
 
     def print(self):
         print(self.laws)

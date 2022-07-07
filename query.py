@@ -1,4 +1,4 @@
-query_data1 = [
+query_data = [
     "Người tham gia bảo hiểm thất nghiệp có được hưởng chế độ bảo hiểm y tế không?",
     "Người đang hưởng trợ cấp thất nghiệp có được hưởng chế độ bảo hiểm y tế không?",
     "Người đang nhận hỗ trợ học nghề có được hưởng chế độ trợ cấp thất nghiệp của bảo hiểm thất nghiệp không?",
@@ -53,7 +53,7 @@ query_data1 = [
     "Thủ tục để được nhận hỗ trợ do ảnh hưởng từ đại dịch COVID-19 gồm những bước nào ?"
 ]
 
-query_data = [
+query_data1 = [
     "Mức bảo hiểm thất nghiệp được nhận là bao nhiêu ?",
     "điều kiện để được hưởng bảo hiểm thất nghiệp ?",
     "Tôi có đủ điều kiện nhận trợ cấp thất nghiệp không?",
